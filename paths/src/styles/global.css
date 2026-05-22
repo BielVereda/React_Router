@@ -1,4 +1,5 @@
-/* src/styles/global.css */
+@import url('https://fonts.cdnfonts.com/css/resident-evil');
+
 * {
     margin: 0;
     padding: 0;
@@ -10,10 +11,11 @@ body,
 #root {
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
 
 body {
     background: black;
     color: #e50914;
-    font-family: 'Courier New', monospace;
+    font-family: 'Resident Evil', sans-serif;
 }
