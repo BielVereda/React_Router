@@ -1,5 +1,5 @@
 .notfound-container {
-    position: relative; /* dá contexto para o slideshow */
+    position: relative;
     min-height: 100vh;
     width: 100vw;
     display: flex;
@@ -16,16 +16,18 @@
 
 /* Fundo animado */
 .background-slideshow {
-    position: absolute;
+    position: fixed; /* cobre sempre a tela inteira */
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1; /* atrás dos elementos */
+    z-index: 0; /* atrás dos elementos */
 }
 
 .background-slideshow img {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -35,13 +37,13 @@
 
 /* Cada imagem entra em sequência */
 .background-slideshow img:nth-child(1) { animation-delay: 0s; }
-.background-slideshow img:nth-child(2) { animation-delay: 8s; }
-.background-slideshow img:nth-child(3) { animation-delay: 16s; }
-.background-slideshow img:nth-child(4) { animation-delay: 24s; }
-.background-slideshow img:nth-child(5) { animation-delay: 32s; }
-.background-slideshow img:nth-child(6) { animation-delay: 40s; }
-.background-slideshow img:nth-child(7) { animation-delay: 48s; }
-.background-slideshow img:nth-child(8) { animation-delay: 56s; }
+.background-slideshow img:nth-child(2) { animation-delay: 5s; }
+.background-slideshow img:nth-child(3) { animation-delay: 10s; }
+.background-slideshow img:nth-child(4) { animation-delay: 15s; }
+.background-slideshow img:nth-child(5) { animation-delay: 20s; }
+.background-slideshow img:nth-child(6) { animation-delay: 25s; }
+.background-slideshow img:nth-child(7) { animation-delay: 30s; }
+.background-slideshow img:nth-child(8) { animation-delay: 35s; }
 
 @keyframes fade {
     0% { opacity: 0; }
@@ -55,6 +57,9 @@
 .image-container {
     position: relative;
     display: inline-block;
+    font-size: 50px;
+    margin-top: 2rem;
+    z-index: 1;
 }
 
 .zombie-img {
@@ -93,21 +98,26 @@
 }
 
 .hint-text {
-    margin-top: 5rem;
-    font-size: 1.2rem;
+    margin-top: 7rem;
+    font-size: 50px;
     color: #bbb;
+
 }
 
 .back-btn {
     margin-top: 2rem;
     padding: 10px 20px;
-    background: #e50914;
+    padding-top: 20px;
+    background: darkred;
     color: white;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 50px;
     transition: 0.3s;
+    font-size: 30px;
+    z-index: 1;
 }
 
 .back-btn:hover {
-    background: darkred;
+    background: red;
+    transform: scale(1.05);
 }

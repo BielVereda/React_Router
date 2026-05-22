@@ -12,10 +12,16 @@ import racoonCity from '@assets/images/404/racoon_city.png'
 import safeRoom from '@assets/images/404/safe_room.png'
 import sewers from '@assets/images/404/sewers.png'
 import starsRoom from '@assets/images/404/stars_room.png'
+import notFoundAudio from '@assets/audio/Not_Found.mp3'
 
 export default function NotFound() {
     return (
         <div className="notfound-container">
+
+            <audio autoPlay loop>
+                <source src={notFoundAudio} type="audio/mpeg" />
+            </audio>
+
             <div className="background-slideshow">
                 <img src={policeStationEntrance} alt="Police Station Entrance" />
                 <img src={policeStationHall} alt="Police Station Hall" />
@@ -28,9 +34,12 @@ export default function NotFound() {
             </div>
 
             <div className="image-container">
-                <p className="warning-text">Você está perdido em Raccoon City...</p>
+                <p style={{ fontFamily: 'Resident Evil, sans-serif' }}>
+                    You're lost in Raccoon City
+                </p>
 
                 <img src={dogsImg} alt="Zombie Dogs Resident Evil" className="zombie-img" />
+
                 <div className="number-container">
                     <img src={fourImg} alt="Número 4" className="number-img four" />
                     <img src={zeroImg} alt="Número 0" className="number-img zero" />
@@ -38,9 +47,12 @@ export default function NotFound() {
                 </div>
             </div>
 
-            <p className="hint-text">A página que você procura foi devorada.</p>
-            <Link to="/" className="back-btn">
-                Voltar para a segurança
+            <p className="hint-text" style={{ fontFamily: 'Resident Evil, sans-serif' }}>
+                The page you're looking for has been devoured by Cerberus
+            </p>
+
+            <Link to="/" className="back-btn" style={{ fontFamily: 'Resident Evil, sans-serif' }}>
+                Return to safety
             </Link>
         </div>
     )
