@@ -1,8 +1,6 @@
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import '@styles/404.css'
-import zeroImg from '@assets/images/404/0.png'
-import fourImg from '@assets/images/404/4.png'
-import dogsImg from '@assets/images/404/cachorros.png'
 
 import policeStationEntrance from '@assets/images/404/police_station_entrance.png'
 import policeStationHall from '@assets/images/404/police_station_hall.png'
@@ -12,15 +10,56 @@ import racoonCity from '@assets/images/404/racoon_city.png'
 import safeRoom from '@assets/images/404/safe_room.png'
 import sewers from '@assets/images/404/sewers.png'
 import starsRoom from '@assets/images/404/stars_room.png'
-import notFoundAudio from '@assets/audio/Not_Found.mp3'
+
+import zombie404Img from '@assets/images/404/zombie_404_dog.png'
 
 export default function NotFound() {
+    const audioRef = useRef(null)
+    const [blocked, setBlocked] = useState(false)
+    const [muted, setMuted] = useState(false)
+
+    useEffect(() => {
+        const audio = audioRef.current
+        if (audio) {
+            audio.muted = true
+            audio.play().then(() => {
+                setTimeout(() => { audio.muted = false }, 500)
+            }).catch(() => {
+                setBlocked(true)
+            })
+        }
+    }, [])
+
+    const handleAudioControl = () => {
+        const audio = audioRef.current
+        if (!audio) return
+
+        if (blocked) {
+            // desbloqueia autoplay
+            audio.muted = false
+            audio.play()
+            setBlocked(false)
+            setMuted(false)
+        } else {
+            // alterna mute/unmute
+            audio.muted = !audio.muted
+            setMuted(audio.muted)
+        }
+    }
+
     return (
         <div className="notfound-container">
 
-            <audio autoPlay loop>
-                <source src={notFoundAudio} type="audio/mpeg" />
+            <audio ref={audioRef} loop preload="auto">
+                <source src="/audio/Not_Found.ogg" type="audio/ogg" />
+                <source src="/audio/Not_Found.mp3" type="audio/mpeg" />
+                Seu navegador não suporta áudio.
             </audio>
+
+            {/* Botão único que cuida de tudo */}
+            <button onClick={handleAudioControl} className="audio-btn" style={{ fontFamily: 'Resident Evil, sans-serif' }}>
+                {blocked ? '🔊 Unmute' : muted ? '🔇 Mute' : '🔊 Active sound'}
+            </button>
 
             <div className="background-slideshow">
                 <img src={policeStationEntrance} alt="Police Station Entrance" />
@@ -38,13 +77,7 @@ export default function NotFound() {
                     You're lost in Raccoon City
                 </p>
 
-                <img src={dogsImg} alt="Zombie Dogs Resident Evil" className="zombie-img" />
-
-                <div className="number-container">
-                    <img src={fourImg} alt="Número 4" className="number-img four" />
-                    <img src={zeroImg} alt="Número 0" className="number-img zero" />
-                    <img src={fourImg} alt="Número 4" className="number-img four" />
-                </div>
+                <img src={zombie404Img} alt="Zombie Dogs Resident Evil 404" className="zombie-404-img" />
             </div>
 
             <p className="hint-text" style={{ fontFamily: 'Resident Evil, sans-serif' }}>
@@ -52,7 +85,7 @@ export default function NotFound() {
             </p>
 
             <Link to="/" className="back-btn" style={{ fontFamily: 'Resident Evil, sans-serif' }}>
-                Return to safety
+                Return to saferoom
             </Link>
         </div>
     )
