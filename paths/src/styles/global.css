@@ -9,12 +9,12 @@ body,
 #root {
     height: 100%;
     width: 100%;
-    overflow: hidden;
 }
 
 @font-face {
     font-family: 'Resident Evil';
-    src: url('/fonts/Resident Evil Large.woff2') format('woff2'),
+    src:
+        url('/fonts/Resident Evil Large.woff2') format('woff2'),
         url('/fonts/Resident Evil Large.woff') format('woff');
     font-weight: normal;
     font-style: normal;
