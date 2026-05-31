@@ -58,7 +58,7 @@ export default function NotFound() {
 
             {/* Botão único que cuida de tudo */}
             <button onClick={handleAudioControl} className="audio-btn" style={{ fontFamily: 'Resident Evil, sans-serif' }}>
-                {blocked ? '🔊 Unmute' : muted ? '🔇 Mute' : '🔊 Active sound'}
+                {blocked ? '🔊 Unmute' : muted ? '🔊 Active sound' : '🔇 Mute'}
             </button>
 
             <div className="background-slideshow">

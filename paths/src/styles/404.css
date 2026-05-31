@@ -9,9 +9,10 @@
     font-family: 'Courier New', monospace;
     color: #e50914;
     margin: 0;
-    padding: 20px;
+    padding: clamp(10px, 4vw, 20px);
     box-sizing: border-box;
     overflow: hidden;
+    text-align: center;
 }
 
 /* Textos principais com Resident Evil + glow pulsante */
@@ -50,6 +51,7 @@
     object-fit: cover;
     opacity: 0;
     animation: fade 40s infinite;
+    max-height: 100vh;
 }
 
 .background-slideshow img:nth-child(1) {
@@ -118,10 +120,11 @@
 
 .zombie-404-img {
     margin-top: 2rem;
-    width: 600px;
+    width: clamp(180px, 60vw, 600px);
     max-width: 90vw;
     height: auto;
     filter: drop-shadow(0 0 15px red);
+    object-fit: contain;
 }
 
 .warning-text {
@@ -130,8 +133,8 @@
 }
 
 .hint-text {
-    margin-top: 7rem;
-    font-size: 50px;
+    margin-top: clamp(2rem, 8vw, 7rem);
+    font-size: clamp(18px, 5vw, 50px);
     color: #bbb;
     font-family: 'Resident Evil', sans-serif;
     text-shadow: 0 0 8px #ff0000, 0 0 16px #660000;
@@ -156,7 +159,6 @@
 
 .back-btn:hover {
     background: red;
-    transform: scale(1.05);
 }
 
 /* Botão de áudio */
@@ -181,6 +183,15 @@
 .audio-btn:hover {
     background: red;
     transform: scale(1.05);
+    box-shadow: 0 0 15px #ff4444;
+}
+
+.back-btn:hover,
+.audio-btn:hover {
+    background: red;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #ff0000, 0 0 40px #660000;
+    text-shadow: 0 0 10px #fff;
 }
 
 /* Responsividade */
@@ -214,6 +225,11 @@
         font-size: 20px;
         padding: 6px 14px;
     }
+
+    .background-slideshow img {
+        object-fit: contain;
+        object-position: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -229,5 +245,15 @@
     .back-btn {
         font-size: 18px;
         padding: 5px 12px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .audio-btn {
+        top: 20px;
+        bottom: auto;
+        right: 10px;
+        font-size: 18px;
+        padding: 5px 10px;
     }
 }
