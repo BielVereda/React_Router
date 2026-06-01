@@ -40,6 +40,7 @@
     width: 100vw;
     height: 100vh;
     z-index: 0;
+    opacity: 0.6;
 }
 
 .background-slideshow img {
@@ -49,9 +50,9 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0;
     animation: fade 40s infinite;
     max-height: 100vh;
+    max-width: 100vw;
 }
 
 .background-slideshow img:nth-child(1) {
@@ -128,12 +129,17 @@
 }
 
 .warning-text {
-    font-size: 2rem;
+    font-size: 3rem;
     color: #ff4444;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px 30px;
+    padding-top: 35px;
+    border-radius: 10px;
+    margin: 0;
 }
 
 .hint-text {
-    margin-top: clamp(2rem, 8vw, 7rem);
+    margin-top: clamp(1rem, 6vw, 5rem);
     font-size: clamp(18px, 5vw, 50px);
     color: #bbb;
     font-family: 'Resident Evil', sans-serif;

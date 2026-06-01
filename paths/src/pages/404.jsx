@@ -56,9 +56,8 @@ export default function NotFound() {
                 Seu navegador não suporta áudio.
             </audio>
 
-            {/* Botão único que cuida de tudo */}
             <button onClick={handleAudioControl} className="audio-btn" style={{ fontFamily: 'Resident Evil, sans-serif' }}>
-                {blocked ? '🔊 Unmute' : muted ? '🔊 Active sound' : '🔇 Mute'}
+                {blocked ? '🔊 Unmute' : muted ? '🔊 Unmute' : '🔇 Mute'}
             </button>
 
             <div className="background-slideshow">
@@ -73,7 +72,7 @@ export default function NotFound() {
             </div>
 
             <div className="image-container">
-                <p style={{ fontFamily: 'Resident Evil, sans-serif' }}>
+                <p className="warning-text" style={{ fontFamily: 'Resident Evil, sans-serif' }}>
                     You're lost in Raccoon City
                 </p>
 

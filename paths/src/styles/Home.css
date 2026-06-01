@@ -1,0 +1,126 @@
+/* Container principal */
+.home-container {
+    min-height: 100vh;
+    background: #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(20px, 5vw, 40px);
+}
+
+.site-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.umbrella-logo {
+    width: clamp(120px, 20vw, 200px);
+    filter: drop-shadow(0 0 12px red);
+}
+
+.resident-logo {
+    width: clamp(200px, 40vw, 500px);
+    filter: drop-shadow(0 0 20px #ff0000);
+    margin-top: 1rem;
+}
+
+/* INVENTORY GRID */
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 colunas fixas */
+    grid-template-rows: repeat(4, 100px);  /* 4 linhas fixas */
+    gap: 5px;
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+    position: relative;
+}
+
+/* Slots base com X */
+.grid-slot {
+    background: rgba(15, 15, 15, 0.8);
+    border: 1px solid #333;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 1; /* slots ficam abaixo dos itens */
+}
+
+.slot-x {
+    font-size: 24px;
+    color: #444;
+}
+
+/* Feedback visual */
+.invalid-drop {
+    background: rgba(120, 0, 0, 0.8);
+    border: 1px solid #ff0000;
+}
+
+.invalid-drop .slot-x {
+    color: #ff0000;
+}
+
+.valid-drop {
+    background: rgba(0, 80, 0, 0.8);
+    border: 1px solid #00ff00;
+}
+
+.valid-drop .slot-x {
+    color: #00ff00;
+}
+
+/* Itens ocupando slots */
+.grid-item {
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid #555;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #eee;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    transition: 0.3s;
+    cursor: grab;
+    z-index: 2; /* itens ficam acima dos slots */
+}
+
+.grid-item:hover {
+    background: #a00000;
+    box-shadow: 0 0 20px #ff0000;
+    transform: translateY(-5px) scale(1.05);
+}
+
+/* Links dentro dos itens */
+.grid-item a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    font-size: 22px;
+}
+
+/* Tamanhos diferentes */
+.size-1x1 {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.size-2x1 {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.size-2x2 {
+    grid-column: span 2;
+    grid-row: span 2;
+}
