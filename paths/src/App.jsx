@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from '@pages/Home'
 import Sobre from '@pages/Sobre'
 import Contato from '@pages/Contato'
+import Characters from '@pages/Characters'
 import NotFound from '@pages/404'
 import '@styles/global.css'
 import { useEffect } from 'react'
@@ -25,6 +26,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/sobre' element={<Sobre />} />
         <Route path='/contato' element={<Contato />} />
+        <Route path='/characters' element={<Characters />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
