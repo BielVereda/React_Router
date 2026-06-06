@@ -2,13 +2,19 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
+    border: none;
 }
 
 html,
 body,
 #root {
-    height: 100%;
+    min-height: 100%;
     width: 100%;
+}
+
+html {
+    background: black;
 }
 
 @font-face {
@@ -22,6 +28,7 @@ body,
 
 body {
     background: black;
+    min-height: 100vh;
     color: #e50914;
     font-family: 'Resident Evil', sans-serif;
 }
