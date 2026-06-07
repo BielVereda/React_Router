@@ -1,11 +1,11 @@
-import '@styles/App.css'
+import './styles/App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from '@pages/Home'
-import Sobre from '@pages/Sobre'
-import Contato from '@pages/Contato'
-import Characters from '@pages/Characters'
-import NotFound from '@pages/404'
-import '@styles/global.css'
+import Home from './pages/Home'
+import Sobre from './pages/Sobre'
+import Contato from './pages/Contato'
+import Characters from './pages/Characters'
+import NotFound from './pages/NotFound'
+import './styles/global.css'
 import { useEffect } from 'react'
 
 function App() {
