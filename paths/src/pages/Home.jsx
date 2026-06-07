@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import '@styles/Home.css';
-import umbrellaLogo from '@assets/images/Home/umbrella-logo.png';
-import residentEvilLogo from '@assets/images/Home/resident-evil-logo.png';
+import '../styles/Home.css';
+import umbrellaLogo from '../assets/images/brand/umbrella-logo.png';
+import residentEvilLogo from '../assets/images/brand/resident-evil-logo.png';
 
-import jill from './../assets/images/Home/chars/jill.png';
-import leon from './../assets/images/Home/chars/leon.webp';
-import claire from './../assets/images/Home/chars/claire.webp';
+import jill from '../assets/images/characters/jill.png';
+import leon from '../assets/images/characters/leon.webp';
+import claire from '../assets/images/characters/claire.webp';
 
 const CHARACTER_IMAGES = [
     { name: "Jill Valentine", src: jill },
@@ -14,7 +14,7 @@ const CHARACTER_IMAGES = [
     { name: "Claire Redfield", src: claire },
 ];
 
-import sprayImg from './../assets/images/Home/items/first_aid_spray.webp';
+import sprayImg from '../assets/images/items/first_aid_spray.webp';
 
 const SPRAY_ITEM = {
     id: 8,
