@@ -1,15 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { characters } from "@src/js/charactersData";
-import "@styles/Characters.css";
+import { characters } from "../data/charactersData";
+import "../styles/Characters.css";
 
 // Assets imports
-import umbrellaLogo from "@assets/images/Home/umbrella-logo.png";
-import residentEvilLogo from "@assets/images/Home/resident-evil-logo.png";
+import umbrellaLogo from "../assets/images/brand/umbrella-logo.png";
+import residentEvilLogo from "../assets/images/brand/resident-evil-logo.png";
 
-import jillLocal from "@assets/images/Home/chars/jill.png";
-import leonLocal from "@assets/images/Home/chars/leon.webp";
-import claireLocal from "@assets/images/Home/chars/claire.webp";
+import jillLocal from "../assets/images/characters/jill.png";
+import leonLocal from "../assets/images/characters/leon.webp";
+import claireLocal from "../assets/images/characters/claire.webp";
 
 // Mapping of characters that have local assets
 const LOCAL_CHAR_IMAGES = {
