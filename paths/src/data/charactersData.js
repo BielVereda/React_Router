@@ -15,7 +15,7 @@ export const characters = [
     {
         id: 'billy_coen',
         name: 'Billy Coen',
-        image: '/images/characters/billy_coen.jpg',
+        image: '/images/characters/billy_coen.png',
         affiliation: 'U.S. Marines (former)',
         status: 'Unknown',
         firstAppearance: 'Resident Evil 0 (2002)',
@@ -185,7 +185,7 @@ export const characters = [
     {
         id: 'annette_birkin',
         name: 'Annette Birkin',
-        image: '/images/characters/annette_birkin.jpg',
+        image: '/images/characters/annette_birkin.webp',
         affiliation: 'Umbrella Corporation',
         status: 'Deceased',
         firstAppearance: 'Resident Evil 2 (1998)',
@@ -195,7 +195,7 @@ export const characters = [
     {
         id: 'hunk',
         name: 'HUNK',
-        image: '/images/characters/hunk.jpg',
+        image: '/images/characters/hunk.webp',
         affiliation: 'Umbrella Corporation (U.S.S.)',
         status: 'Unknown',
         firstAppearance: 'Resident Evil 2 (1998)',
@@ -205,7 +205,7 @@ export const characters = [
     {
         id: 'mr_x',
         name: 'Mr. X (Tyrant T-103)',
-        image: '/images/characters/mr_x.jpg',
+        image: '/images/characters/mr_x.png',
         affiliation: 'Umbrella Corporation',
         status: 'Deceased',
         firstAppearance: 'Resident Evil 2 (1998)',
@@ -219,7 +219,7 @@ export const characters = [
     {
         id: 'licker',
         name: 'Licker',
-        image: '/images/characters/licker.jpg',
+        image: '/images/characters/licker.webp',
         affiliation: 'Umbrella Corporation (uncontrolled B.O.W.)',
         status: 'Active (multiple)',
         firstAppearance: 'Resident Evil 2 (1998)',
@@ -229,7 +229,7 @@ export const characters = [
     {
         id: 'zombie',
         name: 'T-Virus Zombie',
-        image: '/images/characters/zombie.jpg',
+        image: '/images/characters/zombie.webp',
         affiliation: 'Umbrella Corporation (uncontrolled)',
         status: 'Active (countless)',
         firstAppearance: 'Resident Evil (1996)',
@@ -239,7 +239,7 @@ export const characters = [
     {
         id: 'cerberus',
         name: 'Cerberus',
-        image: '/images/characters/cerberus.jpg',
+        image: '/images/characters/cerberus.png',
         affiliation: 'Umbrella Corporation',
         status: 'Active (multiple)',
         firstAppearance: 'Resident Evil (1996)',
@@ -249,7 +249,7 @@ export const characters = [
     {
         id: 'brian_irons',
         name: 'Brian Irons',
-        image: '/images/characters/brian_irons.jpg',
+        image: '/images/characters/brian_irons.webp',
         affiliation: 'Raccoon City Police Department',
         status: 'Deceased',
         firstAppearance: 'Resident Evil 2 (1998)',
@@ -259,7 +259,7 @@ export const characters = [
     {
         id: 'marvin_branagh',
         name: 'Marvin Branagh',
-        image: '/images/characters/marvin_branagh.jpg',
+        image: '/images/characters/marvin_branagh.webp',
         affiliation: 'Raccoon City Police Department',
         status: 'Deceased',
         firstAppearance: 'Resident Evil 2 (1998)',
@@ -269,7 +269,7 @@ export const characters = [
     {
         id: 'giant_moth',
         name: 'Giant Moth (Eliminador)',
-        image: '/images/characters/giant_moth.jpg',
+        image: '/images/characters/giant_moth.webp',
         affiliation: 'Umbrella Corporation (uncontrolled)',
         status: 'Deceased',
         firstAppearance: 'Resident Evil 2 (1998)',
@@ -283,7 +283,7 @@ export const characters = [
     {
         id: 'nemesis',
         name: 'Nemesis-T Type',
-        image: '/images/characters/nemesis.jpg',
+        image: '/images/characters/nemesis.png',
         affiliation: 'Umbrella Corporation',
         status: 'Deceased',
         firstAppearance: 'Resident Evil 3: Nemesis (1999)',
@@ -297,7 +297,7 @@ export const characters = [
     {
         id: 'carlos_oliveira',
         name: 'Carlos Oliveira',
-        image: '/images/characters/carlos_oliveira.jpg',
+        image: '/images/characters/carlos_oliveira.webp',
         affiliation: 'UBCS',
         status: 'Alive',
         firstAppearance: 'Resident Evil 3: Nemesis (1999)',
@@ -307,7 +307,7 @@ export const characters = [
     {
         id: 'mikhail_victor',
         name: 'Mikhail Victor',
-        image: '/images/characters/mikhail_victor.jpg',
+        image: '/images/characters/mikhail_victor.webp',
         affiliation: 'UBCS',
         status: 'Deceased',
         firstAppearance: 'Resident Evil 3: Nemesis (1999)',
@@ -317,7 +317,7 @@ export const characters = [
     {
         id: 'nikolai_zinoviev',
         name: 'Nikolai Zinoviev',
-        image: '/images/characters/nikolai_zinoviev.jpg',
+        image: '/images/characters/nikolai_zinoviev.webp',
         affiliation: 'UBCS / Umbrella (spy)',
         status: 'Unknown',
         firstAppearance: 'Resident Evil 3: Nemesis (1999)',
@@ -327,7 +327,7 @@ export const characters = [
     {
         id: 'grave_digger',
         name: 'Grave Digger',
-        image: '/images/characters/grave_digger.jpg',
+        image: '/images/characters/grave_digger.webp',
         affiliation: 'Umbrella Corporation (uncontrolled)',
         status: 'Deceased',
         firstAppearance: 'Resident Evil 3: Nemesis (1999)',
