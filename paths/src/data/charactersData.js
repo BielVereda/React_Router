@@ -528,7 +528,7 @@ export const characters = [
         status: 'Active (multiple)',
         firstAppearance: 'Resident Evil 5 (2009)',
         games: ['Resident Evil 5 (2009)'],
-        bio: 'Uroboros B.O.W.s are the result of injecting Wesker\'s Uroboros virus into human hosts who are not genetically compatible — approximately 99.999% of humanity. The host\'s body is consumed by writhing black leech-like tendrils that agglomerate into a massive organism driven by pure destructive instinct. Virtually indestructible under normal conditions, they are only vulnerable to intense heat or electricity. The Uroboros Project was Wesker\'s plan to release the virus globally, wiping out \"inferior\" humanity and leaving only those compatible — fewer than 1 in 100,000 people.',
+        bio: 'Uroboros B.O.W.s are the result of injecting Wesker\'s Uroboros virus into human hosts who are not genetically compatible — approximately 99.999% of humanity. The host\'s body is consumed by writhing black leech-like tendrils that agglomerate into a massive organism driven by pure destructive instinct. Virtually indestructible under normal conditions, they are only vulnerable to intense heat or electricity. The Uroboros Project was Wesker\'s plan to release the virus globally, wiping out \'inferior\' humanity and leaving only those compatible — fewer than 1 in 100,000 people.',
     },
     {
         id: 'josh_stone',
