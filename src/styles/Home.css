@@ -1,0 +1,693 @@
+/* ═══════════════════════════════════════════════════════════════
+   HOME.CSS  —  Resident Evil Archive
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Container ──────────────────────────────────────────────── */
+.home-container {
+    min-height: 100vh;
+    background: #080808;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(20px, 4vw, 40px);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* CRT scanlines overlay — attention-grabber #1 */
+.home-container::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.06) 2px,
+        rgba(0, 0, 0, 0.06) 4px
+    );
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* ── Screen flicker — attention-grabber #3 ──────────────────── */
+@keyframes screenFlicker {
+    0%, 92%, 100% { opacity: 1; }
+    93%  { opacity: 0.88; }
+    94%  { opacity: 1; }
+    95%  { opacity: 0.92; }
+    96%  { opacity: 1; }
+}
+
+/* ── Warning overlay ────────────────────────────────────────── */
+.warning-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.97);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: screenFlicker 6s infinite;
+}
+
+.warning-box {
+    position: relative;
+    background: linear-gradient(160deg, #0d0d0d 0%, #180000 100%);
+    border: 1px solid #6b0000;
+    border-radius: 3px;
+    padding: clamp(1.5rem, 5vw, 3rem) clamp(1.5rem, 6vw, 3.5rem);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow:
+        0 0 60px rgba(180, 0, 0, 0.25),
+        0 0 120px rgba(100, 0, 0, 0.1),
+        inset 0 0 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Scanlines inside the warning box */
+.warning-scanlines {
+    position: absolute;
+    inset: 0;
+    border-radius: 3px;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0, 0, 0, 0.07) 3px,
+        rgba(0, 0, 0, 0.07) 4px
+    );
+    pointer-events: none;
+}
+
+.warning-umbrella {
+    width: 72px;
+    filter: drop-shadow(0 0 14px #cc0000);
+    animation: glowPulse 2.5s infinite alternate;
+    margin-bottom: 0.4rem;
+}
+
+.warning-corp-name {
+    font-family: 'Resident Evil', sans-serif;
+    color: #aa0000;
+    font-size: 0.85rem;
+    letter-spacing: 0.35em;
+    text-shadow: 0 0 10px #ff000066;
+    margin-bottom: 0.3rem;
+}
+
+.warning-divider {
+    width: 55%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #6b0000, transparent);
+    margin: 0.7rem auto;
+}
+
+.warning-headphones-icon {
+    font-size: 2.6rem;
+    display: block;
+    margin: 0.4rem 0;
+    animation: bounce 2.2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-7px); }
+}
+
+.warning-headline {
+    font-family: 'Resident Evil', sans-serif;
+    color: #cc0000;
+    font-size: 1.4rem;
+    letter-spacing: 0.2em;
+    text-shadow: 0 0 12px #ff000088;
+    margin-bottom: 0.6rem;
+}
+
+.warning-msg {
+    font-family: 'Courier New', monospace;
+    color: #cccccc;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin: 0.5rem 0;
+}
+
+.warning-msg strong {
+    color: #ff4444;
+    text-shadow: 0 0 8px #ff000066;
+}
+
+.warning-sub {
+    font-family: 'Courier New', monospace;
+    color: #555;
+    font-size: 0.7rem;
+    line-height: 1.6;
+    margin-bottom: 1.6rem;
+}
+
+.warning-btn {
+    background: linear-gradient(135deg, #6b0000, #990000);
+    color: #fff;
+    border: 1px solid #cc0000 !important;
+    font-family: 'Resident Evil', sans-serif;
+    font-size: 1rem;
+    padding: 0.7rem 2.2rem 0.5rem;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 0.18em;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.25);
+}
+
+.warning-btn:hover {
+    background: linear-gradient(135deg, #990000, #cc0000);
+    box-shadow: 0 0 35px rgba(255, 0, 0, 0.55);
+    transform: scale(1.03);
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.site-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    width: 100%;
+}
+
+.logo-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    flex-wrap: wrap;
+}
+
+.umbrella-logo {
+    width: clamp(70px, 9vw, 130px);
+    filter: drop-shadow(0 0 10px #cc0000);
+    animation: glowPulse 3s infinite alternate;
+    flex-shrink: 0;
+}
+
+/* Glitch on RE logo — attention-grabber #4 */
+.resident-logo {
+    width: clamp(200px, 32vw, 420px);
+    filter: drop-shadow(0 0 18px #cc0000);
+    animation: glitchLogo 12s infinite, glowPulse 3.5s infinite alternate;
+}
+
+@keyframes glowPulse {
+    from { filter: drop-shadow(0 0 6px #990000); }
+    to   { filter: drop-shadow(0 0 22px #ff0000) drop-shadow(0 0 40px #660000); }
+}
+
+@keyframes glitchLogo {
+    0%, 88%, 100% {
+        transform: translateX(0) skewX(0deg);
+        filter: drop-shadow(0 0 18px #cc0000);
+    }
+    89% { transform: translateX(-4px) skewX(-1deg); filter: drop-shadow(-4px 0 #00ffff) drop-shadow(4px 0 #ff0000); }
+    90% { transform: translateX(4px) skewX(1deg);  filter: drop-shadow(4px 0 #ff0000)  drop-shadow(-4px 0 #00ffff); }
+    91% { transform: translateX(-2px); }
+    92% { transform: translateX(0) skewX(0deg); filter: drop-shadow(0 0 18px #cc0000); }
+}
+
+/* ── Intro section ───────────────────────────────────────────── */
+.intro-section {
+    width: 100%;
+    max-width: 960px;
+    margin-bottom: 2rem;
+    padding: 0 0.5rem;
+}
+
+.intro-tagline {
+    font-family: 'Resident Evil', sans-serif;
+    color: #550000;
+    font-size: clamp(9px, 1vw, 11px);
+    letter-spacing: 0.4em;
+    text-align: center;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+}
+
+.intro-body {
+    font-family: 'Courier New', monospace;
+    color: #666;
+    font-size: clamp(10px, 1.1vw, 12px);
+    line-height: 1.9;
+    text-align: center;
+    border-top: 1px solid #1a0000;
+    border-bottom: 1px solid #1a0000;
+    padding: 0.9rem 1rem;
+}
+
+.hl {
+    color: #aa0000;
+    font-weight: bold;
+}
+
+/* ── Game area layout ────────────────────────────────────────── */
+.game-area {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1080px;
+    justify-content: center;
+}
+
+/* ── Character panel ─────────────────────────────────────────── */
+.character-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    flex-shrink: 0;
+}
+
+/* Portrait frame */
+.char-frame {
+    position: relative;
+    width: 150px;   /* mesma largura da health-panel */
+    height: 338px;  /* altura proporcional */
+    background: linear-gradient(170deg, #0c0c0c 0%, #180000 100%);
+    border: 1px solid #2a2a2a;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 1px #0a0a0a,
+        0 0 25px rgba(150, 0, 0, 0.15),
+        inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Corner decorations */
+.cf-corner {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-color: #8b0000;
+    border-style: solid;
+}
+.cf-corner.tl { top: 5px;    left: 5px;    border-width: 2px 0 0 2px; }
+.cf-corner.tr { top: 5px;    right: 5px;   border-width: 2px 2px 0 0; }
+.cf-corner.bl { bottom: 5px; left: 5px;    border-width: 0 0 2px 2px; }
+.cf-corner.br { bottom: 5px; right: 5px;   border-width: 0 2px 2px 0; }
+
+.char-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.char-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    color: #333;
+    padding: 2rem 0.5rem;
+}
+
+.char-placeholder-icon {
+    font-family: 'Resident Evil', sans-serif;
+    font-size: 3rem;
+    color: #200000;
+}
+
+.char-placeholder p {
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    color: #2a2a2a;
+    letter-spacing: 0.2em;
+}
+
+.char-nav {
+    position: absolute;
+    bottom: 7px;
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+}
+
+.char-arrow {
+    background: rgba(100, 0, 0, 0.8);
+    color: #ccc;
+    border: 1px solid #550000 !important;
+    border-radius: 2px;
+    padding: 2px 9px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: 'Courier New', monospace;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+.char-arrow:hover {
+    background: #880000;
+    color: #fff;
+    box-shadow: 0 0 8px #ff000055;
+}
+
+.char-name-tag {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    color: #aaa;
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-align: center;
+    padding: 0.5rem 0.3rem 1.6rem;
+    text-transform: uppercase;
+}
+
+/* ── Health panel ────────────────────────────────────────────── */
+.health-panel {
+    width: 150px;
+    background: linear-gradient(160deg, #090909, #110000);
+    border: 1px solid #222;
+    border-radius: 3px;
+    padding: 10px 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Scanlines on health panel */
+.health-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.07) 2px,
+        rgba(0, 0, 0, 0.07) 3px
+    );
+    pointer-events: none;
+}
+
+.health-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.health-label {
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    color: #444;
+    letter-spacing: 0.2em;
+}
+
+.health-status-text {
+    font-family: 'Resident Evil', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    transition: color 1s, text-shadow 1s;
+}
+
+.health-status-text.status-yellow {
+    color: #ffcc00;
+    text-shadow: 0 0 8px #ffcc0088, 0 0 16px #ff880044;
+    animation: statusBlink 1.8s ease-in-out infinite alternate;
+}
+
+.health-status-text.status-green {
+    color: #00ff44;
+    text-shadow: 0 0 8px #00ff4488;
+}
+
+@keyframes statusBlink {
+    from { opacity: 0.65; }
+    to   { opacity: 1; }
+}
+
+.health-bar-track {
+    display: flex;
+    gap: 2px;
+}
+
+.health-seg {
+    flex: 1;
+    height: 12px;
+    border-radius: 2px;
+    background: rgba(60, 0, 0, 0.5);
+    transition: background 1s ease, box-shadow 1s ease;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.health-seg.filled {
+    transition: background 1s ease, box-shadow 1s ease;
+}
+
+.health-note {
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+}
+
+.caution-note { color: #aa8800; }
+.fine-note    { color: #006622; }
+
+/* ── Spray modal ─────────────────────────────────────────────── */
+.spray-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.78);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+}
+
+.spray-modal {
+    background: linear-gradient(160deg, #0d0d0d, #160000);
+    border: 1px solid #6b0000;
+    border-radius: 3px;
+    padding: 2rem 2.5rem;
+    text-align: center;
+    min-width: 270px;
+    box-shadow: 0 0 50px rgba(200, 0, 0, 0.2), inset 0 0 30px rgba(0,0,0,0.5);
+    animation: modalIn 0.2s ease-out;
+}
+
+@keyframes modalIn {
+    from { transform: scale(0.92); opacity: 0; }
+    to   { transform: scale(1);    opacity: 1; }
+}
+
+.spray-modal-img {
+    width: 80px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #00ff4466);
+    margin-bottom: 0.8rem;
+}
+
+.spray-modal-title {
+    font-family: 'Resident Evil', sans-serif;
+    color: #cc0000;
+    font-size: 1.2rem;
+    letter-spacing: 0.2em;
+    text-shadow: 0 0 12px #ff000066;
+    margin-bottom: 0.5rem;
+}
+
+.spray-modal-desc {
+    font-family: 'Courier New', monospace;
+    color: #888;
+    font-size: 0.8rem;
+    line-height: 1.7;
+    margin-bottom: 1.4rem;
+}
+
+.spray-modal-actions {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+}
+
+.spray-btn-use {
+    background: linear-gradient(135deg, #004400, #006600);
+    color: #fff;
+    border: 1px solid #00aa00 !important;
+    font-family: 'Resident Evil', sans-serif;
+    font-size: 0.95rem;
+    padding: 0.5rem 1.6rem 0.35rem;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 0.12em;
+    transition: 0.3s;
+}
+
+.spray-btn-use:hover {
+    background: linear-gradient(135deg, #006600, #009900);
+    box-shadow: 0 0 18px rgba(0, 255, 0, 0.35);
+}
+
+.spray-btn-cancel {
+    background: transparent;
+    color: #666;
+    border: 1px solid #333 !important;
+    font-family: 'Resident Evil', sans-serif;
+    font-size: 0.95rem;
+    padding: 0.5rem 1.6rem 0.35rem;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 0.12em;
+    transition: 0.3s;
+}
+
+.spray-btn-cancel:hover {
+    background: #1a0000;
+    color: #bbb;
+    border-color: #555 !important;
+}
+
+/* ── Inventory grid ──────────────────────────────────────────── */
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 100px);
+    gap: 5px;
+    flex: 1;
+    padding: 18px;
+    position: relative;
+    background: linear-gradient(160deg, rgba(10,10,10,0.95), rgba(18,0,0,0.5));
+    border: 1px solid #1c0000;
+    border-radius: 3px;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.4);
+}
+
+.grid-slot {
+    background: rgba(12, 12, 12, 0.85);
+    border: 1px solid #1e1e1e;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    transition: background 0.25s, border-color 0.25s;
+}
+
+.slot-x {
+    font-size: 16px;
+    color: #1e1e1e;
+    font-family: 'Courier New', monospace;
+    transition: color 0.25s, opacity 0.25s;
+}
+
+.slot-occupied .slot-x { opacity: 0; }
+
+.invalid-drop              { background: rgba(100, 0, 0, 0.75); border-color: #cc0000; }
+.invalid-drop .slot-x      { color: #cc0000; }
+.valid-drop                { background: rgba(0, 70, 0, 0.75);  border-color: #00cc00; }
+.valid-drop .slot-x        { color: #00cc00; }
+
+/* ── Grid items ──────────────────────────────────────────────── */
+.grid-item {
+    background: rgba(18, 18, 18, 0.97);
+    border: 1px solid #383838;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: #ddd;
+    font-size: clamp(10px, 1.3vw, 14px);
+    text-transform: uppercase;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s;
+    cursor: grab;
+    z-index: 2;
+    font-family: 'Resident Evil', sans-serif;
+    letter-spacing: 0.05em;
+}
+
+.grid-item:active { cursor: grabbing; }
+
+.grid-item:hover {
+    background: #5a0000;
+    border-color: #aa0000;
+    box-shadow: 0 0 18px rgba(255, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.grid-item a,
+.grid-item .item-label {
+    color: #ddd;
+    text-decoration: none;
+    font-family: 'Resident Evil', sans-serif;
+    font-size: clamp(10px, 1.3vw, 14px);
+    letter-spacing: 0.05em;
+    text-align: center;
+    padding: 4px 6px;
+    display: block;
+    width: 100%;
+    pointer-events: auto;
+}
+
+.item-icon {
+    width: 50%;
+    max-width: 50px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 4px #00ff4466);
+    pointer-events: none;
+}
+
+/* Action item (spray) */
+.item-action {
+    border-color: #003300;
+    box-shadow: 0 0 8px rgba(0, 180, 0, 0.08);
+    cursor: pointer;
+}
+
+.item-action .item-label { color: #00aa00; }
+
+.item-action:hover {
+    background: #001a00;
+    border-color: #00aa00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.25);
+    transform: translateY(-2px);
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 920px) {
+    .game-area {
+        flex-direction: column;
+        align-items: center;
+    }
+    .character-panel {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .char-frame    { width: 120px; min-height: 168px; }
+    .health-panel  { width: 150px; }
+}
+
+@media (max-width: 640px) {
+    .inventory-grid {
+        grid-template-rows: repeat(4, 72px);
+        padding: 10px;
+    }
+    .character-panel { flex-direction: column; align-items: center; }
+    .resident-logo   { width: clamp(160px, 55vw, 280px); }
+}
