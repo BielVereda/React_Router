@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+}
+
+html,
+body,
+#root {
+    min-height: 100%;
+    width: 100%;
+}
+
+html {
+    background: black;
+}
+
+@font-face {
+    font-family: 'Resident Evil';
+    src:
+        url('/fonts/Resident Evil Large.woff2') format('woff2'),
+        url('/fonts/Resident Evil Large.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Biohazard';
+    src:
+        url('/fonts/biohazard_font.woff2') format('woff2'),
+        url('/fonts/biohazard_font.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background: black;
+    min-height: 100vh;
+    color: #e50914;
+    font-family: 'Resident Evil', sans-serif;
+}
+
+.notfound-container {
+    font-family: 'Resident Evil', sans-serif;
+}
+
+.back-btn,
+.audio-btn {
+    font-family: 'Courier New', monospace;
+}
