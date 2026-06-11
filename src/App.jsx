@@ -8,6 +8,7 @@ import Movies from './pages/Movies'
 import NotFound from './pages/NotFound'
 import './styles/global.css'
 import { useEffect } from 'react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 
 function App() {
   useEffect(() => {
@@ -31,6 +32,7 @@ function App() {
         <Route path='/movies' element={<Movies />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
+      <SpeedInsights />
     </BrowserRouter>
   )
 }
