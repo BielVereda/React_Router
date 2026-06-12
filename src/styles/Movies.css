@@ -2,8 +2,8 @@
     position: relative;
     min-height: 100vh;
     width: 100%;
-    background: radial-gradient(circle at center, #1a0000 0%, #050505 100%);
-    color: #eee;
+    background: radial-gradient(circle at center, #111 0%, #000 100%);
+    color: #ddd;
     font-family: 'Courier New', monospace;
     display: flex;
     flex-direction: column;
@@ -35,11 +35,11 @@
 /* Biohazard font titles */
 .biohazard-title {
     font-family: 'Biohazard', sans-serif;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    color: #ffffff;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: #e0e0e0;
     text-align: center;
     margin: 10px 0 20px;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 0, 0, 0.5);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
     letter-spacing: 2px;
 }
 
@@ -57,9 +57,9 @@
 }
 
 .slider-arrow {
-    background: rgba(20, 0, 0, 0.6);
-    border: 2px solid #551111;
-    color: #ff4444;
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px solid #444;
+    color: #aaa;
     font-size: 24px;
     width: 50px;
     height: 50px;
@@ -69,13 +69,14 @@
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .slider-arrow:hover {
-    background: #551111;
+    background: #333;
     color: #fff;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+    border-color: #8bbfff;
+    box-shadow: 0 0 15px rgba(139, 191, 255, 0.4);
     transform: scale(1.1);
 }
 
@@ -86,11 +87,25 @@
 .movies-carousel {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: clamp(10px, 2.5vw, 30px);
     width: 100%;
-    overflow: hidden;
+    overflow-x: auto;
+    scroll-behavior: smooth;
     padding: 20px 0;
+    /* Hide scrollbar */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.movies-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+/* Pseudo-elements to allow first and last items to be centered */
+.movies-carousel::before,
+.movies-carousel::after {
+    content: '';
+    flex: 0 0 calc(50% - clamp(70px, 10vw, 120px));
 }
 
 /* Movie Card / Slide */
@@ -100,7 +115,7 @@
     width: clamp(140px, 20vw, 240px);
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    opacity: 0.4;
+    opacity: 0.5;
     transform: scale(0.85);
     display: flex;
     flex-direction: column;
@@ -114,7 +129,7 @@
 }
 
 .movie-card:not(.active):hover {
-    opacity: 0.7;
+    opacity: 0.8;
     transform: scale(0.9);
 }
 
@@ -122,9 +137,9 @@
 .movie-card-frame {
     position: relative;
     width: 100%;
-    aspect-ratio: 16/10;
+    aspect-ratio: 2/3;
     background: #000;
-    border: 4px solid #1c1c1c;
+    border: 3px solid #222;
     box-shadow: 0 10px 20px rgba(0,0,0,0.8);
     border-radius: 2px;
     overflow: hidden;
@@ -132,8 +147,8 @@
 }
 
 .movie-card.active .movie-card-frame {
-    border-color: #ff9900;
-    box-shadow: 0 0 20px rgba(255, 153, 0, 0.6), 0 0 40px rgba(255, 0, 0, 0.3);
+    border-color: #e0e0e0;
+    box-shadow: 0 0 15px rgba(139, 191, 255, 0.4), 0 0 5px rgba(255, 255, 255, 0.6);
 }
 
 /* Metal rivets in corners of the frame */
@@ -143,7 +158,7 @@
     position: absolute;
     width: 4px;
     height: 4px;
-    background: #555;
+    background: #444;
     border-radius: 50%;
     z-index: 6;
 }
@@ -154,12 +169,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(40%) contrast(1.1);
+    filter: grayscale(60%) contrast(1.1) brightness(0.8);
     transition: filter 0.3s ease;
 }
 
 .movie-card.active .movie-card-image {
-    filter: grayscale(0%) contrast(1.05);
+    filter: grayscale(10%) contrast(1.05) brightness(1.1);
 }
 
 /* Indicators under the card */
@@ -169,7 +184,7 @@
     justify-content: center;
     gap: 8px;
     font-size: 11px;
-    color: #888;
+    color: #666;
     background: rgba(0, 0, 0, 0.6);
     padding: 4px 10px;
     border-radius: 4px;
@@ -178,9 +193,9 @@
 }
 
 .movie-card.active .movie-card-indicators {
-    color: #ffaa00;
-    border-color: rgba(255, 170, 0, 0.4);
-    background: rgba(20, 10, 0, 0.6);
+    color: #8bbfff;
+    border-color: rgba(139, 191, 255, 0.4);
+    background: rgba(10, 20, 30, 0.6);
 }
 
 .indicator-badge {
@@ -189,22 +204,24 @@
     font-weight: bold;
 }
 .indicator-badge.cgi {
-    background: #004466;
-    color: #66ccff;
+    background: #222;
+    color: #8bbfff;
+    border: 1px solid #444;
 }
 .indicator-badge.live {
-    background: #660000;
-    color: #ff6666;
+    background: #222;
+    color: #ccc;
+    border: 1px solid #444;
 }
 
 /* Details Panel (RE5 stylized dossier) */
 .movie-details-panel {
     width: 95%;
     max-width: 950px;
-    background: linear-gradient(180deg, rgba(20, 18, 18, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
-    border: 2px solid #332222;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(255, 0, 0, 0.05);
-    border-radius: 4px;
+    background: linear-gradient(180deg, rgba(20, 20, 20, 0.95) 0%, rgba(5, 5, 5, 0.98) 100%);
+    border: 1px solid #333;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
     padding: 25px;
     box-sizing: border-box;
     z-index: 3;
@@ -212,34 +229,20 @@
     flex-direction: column;
     gap: 15px;
     position: relative;
-    border-left: 5px solid #ff4444;
-}
-
-/* Decorative target reticle background pattern */
-.movie-details-panel::after {
-    content: '';
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 80px;
-    height: 80px;
-    border: 1px solid rgba(255, 0, 0, 0.08);
-    border-radius: 50%;
-    pointer-events: none;
 }
 
 .details-header {
     text-align: center;
-    border-bottom: 1px solid #3d2222;
+    border-bottom: 1px solid #333;
     padding-bottom: 15px;
     margin-bottom: 5px;
 }
 
 .details-title-full {
     font-size: clamp(1.4rem, 3.5vw, 2.2rem);
-    color: #ffffff;
+    color: #e0e0e0;
     font-family: 'Courier New', monospace;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
     margin: 0 0 4px;
     font-weight: bold;
 }
@@ -247,10 +250,10 @@
 .details-subtitle-game {
     font-family: 'Biohazard', sans-serif;
     font-size: clamp(1.2rem, 3vw, 1.8rem);
-    color: #ff4444;
+    color: #999;
     margin: 5px 0 0;
     letter-spacing: 3px;
-    text-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
 }
 
 /* Two Column Layout */
@@ -269,7 +272,7 @@
 
 .left-section-title {
     font-size: 12px;
-    color: #666;
+    color: #777;
     letter-spacing: 2px;
     margin-bottom: 8px;
     border-bottom: 1px solid #222;
@@ -293,22 +296,10 @@
     font-size: 20px;
     font-weight: bold;
     color: white;
-    border-radius: 6px;
+    border-radius: 2px;
+    background: #333;
+    border: 1px solid #555;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-
-.age-badge.age-16 {
-    background: #ff5e00; /* Orange for 16 */
-    border: 2px solid #ff7a29;
-}
-.age-badge.age-14 {
-    background: #ffd000; /* Yellow for 14 */
-    color: #000;
-    border: 2px solid #ffe15c;
-}
-.age-badge.age-18 {
-    background: #d60000; /* Red for 18 */
-    border: 2px solid #ff3333;
 }
 
 .age-label {
@@ -330,16 +321,16 @@
 
 .rating-box {
     background: rgba(0, 0, 0, 0.5);
-    border: 1px solid #332222;
+    border: 1px solid #333;
     padding: 8px;
     text-align: center;
-    border-radius: 4px;
+    border-radius: 2px;
     transition: all 0.3s ease;
 }
 
 .rating-box:hover {
-    border-color: #ff4444;
-    background: rgba(40, 10, 10, 0.4);
+    border-color: #666;
+    background: rgba(20, 20, 20, 0.4);
 }
 
 .rating-site {
@@ -352,8 +343,7 @@
 .rating-val {
     font-size: 15px;
     font-weight: bold;
-    color: #ffaa00;
-    text-shadow: 0 0 4px rgba(255, 170, 0, 0.3);
+    color: #ccc;
 }
 
 /* Stream Availability */
@@ -365,10 +355,10 @@
 
 .stream-badge {
     background: #1c1c1c;
-    border: 1px solid #444;
-    color: #bbb;
+    border: 1px solid #333;
+    color: #999;
     padding: 6px 14px;
-    border-radius: 20px;
+    border-radius: 2px;
     font-size: 12px;
     transition: all 0.3s ease;
     display: flex;
@@ -377,11 +367,9 @@
 }
 
 .stream-badge:hover {
-    background: #aa0000;
+    background: #2a2a2a;
     color: #fff;
-    border-color: #ff3333;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 10px rgba(255,0,0,0.3);
+    border-color: #8bbfff;
 }
 
 /* Right Column: Prologue Synopsis */
@@ -391,19 +379,18 @@
 }
 
 .prologue-box {
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid #2d1a1a;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
     padding: 15px;
-    border-radius: 4px;
+    border-radius: 2px;
     font-size: 13px;
     line-height: 1.6;
-    color: #ccc;
+    color: #bbb;
     height: 100%;
     min-height: 150px;
     overflow-y: auto;
     text-align: justify;
     box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
-    border-left: 3px solid #662222;
 }
 
 /* Scrollbar styles for synopsis */
@@ -414,11 +401,11 @@
     background: rgba(0, 0, 0, 0.8);
 }
 .prologue-box::-webkit-scrollbar-thumb {
-    background: #551111;
+    background: #444;
     border-radius: 3px;
 }
 .prologue-box::-webkit-scrollbar-thumb:hover {
-    background: #881111;
+    background: #666;
 }
 
 /* HUD Footers style RE5 */
@@ -429,9 +416,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid #332222;
+    border-top: 1px solid #333;
     padding-top: 15px;
-    color: #888;
+    color: #777;
     font-size: 13px;
     z-index: 3;
 }
@@ -440,13 +427,12 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #ccc;
-    animation: flashText 2.5s infinite;
+    color: #aaa;
 }
 
 .hud-left::before {
     content: '●';
-    color: #ffaa00;
+    color: #8bbfff;
 }
 
 .hud-right {
@@ -465,28 +451,24 @@
 }
 
 .hud-btn:hover {
-    color: #fff;
+    color: #e0e0e0;
 }
 
 .hud-key {
-    background: #333;
-    color: #fff;
+    background: #222;
+    color: #ccc;
     padding: 2px 8px;
-    border-radius: 4px;
-    border: 1px solid #555;
+    border-radius: 2px;
+    border: 1px solid #444;
     font-size: 11px;
     font-weight: bold;
     box-shadow: 0 2px 0 #111;
 }
 
 .hud-btn:hover .hud-key {
-    background: #ff4444;
-    border-color: #ff6666;
-}
-
-@keyframes flashText {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
+    background: #333;
+    border-color: #8bbfff;
+    color: #fff;
 }
 
 /* Responsiveness */
@@ -517,5 +499,30 @@
     }
     .movie-card-indicators {
         display: none; /* Hide complex sub-badges on mobile to fit */
+    }
+}
+
+/* --- Smooth Transitions --- */
+.fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.panel-transition {
+    animation: panelFadeScale 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes panelFadeScale {
+    from { 
+        opacity: 0; 
+        transform: translateY(15px) scale(0.98); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
     }
 }

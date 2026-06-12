@@ -10,29 +10,37 @@ export default function Movies() {
     const [activeIndex, setActiveIndex] = useState(0);
     const [muted, setMuted] = useState(false);
     const [audioBlocked, setAudioBlocked] = useState(false);
+    const [started, setStarted] = useState(false);
 
     const bgAudioRef = useRef(null);
     const selectAudioRef = useRef(null);
     const cancelAudioRef = useRef(null);
 
     const activeMovie = movies[activeIndex];
+    const movieRefs = useRef([]);
 
-    // Handle background music autoplay & browser policy
+    // Scroll active movie to center
     useEffect(() => {
+        if (movieRefs.current[activeIndex]) {
+            movieRefs.current[activeIndex].scrollIntoView({
+                behavior: 'smooth',
+                inline: 'center',
+                block: 'nearest'
+            });
+        }
+    }, [activeIndex]);
+
+    // Handle start to satisfy browser audio policies
+    const handleStart = () => {
+        setStarted(true);
         const audio = bgAudioRef.current;
         if (audio) {
-            audio.muted = true;
-            audio.play()
-                .then(() => {
-                    setTimeout(() => {
-                        audio.muted = false;
-                    }, 500);
-                })
-                .catch(() => {
-                    setAudioBlocked(true);
-                });
+            audio.muted = false;
+            audio.play().catch(() => {
+                setAudioBlocked(true);
+            });
         }
-    }, []);
+    };
 
     // Play select sound
     const playSelectSound = () => {
@@ -69,20 +77,7 @@ export default function Movies() {
         setActiveIndex(index);
     };
 
-    // Keyboard navigation (Arrow keys + A/D keys)
-    useEffect(() => {
-        const handleKeyDown = (e) => {
-            const key = e.key.toLowerCase();
-            if (key === 'arrowleft' || key === 'a') {
-                prevMovie();
-            } else if (key === 'arrowright' || key === 'd') {
-                nextMovie();
-            }
-        };
-
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [activeIndex]);
+    // Keyboard navigation removed as requested
 
     // Audio Toggle
     const toggleMute = () => {
@@ -100,8 +95,28 @@ export default function Movies() {
         }
     };
 
+    if (!started) {
+        return (
+            <div className="warning-overlay">
+                <div className="warning-box">
+                    <div className="warning-scanlines" />
+                    <img src={umbrellaLogo} alt="Umbrella" className="warning-umbrella" />
+                    <p className="warning-headline" style={{ marginTop: '10px' }}>VISUAL RECORDS ARCHIVE</p>
+                    <div className="warning-divider" />
+                    <p className="warning-msg" style={{ margin: '20px 0' }}>
+                        Decrypting Umbrella Corporation surveillance footage and B.O.W. field encounters.<br />
+                        Audio and visual feeds are ready for playback.
+                    </p>
+                    <button className="warning-btn" onClick={handleStart}>
+                        ▶ DECRYPT FOOTAGE
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className="movies-page-container">
+        <div className="movies-page-container fade-in">
             {/* Background Audio */}
             <audio ref={bgAudioRef} loop preload="auto">
                 <source src="/audio/Safe_Room.mp3" type="audio/mpeg" />
@@ -122,13 +137,13 @@ export default function Movies() {
             {/* Header branding */}
             <header className="site-header" style={{ width: '100%', maxWidth: '950px', marginBottom: '10px' }}>
                 <div className="logo-row" style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'center' }}>
-                    <img src={umbrellaLogo} alt="Umbrella" className="umbrella-logo" style={{ height: '35px' }} />
-                    <img src={residentEvilLogo} alt="Resident Evil" className="resident-logo" style={{ height: '30px' }} />
+                    <img src={umbrellaLogo} alt="Umbrella" className="umbrella-logo" style={{ height: '35px', width: 'auto', objectFit: 'contain' }} />
+                    <img src={residentEvilLogo} alt="Resident Evil" className="resident-logo" style={{ height: '30px', width: 'auto', objectFit: 'contain' }} />
                 </div>
             </header>
 
             {/* Biohazard styled screen title */}
-            <h1 className="biohazard-title">MOVIE SELECT</h1>
+            <h1 className="biohazard-title">CHAPTER SELECT</h1>
 
             {/* Carousel Slider */}
             <section className="movies-slider-section">
@@ -140,6 +155,7 @@ export default function Movies() {
                         return (
                             <div
                                 key={movie.id}
+                                ref={(el) => (movieRefs.current[index] = el)}
                                 className={`movie-card ${isActive ? 'active' : ''}`}
                                 onClick={() => selectMovie(index)}
                             >
@@ -162,7 +178,7 @@ export default function Movies() {
             </section>
 
             {/* Detail Panel */}
-            <main className="movie-details-panel">
+            <main key={activeIndex} className="movie-details-panel panel-transition">
                 <div className="details-header">
                     <h2 className="details-title-full">{activeMovie.fullTitle}</h2>
                     <h3 className="details-subtitle-game">
@@ -174,20 +190,20 @@ export default function Movies() {
                     {/* Left Column */}
                     <section className="details-left-column">
                         <div>
-                            <div className="left-section-title">Classificação Indicativa</div>
+                            <div className="left-section-title">Age Rating</div>
                             <div className="info-row-rating">
                                 <div className={`age-badge age-${activeMovie.ageRating}`}>
                                     {activeMovie.ageRating}
                                 </div>
                                 <div className="age-label">
-                                    Classificação Oficial: <strong>{activeMovie.ageRating === '18' ? '18+' : `${activeMovie.ageRating} Anos`}</strong>
-                                    <br />Recomendado para maiores.
+                                    Official Rating: <strong>{activeMovie.ageRating === '18' ? '18+' : `${activeMovie.ageRating} Years`}</strong>
+                                    <br />Recommended for mature audiences.
                                 </div>
                             </div>
                         </div>
 
                         <div>
-                            <div className="left-section-title">Avaliações das Plataformas</div>
+                            <div className="left-section-title">Platform Ratings</div>
                             <div className="ratings-container">
                                 <div className="rating-box">
                                     <div className="rating-site">IMDb</div>
@@ -205,7 +221,7 @@ export default function Movies() {
                         </div>
 
                         <div>
-                            <div className="left-section-title">Onde Assistir</div>
+                            <div className="left-section-title">Where to Watch</div>
                             <div className="streams-container">
                                 {activeMovie.whereToWatch.map((stream) => (
                                     <span key={stream} className="stream-badge">
@@ -218,7 +234,7 @@ export default function Movies() {
 
                     {/* Right Column */}
                     <section className="details-right-column">
-                        <div className="left-section-title">Prólogo do Filme</div>
+                        <div className="left-section-title">Film Prologue</div>
                         <div className="prologue-box">
                             {activeMovie.description}
                         </div>
@@ -233,18 +249,16 @@ export default function Movies() {
                 </div>
                 <div className="hud-right">
                     <div className="hud-btn" onClick={prevMovie}>
-                        <span className="hud-key">A</span>
                         <span className="hud-key">◀</span>
-                        <span>Mover</span>
+                        <span>Prev</span>
                     </div>
                     <div className="hud-btn" onClick={nextMovie}>
-                        <span className="hud-key">D</span>
                         <span className="hud-key">▶</span>
-                        <span>Mover</span>
+                        <span>Next</span>
                     </div>
                     <Link to="/" className="hud-btn" onClick={playCancelSound}>
-                        <span className="hud-key">ESC</span>
-                        <span>Menu Inicial</span>
+                        <span className="hud-key">BACK</span>
+                        <span>Saferoom</span>
                     </Link>
                 </div>
             </footer>
