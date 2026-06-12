@@ -1,15 +1,22 @@
-import re2002 from '../assets/images/movies/re_2002.png';
-import reApocalypse from '../assets/images/movies/re_apocalypse.png';
-import reDegeneration from '../assets/images/movies/re_degeneration.png';
-import reRetribution from '../assets/images/movies/re_retribution.png';
-import reDeathIsland from '../assets/images/movies/re_death_island.png';
+import re2002 from '../assets/images/movies/re_2002.jpg';
+import reApocalypse from '../assets/images/movies/re_apocalypse.jpg';
+import reExtinction from '../assets/images/movies/re_extinction.jpg';
+import reAfterlife from '../assets/images/movies/re_afterlife.jpg';
+import reRetribution from '../assets/images/movies/re_retribution.jpg';
+import reFinalChapter from '../assets/images/movies/re_final_chapter.jpg';
+import reWelcomeRaccoon from '../assets/images/movies/re_welcome_raccoon.jpg';
+
+import reDegeneration from '../assets/images/movies/re_degeneration.jpg';
+import reDamnation from '../assets/images/movies/re_damnation.jpg';
+import reVendetta from '../assets/images/movies/re_vendetta.png';
+import reDeathIsland from '../assets/images/movies/re_death_island.jpg';
 
 export const movies = [
   {
     id: 1,
     title: "RESIDENT EVIL",
     subtitle: "GENESIS",
-    fullTitle: "Resident Evil: O Hóspede Maldito",
+    fullTitle: "Resident Evil",
     year: "2002",
     image: re2002,
     type: "LIVE ACTION",
@@ -21,13 +28,13 @@ export const movies = [
       metacritic: "33/100"
     },
     whereToWatch: ["Netflix", "Prime Video", "Apple TV"],
-    description: "Um vírus mortal é liberado em um laboratório secreto de engenharia genética conhecido como 'A Colmeia', controlado por um supercomputador chamado Rainha Vermelha. A Umbrella Corporation envia uma equipe militar de elite para conter a ameaça, encontrando no caminho Alice, uma agente de segurança desmemoriada que se junta ao grupo para sobreviver à horda de mortos-vivos e criaturas mutantes."
+    description: "A deadly virus is unleashed in a secret genetic engineering laboratory known as 'The Hive', controlled by a supercomputer named the Red Queen. The Umbrella Corporation sends an elite military team to contain the threat, encountering Alice along the way, an amnesiac security operative who joins the group to survive the horde of undead and mutant creatures."
   },
   {
     id: 2,
-    title: "RESIDENT EVIL @",
+    title: "RESIDENT EVIL",
     subtitle: "APOCALYPSE",
-    fullTitle: "Resident Evil: Apocalipse",
+    fullTitle: "Resident Evil: Apocalypse",
     year: "2004",
     image: reApocalypse,
     type: "LIVE ACTION",
@@ -39,31 +46,49 @@ export const movies = [
       metacritic: "35/100"
     },
     whereToWatch: ["Netflix", "Prime Video", "Google Play"],
-    description: "O T-vírus se espalha para além da Colmeia e infecta toda a cidade de Raccoon City. A Umbrella Corporation sela as saídas para conter o surto, isolando os sobreviventes. Alice acorda em um hospital deserto, agora com habilidades sobre-humanas após ser modificada geneticamente. Ela une forças com Jill Valentine e o mercenário Carlos Oliveira para resgatar a filha de um cientista em troca de uma rota de fuga antes que a cidade seja destruída por um ataque nuclear. No entanto, eles devem enfrentar o terrível projeto Nemesis, uma arma biológica implacável criada pela Umbrella."
+    description: "The T-virus spreads beyond The Hive and infects the entire city of Raccoon City. The Umbrella Corporation seals the exits to contain the outbreak, isolating the survivors. Alice wakes up in a deserted hospital, now with superhuman abilities after being genetically modified. She joins forces with Jill Valentine and mercenary Carlos Oliveira to rescue a scientist's daughter in exchange for an escape route before the city is destroyed by a nuclear strike. However, they must face the terrifying Nemesis project, a relentless biological weapon created by Umbrella."
   },
   {
     id: 3,
     title: "RESIDENT EVIL",
-    subtitle: "DEGENERATION",
-    fullTitle: "Resident Evil: Degeneração",
-    year: "2008",
-    image: reDegeneration,
-    type: "CGI ANIMATION",
-    duration: "96 MIN",
-    ageRating: "14",
+    subtitle: "EXTINCTION",
+    fullTitle: "Resident Evil: Extinction",
+    year: "2007",
+    image: reExtinction,
+    type: "LIVE ACTION",
+    duration: "94 MIN",
+    ageRating: "16",
     ratings: {
-      imdb: "6.4/10",
-      rotten: "57%",
-      metacritic: "N/A"
+      imdb: "6.2/10",
+      rotten: "25%",
+      metacritic: "41/100"
     },
-    whereToWatch: ["Prime Video", "Apple TV", "Google Play"],
-    description: "Sete anos após o desastre de Raccoon City, um ataque bioterrorista com o T-vírus ocorre em um movimentado aeroporto nos Estados Unidos. A ativista Claire Redfield, presente no local, se depara com a infestação de zumbis. O agente federal Leon S. Kennedy é enviado para liderar a equipe de resposta tática do governo e resgatar os civis encurralados. À medida que investigam os responsáveis pelo ataque, eles descobrem uma conspiração envolvendo a venda clandestina do vírus por corporações farmacêuticas rivais da falida Umbrella."
+    whereToWatch: ["Prime Video", "Apple TV"],
+    description: "Years after the Raccoon City disaster, the T-virus has ravaged the world, turning it into a global wasteland. Alice travels the Nevada desert, joining a convoy of survivors led by Claire Redfield and Carlos Oliveira. As they battle hordes of the undead and mutated crows, Alice discovers her newly developed psychic powers. The group must find a way to reach a supposed safe haven in Alaska, while the Umbrella Corporation's Dr. Isaacs relentlessly hunts Alice to harness her blood for a cure and create super-zombies."
   },
   {
     id: 4,
     title: "RESIDENT EVIL",
+    subtitle: "AFTERLIFE",
+    fullTitle: "Resident Evil: Afterlife",
+    year: "2010",
+    image: reAfterlife,
+    type: "LIVE ACTION",
+    duration: "96 MIN",
+    ageRating: "16",
+    ratings: {
+      imdb: "5.8/10",
+      rotten: "21%",
+      metacritic: "37/100"
+    },
+    whereToWatch: ["Netflix", "Prime Video"],
+    description: "Alice continues her journey to find survivors and lead them to safety. Her deadly battle with the Umbrella Corporation reaches new heights when she receives unexpected help from an old friend. A new lead that promises a safe haven from the Undead takes them to Los Angeles, but when they arrive the city is overrun by thousands of Undead - and Alice and her comrades are about to step into a deadly trap."
+  },
+  {
+    id: 5,
+    title: "RESIDENT EVIL",
     subtitle: "RETRIBUTION",
-    fullTitle: "Resident Evil: Retribuição",
+    fullTitle: "Resident Evil: Retribution",
     year: "2012",
     image: reRetribution,
     type: "LIVE ACTION",
@@ -75,13 +100,103 @@ export const movies = [
       metacritic: "39/100"
     },
     whereToWatch: ["Netflix", "Prime Video", "Apple TV"],
-    description: "Alice acorda dentro da maior e mais secreta instalação de testes da Umbrella Corporation. Sem aliados aparentes, ela precisa navegar por simulações detalhadas de surtos virais em Tóquio, Nova York, Moscou e subúrbios americanos. Com a ajuda inesperada de antigos inimigos e novos aliados, incluindo Ada Wong e Leon S. Kennedy, Alice luta para escapar do complexo fortificado sob o controle da hostil Rainha Vermelha, enquanto descobre segredos profundos sobre seu próprio passado."
+    description: "Alice awakens in the Umbrella Corporation's most clandestine testing facility. With no apparent allies, she must navigate detailed simulations of viral outbreaks in Tokyo, New York, Moscow, and suburban America. With the unexpected help of former enemies and new allies, including Ada Wong and Leon S. Kennedy, Alice fights to escape the fortified complex under the control of the hostile Red Queen, while discovering deep secrets about her own past."
   },
   {
-    id: 5,
+    id: 6,
+    title: "RESIDENT EVIL",
+    subtitle: "THE FINAL CHAPTER",
+    fullTitle: "Resident Evil: The Final Chapter",
+    year: "2016",
+    image: reFinalChapter,
+    type: "LIVE ACTION",
+    duration: "106 MIN",
+    ageRating: "16",
+    ratings: {
+      imdb: "5.5/10",
+      rotten: "37%",
+      metacritic: "49/100"
+    },
+    whereToWatch: ["Prime Video", "Apple TV"],
+    description: "Picking up immediately after the events in Resident Evil: Retribution, Alice is the only survivor of what was meant to be humanity's final stand against the undead. Now, she must return to where the nightmare began - The Hive in Raccoon City, where the Umbrella Corporation is gathering its forces for a final strike against the only remaining survivors of the apocalypse."
+  },
+  {
+    id: 7,
+    title: "RESIDENT EVIL",
+    subtitle: "WELCOME TO RACCOON CITY",
+    fullTitle: "Resident Evil: Welcome to Raccoon City",
+    year: "2021",
+    image: reWelcomeRaccoon,
+    type: "LIVE ACTION",
+    duration: "107 MIN",
+    ageRating: "16",
+    ratings: {
+      imdb: "5.2/10",
+      rotten: "30%",
+      metacritic: "44/100"
+    },
+    whereToWatch: ["Prime Video", "Apple TV"],
+    description: "Once the booming home of pharmaceutical giant Umbrella Corporation, Raccoon City is now a dying Midwestern town. The company's exodus left the city a wasteland... with great evil brewing below the surface. When that evil is unleashed, the townspeople are forever... changed... and a small group of survivors must work together to uncover the truth behind Umbrella and make it through the night."
+  },
+  {
+    id: 8,
+    title: "RESIDENT EVIL",
+    subtitle: "DEGENERATION",
+    fullTitle: "Resident Evil: Degeneration",
+    year: "2008",
+    image: reDegeneration,
+    type: "CGI ANIMATION",
+    duration: "96 MIN",
+    ageRating: "16",
+    ratings: {
+      imdb: "6.4/10",
+      rotten: "57%",
+      metacritic: "N/A"
+    },
+    whereToWatch: ["Prime Video", "Apple TV", "Google Play"],
+    description: "Seven years after the Raccoon City disaster, a bioterrorist attack using the T-virus occurs at a busy airport in the United States. Activist Claire Redfield, present at the scene, faces the zombie infestation. Federal agent Leon S. Kennedy is sent to lead the government's tactical response team and rescue trapped civilians. As they investigate those responsible for the attack, they uncover a conspiracy involving the clandestine sale of the virus by rival pharmaceutical corporations to the bankrupt Umbrella."
+  },
+  {
+    id: 9,
+    title: "RESIDENT EVIL",
+    subtitle: "DAMNATION",
+    fullTitle: "Resident Evil: Damnation",
+    year: "2012",
+    image: reDamnation,
+    type: "CGI ANIMATION",
+    duration: "100 MIN",
+    ageRating: "16",
+    ratings: {
+      imdb: "6.4/10",
+      rotten: "100%",
+      metacritic: "N/A"
+    },
+    whereToWatch: ["Prime Video", "Apple TV"],
+    description: "United States Special Agent Leon S. Kennedy sneaks into a small Eastern European country to verify rumors that Bio Organic Weapons (B.O.W.s) are being used in war. Right after his infiltration, the US government orders him to leave immediately. Determined to uncover the truth, Leon ignores the order and enters the battlefield to end the chain of tragedies caused by the B.O.W.s."
+  },
+  {
+    id: 10,
+    title: "RESIDENT EVIL",
+    subtitle: "VENDETTA",
+    fullTitle: "Resident Evil: Vendetta",
+    year: "2017",
+    image: reVendetta,
+    type: "CGI ANIMATION",
+    duration: "97 MIN",
+    ageRating: "16",
+    ratings: {
+      imdb: "6.2/10",
+      rotten: "43%",
+      metacritic: "N/A"
+    },
+    whereToWatch: ["Prime Video", "Apple TV"],
+    description: "BSAA Chris Redfield enlists the help of government agent Leon S. Kennedy and Professor Rebecca Chambers from the Alexander Institute of Biotechnology to stop a death merchant with a vengeance from spreading a deadly virus in New York."
+  },
+  {
+    id: 11,
     title: "RESIDENT EVIL",
     subtitle: "DEATH ISLAND",
-    fullTitle: "Resident Evil: Ilha da Morte",
+    fullTitle: "Resident Evil: Death Island",
     year: "2023",
     image: reDeathIsland,
     type: "CGI ANIMATION",
@@ -93,6 +208,6 @@ export const movies = [
       metacritic: "50/100"
     },
     whereToWatch: ["Prime Video", "Apple TV", "YouTube"],
-    description: "O agente federal Leon S. Kennedy está em uma missão para resgatar o sequestrado Dr. Antonio Taylor, enquanto o agente da BSAA Chris Redfield investiga um surto de zumbis em São Francisco. Suas pistas convergem para a ilha de Alcatraz, onde um novo vilão planeja desencadear uma infecção em massa usando drones de transmissão viral. Pela primeira vez na franquia, os lendários protagonists Leon, Chris, Jill Valentine, Claire Redfield e Rebecca Chambers unem forças na lendária prisão para impedir a aniquilação global."
+    description: "D.S.O. agent Leon S. Kennedy is on a mission to rescue Dr. Antonio Taylor from kidnappers, when a mysterious woman thwarts his pursuit. Meanwhile, B.S.A.A. agent Chris Redfield is investigating a zombie outbreak in San Francisco, where the cause of the infection cannot be identified. The only thing the victims have in common is that they all visited Alcatraz Island recently. Following that clue, Chris and his team head to the island, where a new horror awaits them."
   }
 ];
