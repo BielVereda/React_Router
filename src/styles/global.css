@@ -50,3 +50,143 @@ body {
 .audio-btn {
     font-family: 'Courier New', monospace;
 }
+
+/* ── Screen flicker ─────────────────────────────────────────── */
+@keyframes screenFlicker {
+    0%, 92%, 100% { opacity: 1; }
+    93%  { opacity: 0.88; }
+    94%  { opacity: 1; }
+    95%  { opacity: 0.92; }
+    96%  { opacity: 1; }
+}
+
+/* ── Warning overlay (Global) ───────────────────────────────── */
+.warning-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.97);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: screenFlicker 6s infinite;
+}
+
+.warning-box {
+    position: relative;
+    background: linear-gradient(160deg, #0d0d0d 0%, #180000 100%);
+    border: 1px solid #6b0000;
+    border-radius: 3px;
+    padding: clamp(1.5rem, 5vw, 3rem) clamp(1.5rem, 6vw, 3.5rem);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow:
+        0 0 60px rgba(180, 0, 0, 0.25),
+        0 0 120px rgba(100, 0, 0, 0.1),
+        inset 0 0 40px rgba(0, 0, 0, 0.6);
+}
+
+.warning-scanlines {
+    position: absolute;
+    inset: 0;
+    border-radius: 3px;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0, 0, 0, 0.07) 3px,
+        rgba(0, 0, 0, 0.07) 4px
+    );
+    pointer-events: none;
+}
+
+.warning-umbrella {
+    width: 72px;
+    filter: drop-shadow(0 0 14px #cc0000);
+    animation: glowPulseGlobal 2.5s infinite alternate;
+    margin-bottom: 0.4rem;
+}
+
+.warning-corp-name {
+    font-family: 'Resident Evil', sans-serif;
+    color: #aa0000;
+    font-size: 0.85rem;
+    letter-spacing: 0.35em;
+    text-shadow: 0 0 10px #ff000066;
+    margin-bottom: 0.3rem;
+}
+
+.warning-divider {
+    width: 55%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #6b0000, transparent);
+    margin: 0.7rem auto;
+}
+
+.warning-headphones-icon {
+    font-size: 2.6rem;
+    display: block;
+    margin: 0.4rem 0;
+    animation: bounceGlobal 2.2s ease-in-out infinite;
+}
+
+@keyframes bounceGlobal {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-7px); }
+}
+
+@keyframes glowPulseGlobal {
+    from { filter: drop-shadow(0 0 6px #990000); }
+    to   { filter: drop-shadow(0 0 22px #ff0000) drop-shadow(0 0 40px #660000); }
+}
+
+.warning-headline {
+    font-family: 'Resident Evil', sans-serif;
+    color: #cc0000;
+    font-size: 1.4rem;
+    letter-spacing: 0.2em;
+    text-shadow: 0 0 12px #ff000088;
+    margin-bottom: 0.6rem;
+}
+
+.warning-msg {
+    font-family: 'Courier New', monospace;
+    color: #cccccc;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin: 0.5rem 0;
+}
+
+.warning-msg strong {
+    color: #ff4444;
+    text-shadow: 0 0 8px #ff000066;
+}
+
+.warning-sub {
+    font-family: 'Courier New', monospace;
+    color: #555;
+    font-size: 0.7rem;
+    line-height: 1.6;
+    margin-bottom: 1.6rem;
+}
+
+.warning-btn {
+    background: linear-gradient(135deg, #6b0000, #990000);
+    color: #fff;
+    border: 1px solid #cc0000 !important;
+    font-family: 'Resident Evil', sans-serif;
+    font-size: 1rem;
+    padding: 0.7rem 2.2rem 0.5rem;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 0.18em;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.25);
+}
+
+.warning-btn:hover {
+    background: linear-gradient(135deg, #990000, #cc0000);
+    box-shadow: 0 0 35px rgba(255, 0, 0, 0.55);
+    transform: scale(1.03);
+}
