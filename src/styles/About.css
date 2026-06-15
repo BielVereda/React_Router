@@ -1,0 +1,226 @@
+/* Umbrella Corporate Style */
+.about-container {
+    background-color: #ffffff;
+    color: #333333;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    transition: all 0.2s ease;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.about-header {
+    background: #004488; /* Corporate Blue */
+    color: white;
+    padding: 30px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.about-header-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.about-logo {
+    width: 80px;
+    filter: brightness(0) invert(1);
+    transition: all 0.2s;
+}
+
+.about-titles {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-title {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.about-tagline {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    margin: 5px 0 0;
+    opacity: 0.8;
+}
+
+.about-back-btn {
+    background: #ffffff;
+    color: #004488;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+}
+
+.about-back-btn:hover {
+    background: #dddddd;
+}
+
+.about-main {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-bottom: 50px;
+}
+
+.about-section {
+    background: #f9f9f9;
+    border-left: 5px solid #004488;
+    padding: 30px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+    cursor: default;
+}
+
+.about-section h2 {
+    color: #004488;
+    font-family: 'Courier New', monospace;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    transition: color 0.2s;
+}
+
+.about-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin: 0;
+}
+
+.about-image-placeholder {
+    width: 100%;
+    height: 200px;
+    background: #e0e0e0;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-style: italic;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+/* ── GLITCH STATE ── */
+
+.about-container.glitching {
+    background-color: #0a0000;
+    color: #ff0000;
+}
+
+.about-container.glitching .about-header {
+    background: #220000;
+    border-bottom: 2px solid #ff0000;
+    box-shadow: 0 4px 15px rgba(255,0,0,0.4);
+}
+
+.about-container.glitching .about-logo {
+    filter: drop-shadow(0 0 10px #ff0000) brightness(0) invert(0) sepia(1) hue-rotate(-50deg) saturate(5);
+    animation: jitter 0.1s infinite;
+}
+
+.about-container.glitching .about-title {
+    color: #ff0000;
+    font-family: 'Resident Evil', sans-serif;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.about-container.glitching .about-tagline {
+    color: #aa0000;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+.about-container.glitching .about-back-btn {
+    background: #550000;
+    color: #ff0000;
+    border: 1px solid #ff0000;
+}
+
+.about-container.glitching .about-section {
+    background: #110000;
+    border-color: #ff0000;
+    box-shadow: inset 0 0 20px rgba(255,0,0,0.2);
+}
+
+.about-container.glitching .about-section h2 {
+    color: #ff0000;
+    font-family: 'Resident Evil', sans-serif;
+    letter-spacing: 4px;
+}
+
+.about-container.glitching .about-section p {
+    color: #ff4444;
+    font-family: 'Courier New', monospace;
+}
+
+.about-container.glitching .about-image-placeholder {
+    background: #330000;
+    color: #ff0000;
+    border: 1px solid #ff0000;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    font-style: normal;
+    animation: scanline 2s infinite linear;
+}
+
+/* Red Queen Full Glitch Overlay */
+.red-queen-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(200, 0, 0, 0.1);
+    color: rgba(255, 0, 0, 0.3);
+    font-family: 'Resident Evil', sans-serif;
+    font-size: clamp(3rem, 10vw, 8rem);
+    text-align: center;
+    animation: flashRed 0.5s infinite alternate;
+}
+
+@keyframes jitter {
+    0% { transform: translate(1px, 1px); }
+    25% { transform: translate(-1px, -2px); }
+    50% { transform: translate(-2px, 1px); }
+    75% { transform: translate(2px, -1px); }
+    100% { transform: translate(1px, 2px); }
+}
+
+@keyframes flashRed {
+    0% { background: rgba(255, 0, 0, 0.05); }
+    100% { background: rgba(255, 0, 0, 0.2); }
+}
+
+@keyframes scanline {
+    0% { background: linear-gradient(to bottom, #330000 0%, #330000 100%); }
+    50% { background: linear-gradient(to bottom, #330000 0%, #550000 50%, #330000 100%); }
+    100% { background: linear-gradient(to bottom, #330000 0%, #330000 100%); }
+}
+
+@media (max-width: 768px) {
+    .about-header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    .about-header-content {
+        flex-direction: column;
+    }
+}
