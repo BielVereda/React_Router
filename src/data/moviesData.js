@@ -14,8 +14,6 @@ import reDeathIsland from '../assets/images/movies/re_death_island.jpg';
 export const movies = [
   {
     id: 1,
-    title: "RESIDENT EVIL",
-    subtitle: "GENESIS",
     fullTitle: "Resident Evil",
     year: "2002",
     image: re2002,
@@ -32,8 +30,6 @@ export const movies = [
   },
   {
     id: 2,
-    title: "RESIDENT EVIL",
-    subtitle: "APOCALYPSE",
     fullTitle: "Resident Evil: Apocalypse",
     year: "2004",
     image: reApocalypse,
@@ -50,8 +46,6 @@ export const movies = [
   },
   {
     id: 3,
-    title: "RESIDENT EVIL",
-    subtitle: "EXTINCTION",
     fullTitle: "Resident Evil: Extinction",
     year: "2007",
     image: reExtinction,
@@ -68,8 +62,6 @@ export const movies = [
   },
   {
     id: 4,
-    title: "RESIDENT EVIL",
-    subtitle: "AFTERLIFE",
     fullTitle: "Resident Evil: Afterlife",
     year: "2010",
     image: reAfterlife,
@@ -86,8 +78,6 @@ export const movies = [
   },
   {
     id: 5,
-    title: "RESIDENT EVIL",
-    subtitle: "RETRIBUTION",
     fullTitle: "Resident Evil: Retribution",
     year: "2012",
     image: reRetribution,
@@ -104,8 +94,6 @@ export const movies = [
   },
   {
     id: 6,
-    title: "RESIDENT EVIL",
-    subtitle: "THE FINAL CHAPTER",
     fullTitle: "Resident Evil: The Final Chapter",
     year: "2016",
     image: reFinalChapter,
@@ -122,8 +110,6 @@ export const movies = [
   },
   {
     id: 7,
-    title: "RESIDENT EVIL",
-    subtitle: "WELCOME TO RACCOON CITY",
     fullTitle: "Resident Evil: Welcome to Raccoon City",
     year: "2021",
     image: reWelcomeRaccoon,
@@ -140,8 +126,6 @@ export const movies = [
   },
   {
     id: 8,
-    title: "RESIDENT EVIL",
-    subtitle: "DEGENERATION",
     fullTitle: "Resident Evil: Degeneration",
     year: "2008",
     image: reDegeneration,
@@ -158,8 +142,6 @@ export const movies = [
   },
   {
     id: 9,
-    title: "RESIDENT EVIL",
-    subtitle: "DAMNATION",
     fullTitle: "Resident Evil: Damnation",
     year: "2012",
     image: reDamnation,
@@ -176,8 +158,6 @@ export const movies = [
   },
   {
     id: 10,
-    title: "RESIDENT EVIL",
-    subtitle: "VENDETTA",
     fullTitle: "Resident Evil: Vendetta",
     year: "2017",
     image: reVendetta,
@@ -194,8 +174,6 @@ export const movies = [
   },
   {
     id: 11,
-    title: "RESIDENT EVIL",
-    subtitle: "DEATH ISLAND",
     fullTitle: "Resident Evil: Death Island",
     year: "2023",
     image: reDeathIsland,
