@@ -31,12 +31,21 @@ export default function Movies() {
     }, [activeIndex]);
 
     // Handle start to satisfy browser audio policies
+    // Background audio fade-in logic
     const handleStart = () => {
         setStarted(true);
         const audio = bgAudioRef.current;
         if (audio) {
+            audio.volume = 0;
             audio.muted = false;
-            audio.play().catch(() => {
+            audio.play().then(() => {
+                let vol = 0;
+                const fade = setInterval(() => {
+                    vol = Math.min(vol + 0.05, 0.7);
+                    audio.volume = vol;
+                    if (vol >= 0.7) clearInterval(fade);
+                }, 100);
+            }).catch(() => {
                 setAudioBlocked(true);
             });
         }
@@ -47,7 +56,7 @@ export default function Movies() {
         const selectSfx = selectAudioRef.current;
         if (selectSfx) {
             selectSfx.currentTime = 0;
-            selectSfx.play().catch(() => {});
+            selectSfx.play().catch(() => { });
         }
     };
 
@@ -56,7 +65,7 @@ export default function Movies() {
         const cancelSfx = cancelAudioRef.current;
         if (cancelSfx) {
             cancelSfx.currentTime = 0;
-            cancelSfx.play().catch(() => {});
+            cancelSfx.play().catch(() => { });
         }
     };
 
@@ -77,14 +86,13 @@ export default function Movies() {
         setActiveIndex(index);
     };
 
-    // Keyboard navigation removed as requested
-
     // Audio Toggle
     const toggleMute = () => {
         const audio = bgAudioRef.current;
         if (!audio) return;
 
         if (audioBlocked) {
+            audio.volume = 0.7;
             audio.muted = false;
             audio.play();
             setAudioBlocked(false);
@@ -95,31 +103,11 @@ export default function Movies() {
         }
     };
 
-    if (!started) {
-        return (
-            <div className="warning-overlay">
-                <div className="warning-box">
-                    <div className="warning-scanlines" />
-                    <img src={umbrellaLogo} alt="Umbrella" className="warning-umbrella" />
-                    <p className="warning-headline" style={{ marginTop: '10px' }}>VISUAL RECORDS ARCHIVE</p>
-                    <div className="warning-divider" />
-                    <p className="warning-msg" style={{ margin: '20px 0' }}>
-                        Decrypting Umbrella Corporation surveillance footage and B.O.W. field encounters.<br />
-                        Audio and visual feeds are ready for playback.
-                    </p>
-                    <button className="warning-btn" onClick={handleStart}>
-                        ▶ DECRYPT FOOTAGE
-                    </button>
-                </div>
-            </div>
-        );
-    }
-
     return (
         <div className="movies-page-container fade-in">
             {/* Background Audio */}
             <audio ref={bgAudioRef} loop preload="auto">
-                <source src="/audio/Safe_Room.mp3" type="audio/mpeg" />
+                <source src="/audio/Not_Found.mp3" type="audio/mpeg" />
             </audio>
             {/* SFX Audios */}
             <audio ref={selectAudioRef} preload="auto">
@@ -129,26 +117,45 @@ export default function Movies() {
                 <source src="/audio/cursorCancel.mp3" type="audio/mpeg" />
             </audio>
 
-            {/* Mute Button */}
-            <button onClick={toggleMute} className="audio-btn" style={{ fontFamily: 'Resident Evil, sans-serif' }}>
-                {audioBlocked ? '🔊 Unmute' : muted ? '🔊 Unmute' : '🔇 Mute'}
-            </button>
+            {!started && (
+                <div className="warning-overlay">
+                    <div className="warning-box">
+                        <div className="warning-scanlines" />
+                        <img src={umbrellaLogo} alt="Umbrella" className="warning-umbrella" />
+                        <p className="warning-headline" style={{ marginTop: '10px' }}>VISUAL RECORDS ARCHIVE</p>
+                        <div className="warning-divider" />
+                        <p className="warning-msg" style={{ margin: '20px 0' }}>
+                            Decrypting Umbrella Corporation surveillance footage and B.O.W. field encounters.<br />
+                            Audio and visual feeds are ready for playback.
+                        </p>
+                        <button className="warning-btn" onClick={handleStart}>
+                            ▶ DECRYPT FOOTAGE
+                        </button>
+                    </div>
+                </div>
+            )}
 
             {/* Header branding */}
-            <header className="site-header" style={{ width: '100%', maxWidth: '950px', marginBottom: '10px' }}>
-                <div className="logo-row" style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'center' }}>
-                    <img src={umbrellaLogo} alt="Umbrella" className="umbrella-logo" style={{ height: '35px', width: 'auto', objectFit: 'contain' }} />
-                    <img src={residentEvilLogo} alt="Resident Evil" className="resident-logo" style={{ height: '30px', width: 'auto', objectFit: 'contain' }} />
+            <header className="movies-header">
+                <div className="movies-header-left">
+                    <img src={umbrellaLogo} alt="Umbrella" className="movies-umbrella-logo" />
+                    <img src={residentEvilLogo} alt="Resident Evil" className="movies-resident-logo" />
+                </div>
+
+                <div className="movies-header-right">
+                    <button onClick={toggleMute} className="audio-btn movies-audio-btn">
+                        {audioBlocked ? '🔊 UNMUTE' : muted ? '🔊 UNMUTE' : '🔇 MUTE'}
+                    </button>
+                    <Link to="/" className="movies-btn-back">
+                        ◀ BACK TO SAFEROOM
+                    </Link>
                 </div>
             </header>
-
-            {/* Biohazard styled screen title */}
-            <h1 className="biohazard-title">CHAPTER SELECT</h1>
 
             {/* Carousel Slider */}
             <section className="movies-slider-section">
                 <button className="slider-arrow" onClick={prevMovie} aria-label="Previous Movie">◀</button>
-                
+
                 <div className="movies-carousel">
                     {movies.map((movie, index) => {
                         const isActive = index === activeIndex;
@@ -241,27 +248,6 @@ export default function Movies() {
                     </section>
                 </div>
             </main>
-
-            {/* HUD Footer controls */}
-            <footer className="movies-hud-footer">
-                <div className="hud-left">
-                    Select a movie archive to inspect details.
-                </div>
-                <div className="hud-right">
-                    <div className="hud-btn" onClick={prevMovie}>
-                        <span className="hud-key">◀</span>
-                        <span>Prev</span>
-                    </div>
-                    <div className="hud-btn" onClick={nextMovie}>
-                        <span className="hud-key">▶</span>
-                        <span>Next</span>
-                    </div>
-                    <Link to="/" className="hud-btn" onClick={playCancelSound}>
-                        <span className="hud-key">BACK</span>
-                        <span>Saferoom</span>
-                    </Link>
-                </div>
-            </footer>
         </div>
     );
 }

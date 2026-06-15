@@ -1,3 +1,38 @@
+header {
+    width: 100%;
+    max-width: 950px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    z-index: 3;
+}
+
+.char-btn-back {
+    background: rgba(12, 12, 12, 0.9);
+    border: 1px solid #444;
+    color: #888;
+    padding: 6px 14px 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.char-btn-audio:hover,
+.char-btn-back:hover {
+    border-color: #aa0000;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(170, 0, 0, 0.35);
+    background: #1a0000;
+}
+
 .movies-page-container {
     position: relative;
     min-height: 100vh;
@@ -499,6 +534,90 @@
     }
     .movie-card-indicators {
         display: none; /* Hide complex sub-badges on mobile to fit */
+    }
+}
+
+/* ── Header Layout ── */
+.movies-header {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    z-index: 3;
+}
+
+.movies-header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.movies-umbrella-logo {
+    height: clamp(45px, 6vw, 65px);
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px #cc0000);
+}
+
+.movies-resident-logo {
+    height: clamp(40px, 5vw, 55px);
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px #cc0000);
+}
+
+.movies-header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.movies-audio-btn {
+    background: rgba(20, 20, 20, 0.8);
+    color: #aaa;
+    border: 1px solid #444;
+    padding: 8px 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 11px;
+    font-family: 'Resident Evil', sans-serif;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+}
+
+.movies-audio-btn:hover {
+    color: #fff;
+    border-color: #8bbfff;
+    box-shadow: 0 0 10px rgba(139, 191, 255, 0.3);
+}
+
+.movies-btn-back {
+    background: rgba(100, 0, 0, 0.8);
+    color: #ccc;
+    border: 1px solid #550000;
+    padding: 8px 15px;
+    font-size: 11px;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.3s;
+    letter-spacing: 1px;
+}
+
+.movies-btn-back:hover {
+    background: #880000;
+    color: #fff;
+    box-shadow: 0 0 10px #ff000055;
+}
+
+@media (max-width: 768px) {
+    .movies-header {
+        flex-direction: column;
+        gap: 20px;
     }
 }
 
