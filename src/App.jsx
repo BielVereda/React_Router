@@ -5,6 +5,8 @@ import About from './pages/About'
 import Characters from './pages/Characters'
 import Movies from './pages/Movies'
 import NotFound from './pages/NotFound'
+import Contact from './pages/Contact'
+import Downloads from './pages/Downloads'
 import './styles/global.css'
 import { useEffect } from 'react'
 
@@ -27,7 +29,9 @@ function App() {
         <Route path='/about' element={<About />} />
         <Route path='/characters' element={<Characters />} />
         <Route path='/movies' element={<Movies />} />
+        <Route path='/contact' element={<Contact />} />
         <Route path='*' element={<NotFound />} />
+        <Route path='/downloads' element={<Downloads />} />
       </Routes>
     </BrowserRouter>
   )
