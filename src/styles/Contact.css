@@ -1,0 +1,435 @@
+/* ─── Contact: Green CRT Terminal ─── */
+
+/* Import font */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+:root {
+    --green: #00ff41;
+    --green-dim: #00cc33;
+    --green-dark: #003300;
+    --green-glow: rgba(0, 255, 65, 0.3);
+    --bg: #000900;
+    --panel: #010e01;
+}
+
+.contact-container {
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 30px 20px 60px;
+    font-family: 'Share Tech Mono', 'Courier New', monospace;
+    position: relative;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* ── CRT Effects ── */
+.crt-scanlines {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.4) 2px,
+        rgba(0, 0, 0, 0.4) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.crt-flicker {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+    background: transparent;
+    animation: crtFlicker 8s infinite;
+}
+
+.crt-vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9997;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.85) 100%);
+}
+
+@keyframes crtFlicker {
+    0%, 100%   { opacity: 1; }
+    92%        { opacity: 1; }
+    93%        { opacity: 0.7; }
+    94%        { opacity: 1; }
+    97%        { opacity: 1; }
+    97.5%      { opacity: 0.5; }
+    98%        { opacity: 1; }
+}
+
+/* ── Terminal Window ── */
+.terminal-window {
+    width: 100%;
+    max-width: 760px;
+    background: var(--panel);
+    border: 1px solid var(--green-dim);
+    border-radius: 6px;
+    box-shadow:
+        0 0 30px rgba(0, 255, 65, 0.15),
+        0 0 60px rgba(0, 255, 65, 0.08),
+        inset 0 0 20px rgba(0, 255, 65, 0.03);
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+}
+
+/* ── Title bar ── */
+.terminal-titlebar {
+    background: #011a01;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #013301;
+}
+
+.terminal-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.red-dot    { background: #cc3030; box-shadow: 0 0 4px #cc3030; }
+.yellow-dot { background: #ccaa00; box-shadow: 0 0 4px #ccaa00; }
+.green-dot  { background: var(--green-dim); box-shadow: 0 0 4px var(--green-dim); }
+
+.terminal-name {
+    flex: 1;
+    font-size: 11px;
+    color: var(--green-dim);
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.terminal-back-btn {
+    font-size: 11px;
+    color: #666;
+    text-decoration: none;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+    padding: 2px 8px;
+    border: 1px solid #333;
+    border-radius: 2px;
+}
+
+.terminal-back-btn:hover {
+    color: #cc3333;
+    border-color: #cc3333;
+}
+
+/* ── Boot sequence ── */
+.terminal-boot {
+    padding: 18px 24px 0;
+    min-height: 40px;
+}
+
+.boot-line {
+    font-size: 13px;
+    color: var(--green-dim);
+    margin-bottom: 3px;
+    opacity: 0;
+    animation: typeLine 0.2s forwards;
+}
+
+@keyframes typeLine {
+    to { opacity: 1; }
+}
+
+.boot-cursor {
+    color: var(--green);
+    animation: blinkBlock 0.8s infinite;
+    font-size: 13px;
+}
+
+/* ── Terminal body ── */
+.terminal-body {
+    padding: 20px 24px 30px;
+}
+
+.terminal-prompt {
+    color: var(--green);
+    font-size: 13px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    opacity: 0;
+    animation: typeLine 0.3s 0.2s forwards;
+}
+
+/* ── Form fields ── */
+.terminal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    opacity: 0;
+    animation: typeLine 0.3s forwards;
+}
+
+.form-field:nth-child(2) { animation-delay: 0.1s; }
+.form-field:nth-child(3) { animation-delay: 0.2s; }
+.form-field:nth-child(4) { animation-delay: 0.3s; }
+
+.terminal-label {
+    font-size: 11px;
+    color: var(--green-dim);
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.char-counter {
+    color: #446644;
+    font-size: 10px;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid #013301;
+    border-radius: 2px;
+    background: #000d00;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-wrapper:focus-within {
+    border-color: var(--green-dim);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+}
+
+.input-prefix {
+    color: var(--green);
+    padding: 0 10px;
+    font-size: 14px;
+    border-right: 1px solid #013301;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.terminal-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--green);
+    font-family: 'Share Tech Mono', 'Courier New', monospace;
+    font-size: 14px;
+    padding: 10px 12px;
+    width: 100%;
+    caret-color: var(--green);
+    letter-spacing: 1px;
+}
+
+.terminal-input::placeholder { color: #1a4a1a; }
+
+.terminal-select {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.terminal-select option {
+    background: #000d00;
+    color: var(--green);
+}
+
+.textarea-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    border: 1px solid #013301;
+    border-radius: 2px;
+    background: #000d00;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.textarea-wrapper:focus-within {
+    border-color: var(--green-dim);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+}
+
+.textarea-prefix {
+    color: var(--green);
+    padding: 10px;
+    font-size: 14px;
+    border-right: 1px solid #013301;
+    user-select: none;
+    flex-shrink: 0;
+    align-self: flex-start;
+}
+
+.terminal-textarea {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--green);
+    font-family: 'Share Tech Mono', 'Courier New', monospace;
+    font-size: 13px;
+    padding: 10px 12px;
+    width: 100%;
+    resize: vertical;
+    caret-color: var(--green);
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+}
+
+.terminal-textarea::placeholder { color: #1a4a1a; }
+
+/* ── Footer bar ── */
+.terminal-form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-top: 5px;
+}
+
+.terminal-status-bar {
+    font-size: 11px;
+    color: #2a6a2a;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.blink-cursor {
+    color: var(--green);
+    animation: blinkBlock 0.8s infinite;
+}
+
+@keyframes blinkBlock {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0; }
+}
+
+/* ── Buttons ── */
+.terminal-btn {
+    background: var(--green-dark);
+    color: var(--green);
+    border: 1px solid var(--green-dim);
+    padding: 10px 24px;
+    font-family: 'Share Tech Mono', 'Courier New', monospace;
+    font-size: 13px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+}
+
+.terminal-btn:hover:not(:disabled) {
+    background: #004400;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+    transform: translateY(-1px);
+}
+
+.terminal-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    animation: sendingPulse 1s infinite alternate;
+}
+
+.terminal-btn.secondary {
+    background: transparent;
+    color: var(--green-dim);
+    margin-top: 20px;
+}
+
+@keyframes sendingPulse {
+    from { box-shadow: 0 0 5px rgba(0, 255, 65, 0.2); }
+    to   { box-shadow: 0 0 20px rgba(0, 255, 65, 0.6); }
+}
+
+/* ── Success screen ── */
+.transmission-success {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    opacity: 0;
+    animation: typeLine 0.5s 0.2s forwards;
+}
+
+.success-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid #013301;
+    padding-bottom: 15px;
+}
+
+.success-logo {
+    width: 40px;
+    filter: sepia(1) saturate(5) hue-rotate(90deg) brightness(1.5);
+    animation: logoPulse 2s infinite alternate;
+}
+
+@keyframes logoPulse {
+    from { filter: sepia(1) saturate(5) hue-rotate(90deg) brightness(1); }
+    to   { filter: sepia(1) saturate(5) hue-rotate(90deg) brightness(2) drop-shadow(0 0 8px var(--green)); }
+}
+
+.success-header h2 {
+    color: var(--green);
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    margin: 0;
+    letter-spacing: 3px;
+    text-shadow: 0 0 15px var(--green);
+}
+
+.success-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.success-lines p {
+    font-size: 13px;
+    color: var(--green-dim);
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.highlight {
+    color: var(--green);
+    font-weight: bold;
+}
+
+.mono {
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.success-ok {
+    color: #00ff00;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    .contact-container { padding: 10px 10px 40px; }
+    .terminal-form-footer { flex-direction: column; align-items: flex-start; }
+    .terminal-name { display: none; }
+}
