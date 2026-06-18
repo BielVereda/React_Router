@@ -9,6 +9,7 @@ import Contact from './pages/Contact'
 import Downloads from './pages/Downloads'
 import './styles/global.css'
 import { useEffect } from 'react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 
 function App() {
   useEffect(() => {
@@ -33,6 +34,7 @@ function App() {
         <Route path='*' element={<NotFound />} />
         <Route path='/downloads' element={<Downloads />} />
       </Routes>
+      <SpeedInsights />
     </BrowserRouter>
   )
 }
