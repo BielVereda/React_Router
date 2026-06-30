@@ -4,6 +4,8 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Characters from './pages/Characters'
 import Movies from './pages/Movies'
+import Games from './pages/Games'
+import Models from './pages/Models'
 import NotFound from './pages/NotFound'
 import Contact from './pages/Contact'
 import Downloads from './pages/Downloads'
@@ -29,6 +31,8 @@ function App() {
         <Route path='/about' element={<About />} />
         <Route path='/characters' element={<Characters />} />
         <Route path='/movies' element={<Movies />} />
+        <Route path='/games' element={<Games />} />
+        <Route path='/models3d' element={<Models />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='*' element={<NotFound />} />
         <Route path='/downloads' element={<Downloads />} />
