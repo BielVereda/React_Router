@@ -1,0 +1,317 @@
+/* ─── Models Page (Umbrella R&D Holographic / Blueprint Theme) ─── */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap');
+
+:root {
+    --holo-cyan: #00f0ff;
+    --holo-cyan-dim: #007a88;
+    --holo-bg: #020a10;
+    --holo-panel: rgba(2, 16, 26, 0.75);
+    --holo-border: #005a66;
+}
+
+.models-page {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--holo-bg);
+    color: #cceeff;
+    font-family: 'Rajdhani', 'Courier New', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 20px 60px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* Holographic Blueprint Grid */
+.models-grid-bg {
+    position: fixed;
+    inset: 0;
+    background-image: 
+        linear-gradient(var(--holo-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--holo-border) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center center;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+    transform: perspective(1000px) rotateX(20deg);
+    transform-origin: top;
+}
+
+.models-vignette {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 30%, var(--holo-bg) 90%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Header */
+.models-header {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0 30px;
+    z-index: 3;
+    border-bottom: 1px solid var(--holo-cyan-dim);
+    margin-bottom: 30px;
+}
+
+.models-header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.models-umbrella-logo {
+    height: 50px;
+    filter: brightness(0) invert(1) sepia(100%) hue-rotate(140deg) saturate(300%) brightness(1.2);
+    animation: holoPulse 4s infinite alternate;
+}
+
+@keyframes holoPulse {
+    from { filter: brightness(0) invert(1) sepia(100%) hue-rotate(140deg) saturate(300%) brightness(1) drop-shadow(0 0 5px var(--holo-cyan)); }
+    to { filter: brightness(0) invert(1) sepia(100%) hue-rotate(140deg) saturate(300%) brightness(1.5) drop-shadow(0 0 15px var(--holo-cyan)); }
+}
+
+.models-title-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.models-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--holo-cyan);
+    margin: 0;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+}
+
+.models-subtitle {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6699aa;
+    margin: 2px 0 0;
+    letter-spacing: 2px;
+}
+
+.models-header-right {
+    display: flex;
+    gap: 12px;
+}
+
+.models-back-btn {
+    background: transparent;
+    color: var(--holo-cyan);
+    border: 1px solid var(--holo-cyan-dim);
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    backdrop-filter: blur(4px);
+}
+
+.models-back-btn:hover {
+    background: var(--holo-cyan-dim);
+    color: #fff;
+    box-shadow: 0 0 15px var(--holo-cyan-dim);
+}
+
+/* Grid Layout */
+.models-container {
+    width: 100%;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    z-index: 3;
+}
+
+/* Model Card */
+.models-card {
+    background: var(--holo-panel);
+    border: 1px solid var(--holo-border);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.models-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--holo-cyan), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.models-card:hover {
+    border-color: var(--holo-cyan);
+    box-shadow: 0 5px 25px rgba(0, 240, 255, 0.15), inset 0 0 15px rgba(0, 240, 255, 0.05);
+    transform: translateY(-4px);
+}
+
+.models-card:hover::before {
+    opacity: 1;
+}
+
+/* Image section */
+.models-image-wrap {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    border-bottom: 1px solid var(--holo-border);
+}
+
+.models-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+    transition: opacity 0.3s, transform 0.5s;
+    mix-blend-mode: screen; /* Gives it a holographic feel if the image is mostly dark */
+    filter: sepia(1) hue-rotate(140deg) saturate(1.5) brightness(0.9);
+}
+
+.models-card:hover .models-image {
+    opacity: 1;
+    transform: scale(1.05);
+    filter: none; /* Return to original colors on hover */
+    mix-blend-mode: normal;
+}
+
+/* Image Indicators */
+.models-image-indicators {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    display: flex;
+    gap: 5px;
+    background: rgba(0,0,0,0.7);
+    padding: 3px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--holo-border);
+    z-index: 2;
+}
+
+.model-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(0, 240, 255, 0.2);
+    transition: all 0.3s;
+}
+
+.model-dot.active {
+    background: var(--holo-cyan);
+    box-shadow: 0 0 6px var(--holo-cyan);
+}
+
+/* Card Content */
+.models-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.models-card-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 10px;
+    letter-spacing: 1px;
+}
+
+.models-card-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #99aabb;
+    margin: 0 0 20px;
+    flex: 1;
+}
+
+.models-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: #6699aa;
+    border-top: 1px dashed var(--holo-border);
+    border-bottom: 1px dashed var(--holo-border);
+    padding: 10px 0;
+}
+
+.models-meta-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.models-meta-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    color: var(--holo-cyan-dim);
+    margin-bottom: 2px;
+}
+
+.models-meta-value {
+    color: #fff;
+    font-weight: bold;
+}
+
+/* External Link Button */
+.models-link-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(0, 240, 255, 0.1);
+    color: var(--holo-cyan);
+    border: 1px solid var(--holo-cyan-dim);
+    padding: 12px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    text-transform: uppercase;
+}
+
+.models-link-btn:hover {
+    background: var(--holo-cyan);
+    color: #000;
+    box-shadow: 0 0 15px var(--holo-cyan);
+}
+
+.models-link-icon {
+    font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .models-header {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    
+    .models-container {
+        grid-template-columns: 1fr;
+    }
+}
