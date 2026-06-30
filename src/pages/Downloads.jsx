@@ -15,65 +15,37 @@ export default function Downloads() {
 
     const activeSection = consoleSections.find(s => s.id === activeConsole)
 
-    /* ── Background audio ───────────────────────────────────── */
-    useEffect(() => {
-        const audio = bgAudioRef.current
-        if (!audio) return
-        audio.muted = true
-        audio.play()
-            .then(() => { setTimeout(() => { audio.muted = false }, 500) })
-            .catch(() => setAudioBlocked(true))
-    }, [])
+    /* ── Entry Handler ───────────────────────────────────── */
+    const handleStart = () => {
+        setEntered(true);
+        const audio = bgAudioRef.current;
+        if (audio) {
+            audio.volume = 0;
+            audio.play().then(() => {
+                let vol = 0;
+                const fade = setInterval(() => {
+                    vol = Math.min(vol + 0.05, 0.65);
+                    audio.volume = vol;
+                    if (vol >= 0.65) clearInterval(fade);
+                }, 100);
+            }).catch(() => {});
+        }
+    };
 
     const toggleMute = () => {
-        const audio = bgAudioRef.current
-        if (!audio) return
-        if (audioBlocked) {
-            audio.muted = false
-            audio.play()
-            setAudioBlocked(false)
-            setMuted(false)
-        } else {
-            audio.muted = !audio.muted
-            setMuted(audio.muted)
-        }
-    }
+        const audio = bgAudioRef.current;
+        if (!audio) return;
+        audio.muted = !audio.muted;
+        setMuted(audio.muted);
+    };
 
     /* ── Download handler ───────────────────────────────────── */
     const handleDownload = (link) => {
-        if (!link || link.startsWith('PLACEHOLDER')) return
-        window.open(link, '_blank', 'noopener,noreferrer')
+        if (!link || link.startsWith('PLACEHOLDER')) return;
+        window.open(link, '_blank', 'noopener,noreferrer');
     }
 
-    const isPlaceholder = (link) => !link || link.startsWith('PLACEHOLDER')
-
-    /* ── Entry overlay ──────────────────────────────────────── */
-    if (!entered) {
-        return (
-            <div className="warning-overlay dl-entry-overlay">
-                <div className="warning-box">
-                    <div className="warning-scanlines" />
-                    <img src={umbrellaLogo} alt="Umbrella" className="warning-umbrella" />
-                    <p className="warning-corp-name">UMBRELLA CORPORATION</p>
-                    <div className="warning-divider" />
-                    <h2 className="warning-headline">SECURE ARCHIVE</h2>
-                    <p className="warning-msg">
-                        You are accessing the <strong>Biohazard Countermeasure Service</strong><br />
-                        classified file repository.<br /><br />
-                        Game archives, emulation software and firmware<br />
-                        are stored within this unit.
-                    </p>
-                    <p className="warning-sub">
-                        BIOS files are proprietary firmware. Ensure legal ownership<br />
-                        of the original hardware before downloading.
-                    </p>
-                    <button className="warning-btn" onClick={() => setEntered(true)}>
-                        ACCESS ARCHIVE
-                    </button>
-                </div>
-            </div>
-        )
-    }
+    const isPlaceholder = (link) => !link || link.startsWith('PLACEHOLDER');
 
     /* ── Main page ──────────────────────────────────────────── */
     return (
@@ -82,6 +54,32 @@ export default function Downloads() {
             <audio ref={bgAudioRef} loop preload="auto">
                 <source src="/audio/Safe_Room.mp3" type="audio/mpeg" />
             </audio>
+
+            {/* ── Entry overlay ──────────────────────────────────────── */}
+            {!entered && (
+                <div className="warning-overlay">
+                    <div className="warning-box">
+                        <div className="warning-scanlines" />
+                        <img src={umbrellaLogo} alt="Umbrella" className="warning-umbrella" />
+                        <p className="warning-corp-name">UMBRELLA CORPORATION</p>
+                        <div className="warning-divider" />
+                        <h2 className="warning-headline">SECURE ARCHIVE</h2>
+                        <p className="warning-msg">
+                            You are accessing the <strong>Biohazard Countermeasure Service</strong><br />
+                            classified file repository.<br /><br />
+                            Game archives, emulation software and firmware<br />
+                            are stored within this unit.
+                        </p>
+                        <p className="warning-sub">
+                            BIOS files are proprietary firmware. Ensure legal ownership<br />
+                            of the original hardware before downloading.
+                        </p>
+                        <button className="warning-btn" onClick={handleStart}>
+                            ACCESS ARCHIVE
+                        </button>
+                    </div>
+                </div>
+            )}
 
             <div className="dl-scanlines" />
 
