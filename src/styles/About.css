@@ -255,6 +255,63 @@
     transform: rotate(-2deg);
 }
 
+/* Tech stack grid */
+.about-tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 6px;
+}
+
+.about-tech-card {
+    background: #f0f4ff;
+    border: 1px solid #ccd6f6;
+    border-radius: 4px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.5s, border-color 0.5s;
+}
+
+.about-tech-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    width: 32px;
+    text-align: center;
+    color: #003a8c;
+    transition: color 0.5s;
+}
+
+.about-tech-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.about-tech-name {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #003a8c;
+    transition: color 0.5s;
+}
+
+.about-tech-desc {
+    font-size: 0.75rem;
+    color: #666;
+    transition: color 0.5s;
+}
+
+/* Red Queen overrides for tech cards */
+.about-container.red-queen-mode .about-tech-card {
+    background: #1a0000;
+    border-color: #330000;
+}
+.about-container.red-queen-mode .about-tech-icon,
+.about-container.red-queen-mode .about-tech-name { color: #ff4444; }
+.about-container.red-queen-mode .about-tech-desc { color: #661111; }
+
 /* Footer bar */
 .about-footer-bar {
     margin-top: 20px;
