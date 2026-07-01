@@ -175,7 +175,7 @@ export default function About() {
                         <div className="about-footer-bar">
                             {redQueenActive
                                 ? <span>🔴 RED QUEEN ONLINE — ALL EXITS SEALED</span>
-                                : <span>Made with ❤ and React · © {new Date().getFullYear()} Gabriel Vereda · <a href="https://github.com/BielVereda" target="_blank" rel="noreferrer" style={{ color: '#0055a4' }}>GitHub</a></span>
+                                : <span>© {new Date().getFullYear()} Biel Vereda · <a href="https://github.com/BielVereda" target="_blank" rel="noreferrer" style={{ color: '#0055a4' }}>GitHub</a></span>
                             }
                         </div>
                     </section>
