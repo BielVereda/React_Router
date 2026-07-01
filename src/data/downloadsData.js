@@ -17,16 +17,32 @@ export const consoleSections = [
         hasBios: false,
         biosNote: 'mGBA does not require a BIOS file to run GBC titles.',
 
-        emulator: {
-            name: 'mGBA',
-            version: '0.10.3',
-            description:
-                'Modern, cycle-accurate Game Boy / GBC / GBA emulator. Lightweight and feature-rich with save states, cheat codes and real-time clock support.',
-            os: ['Windows', 'macOS', 'Linux', 'Android'],
-            biosRequired: false,
-            link: 'PLACEHOLDER_MGBA',
-            officialSite: 'https://mgba.io',
-        },
+        emulators: [
+            {
+                name: 'mGBA',
+                version: '0.10.3',
+                description: 'Modern, cycle-accurate Game Boy / GBC / GBA emulator. Lightweight and feature-rich with save states, cheat codes and real-time clock support.',
+                os: ['Windows', 'macOS', 'Linux'],
+                biosRequired: false,
+                links: {
+                    Windows: 'https://drive.google.com/file/d/1qvAv94UFugeEAfJzMyi4JgPRlj-SMPgK/view?usp=drive_link',
+                    macOS: 'https://drive.google.com/file/d/110NHzwVjPeGkSuYEGm9HJMyrB4HSRMrI/view?usp=drive_link',
+                    Linux: 'https://drive.google.com/file/d/1hjnh_b0XuBprOdnU6rfl7bZoO89Mqydm/view?usp=drive_link'
+                },
+                officialSite: 'https://mgba.io',
+            },
+            {
+                name: 'Super GBC',
+                version: 'Latest',
+                description: 'A fast and full-featured emulator to run Game Boy and Game Boy Color games on Android devices.',
+                os: ['Android'],
+                biosRequired: false,
+                links: {
+                    Android: 'https://drive.google.com/file/d/1YBW83r87SWio98Dp9mYaaR3x9wtjnRF2/view?usp=drive_link'
+                },
+                officialSite: 'https://play.google.com',
+            }
+        ],
 
         bios: null,
 
@@ -38,7 +54,7 @@ export const consoleSections = [
                 region: 'EUR / USA',
                 genre: 'Action RPG',
                 size: '~1 MB',
-                link: 'PLACEHOLDER_GAIDEN',
+                link: 'https://drive.google.com/file/d/1U7WyQWXGGZIUo4C1gjuHsbnngZHQcK6N/view?usp=drive_link',
                 description:
                     'Barry Burton boards a luxury ocean liner overrun by Bio-Organic Weapons to rescue Leon S. Kennedy. Features a unique top-down exploration style and a first-person real-time battle system.',
             },
@@ -56,16 +72,21 @@ export const consoleSections = [
         hasBios: false,
         biosNote: 'DeSmuME uses a built-in HLE BIOS implementation — no firmware dump required.',
 
-        emulator: {
-            name: 'DeSmuME',
-            version: '0.9.13',
-            description:
-                'The most widely compatible Nintendo DS emulator. Supports save states, AR cheat codes, microphone input and Wi-Fi emulation for select titles.',
-            os: ['Windows', 'macOS', 'Linux'],
-            biosRequired: false,
-            link: 'PLACEHOLDER_DESMUME',
-            officialSite: 'https://desmume.org',
-        },
+        emulators: [
+            {
+                name: 'DeSmuME',
+                version: '0.9.13',
+                description: 'The most widely compatible Nintendo DS emulator. Supports save states, AR cheat codes, microphone input and Wi-Fi emulation for select titles.',
+                os: ['Windows', 'macOS', 'Linux'],
+                biosRequired: false,
+                links: {
+                    Windows: 'https://drive.google.com/file/d/1XpNXy-QqKHuEzmY-R18Qhs1QyqwFX9oK/view?usp=drive_link',
+                    macOS: 'https://drive.google.com/file/d/1Q1HVuXixUKEtvEV8-woveTsExrFaUsTL/view?usp=drive_link',
+                    Linux: 'https://drive.google.com/file/d/1Ak5z91BmJIeHUH8H2AVBkNPxHrDHhubp/view?usp=drive_link'
+                },
+                officialSite: 'https://desmume.org',
+            }
+        ],
 
         bios: null,
 
@@ -77,7 +98,7 @@ export const consoleSections = [
                 region: 'USA / EUR / JPN',
                 genre: 'Survival Horror',
                 size: '~128 MB',
-                link: 'PLACEHOLDER_DEADLY_SILENCE',
+                link: 'https://drive.google.com/file/d/1bBSC7shETAWBY1L6-UXQX_1wbd6-ShTD/view?usp=drive_link',
                 description:
                     'Enhanced remake of the original Resident Evil for the Nintendo DS. Includes both Classic and Rebirth modes, with touch-screen puzzles, cooperative and versus multiplayer via local wireless.',
             },
@@ -95,16 +116,22 @@ export const consoleSections = [
         hasBios: true,
         biosNote: null,
 
-        emulator: {
-            name: 'DuckStation',
-            version: 'Latest',
-            description:
-                'Highly accurate, cycle-based PS1 emulator. Supports upscaling to 4K, texture filtering, PGXP geometry correction, widescreen patches and RetroAchievements integration.',
-            os: ['Windows', 'macOS', 'Linux', 'Android'],
-            biosRequired: true,
-            link: 'PLACEHOLDER_DUCKSTATION',
-            officialSite: 'https://www.duckstation.org',
-        },
+        emulators: [
+            {
+                name: 'DuckStation',
+                version: 'Latest',
+                description: 'Highly accurate, cycle-based PS1 emulator. Supports upscaling to 4K, texture filtering, PGXP geometry correction, widescreen patches and RetroAchievements integration.',
+                os: ['Windows', 'macOS', 'Linux', 'Android'],
+                biosRequired: true,
+                links: {
+                    Windows: 'PLACEHOLDER_DUCKSTATION_WINDOWS',
+                    macOS: 'PLACEHOLDER_DUCKSTATION_MACOS',
+                    Linux: 'PLACEHOLDER_DUCKSTATION_LINUX',
+                    Android: 'PLACEHOLDER_DUCKSTATION_ANDROID'
+                },
+                officialSite: 'https://www.duckstation.org',
+            }
+        ],
 
         bios: {
             name: 'PS1 BIOS Pack',
@@ -112,7 +139,7 @@ export const consoleSections = [
                 'Firmware required by DuckStation. Pack includes SCPH-1001 (USA v2.2), SCPH-5501 (USA v3.0) and SCPH-5502 (EUR v3.0). The SCPH-5501 is recommended for best compatibility.',
             warning:
                 'PS1 BIOS files are proprietary Sony firmware. You are solely responsible for ensuring that you legally own a PS1 console from which the BIOS was dumped.',
-            link: 'PLACEHOLDER_PS1_BIOS',
+            link: 'https://drive.google.com/file/d/1ZO3baxiNodGLXnUvTBoollO8xeAg4LLu/view?usp=drive_link',
             size: '~2 MB',
         },
 
@@ -124,7 +151,7 @@ export const consoleSections = [
                 region: 'USA / EUR',
                 genre: 'Survival Horror',
                 size: '~530 MB',
-                link: 'PLACEHOLDER_DIRECTORS_CUT',
+                link: 'https://drive.google.com/file/d/1zUykuMv4UEVcFJM4KMMB-ukpEi1WfgZ0/view?usp=drive_link',
                 description:
                     "Expanded release of the original RE including Original, Arranged and Beginner difficulty modes, plus a preview of Resident Evil 2. The Arranged mode features remixed item and enemy placements.",
             },
@@ -135,7 +162,7 @@ export const consoleSections = [
                 region: 'USA / EUR',
                 genre: 'Survival Horror',
                 size: '~1.1 GB',
-                link: 'PLACEHOLDER_RE2_PS1',
+                link: 'https://drive.google.com/file/d/1CiMuWC-Hw3QJ5zyadxmdyncpFconwOEo/view?usp=drive_link',
                 description:
                     "Leon S. Kennedy and Claire Redfield's first night in Raccoon City. Features a dual-scenario system across two discs, where each character's actions affect the other's story.",
             },
@@ -146,7 +173,7 @@ export const consoleSections = [
                 region: 'USA / EUR',
                 genre: 'Survival Horror',
                 size: '~580 MB',
-                link: 'PLACEHOLDER_RE3_PS1',
+                link: 'https://drive.google.com/file/d/19F3vHtuvyuu3IqF7oaesMrSB7RQ6ztt8/view?usp=drive_link',
                 description:
                     'Jill Valentine attempts to escape Raccoon City while hunted by the near-indestructible Bio-Organic Weapon known as Nemesis. Features a dynamic branching decision system.',
             },
@@ -157,7 +184,7 @@ export const consoleSections = [
                 region: 'USA / EUR',
                 genre: 'First-Person Shooter',
                 size: '~480 MB',
-                link: 'PLACEHOLDER_SURVIVOR_PS1',
+                link: 'https://drive.google.com/file/d/16ylad03Sp96EzEBZxBhHGjC2EccJt97a/view?usp=drive_link',
                 description:
                     'First entry in the Gun Survivor sub-series. Ark Thompson, an amnesiac agent, is stranded in a city overrun by the T-virus and must uncover the truth behind his identity and the outbreak.',
             },
@@ -175,16 +202,21 @@ export const consoleSections = [
         hasBios: true,
         biosNote: null,
 
-        emulator: {
-            name: 'PCSX2',
-            version: '2.x (Qt)',
-            description:
-                'The definitive PlayStation 2 emulator with near-complete game compatibility. Supports up to 4K internal resolution, widescreen patches, texture replacement and RetroAchievements.',
-            os: ['Windows', 'macOS', 'Linux'],
-            biosRequired: true,
-            link: 'PLACEHOLDER_PCSX2',
-            officialSite: 'https://pcsx2.net',
-        },
+        emulators: [
+            {
+                name: 'PCSX2',
+                version: '2.x (Qt)',
+                description: 'The definitive PlayStation 2 emulator with near-complete game compatibility. Supports up to 4K internal resolution, widescreen patches, texture replacement and RetroAchievements.',
+                os: ['Windows', 'macOS', 'Linux'],
+                biosRequired: true,
+                links: {
+                    Windows: 'PLACEHOLDER_PCSX2_WINDOWS',
+                    macOS: 'PLACEHOLDER_PCSX2_MACOS',
+                    Linux: 'PLACEHOLDER_PCSX2_LINUX'
+                },
+                officialSite: 'https://pcsx2.net',
+            }
+        ],
 
         bios: {
             name: 'PS2 BIOS Pack',

@@ -198,47 +198,57 @@ export default function Downloads() {
                             <span className="dl-subsection-label">EMULATION SOFTWARE</span>
                         </div>
 
-                        <div className="dl-card emu-card">
-                            <div className="dl-card-top">
-                                <div className="dl-badges">
-                                    <span className="dl-badge badge-emu">EMULATOR</span>
-                                    {activeSection.emulator.os.map(os => (
-                                        <span key={os} className="dl-badge badge-os">{os}</span>
-                                    ))}
-                                </div>
-                                <span className="dl-card-year">v{activeSection.emulator.version}</span>
+                        {activeSection.biosNote && (
+                            <div className="dl-info-note" style={{ marginBottom: '15px' }}>
+                                <span>ℹ</span>
+                                <p>{activeSection.biosNote}</p>
                             </div>
+                        )}
 
-                            <h3 className="dl-card-title">{activeSection.emulator.name}</h3>
-                            <p className="dl-card-desc">{activeSection.emulator.description}</p>
+                        <div className="dl-grid">
+                            {activeSection.emulators.map((emu, idx) => (
+                                <div key={idx} className="dl-card emu-card">
+                                    <div className="dl-card-top">
+                                        <div className="dl-badges">
+                                            <span className="dl-badge badge-emu">EMULATOR</span>
+                                            {emu.os.map(os => (
+                                                <span key={os} className="dl-badge badge-os">{os}</span>
+                                            ))}
+                                        </div>
+                                        <span className="dl-card-year">v{emu.version}</span>
+                                    </div>
 
-                            {activeSection.biosNote && (
-                                <div className="dl-info-note">
-                                    <span>ℹ</span>
-                                    <p>{activeSection.biosNote}</p>
+                                    <h3 className="dl-card-title">{emu.name}</h3>
+                                    <p className="dl-card-desc">{emu.description}</p>
+
+                                    <div className="dl-card-foot">
+                                        <span className="dl-card-meta">
+                                            Official:{' '}
+                                            <a
+                                                href={emu.officialSite}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="dl-ext-link"
+                                            >
+                                                {emu.officialSite.replace('https://', '')}
+                                            </a>
+                                        </span>
+                                        <div className="dl-os-buttons" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+                                            {Object.entries(emu.links).map(([osName, link]) => (
+                                                <button
+                                                    key={osName}
+                                                    className={`dl-dl-btn${isPlaceholder(link) ? ' btn-placeholder' : ''}`}
+                                                    onClick={() => handleDownload(link)}
+                                                    title={isPlaceholder(link) ? `${osName} link not yet configured` : `Download ${emu.name} for ${osName}`}
+                                                    style={{ fontSize: '11px', padding: '6px 12px' }}
+                                                >
+                                                    {isPlaceholder(link) ? `⌛ ${osName.toUpperCase()}` : `↓ ${osName.toUpperCase()}`}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
-                            )}
-
-                            <div className="dl-card-foot">
-                                <span className="dl-card-meta">
-                                    Official:{' '}
-                                    <a
-                                        href={activeSection.emulator.officialSite}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="dl-ext-link"
-                                    >
-                                        {activeSection.emulator.officialSite}
-                                    </a>
-                                </span>
-                                <button
-                                    className={`dl-dl-btn${isPlaceholder(activeSection.emulator.link) ? ' btn-placeholder' : ''}`}
-                                    onClick={() => handleDownload(activeSection.emulator.link)}
-                                    title={isPlaceholder(activeSection.emulator.link) ? 'Link not yet configured' : `Download ${activeSection.emulator.name}`}
-                                >
-                                    {isPlaceholder(activeSection.emulator.link) ? '⌛ PENDING' : '↓ DOWNLOAD'}
-                                </button>
-                            </div>
+                            ))}
                         </div>
                     </div>
 
