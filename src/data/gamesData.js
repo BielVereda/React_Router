@@ -13,7 +13,7 @@ export const games = [
     year: '2002',
     platform: ['GameCube', 'Wii', 'PC', 'PS3', 'PS4', 'Xbox One', 'Switch'],
     type: 'MAINLINE',
-    covers: ['/images/games/re0.jpg'],
+    covers: ['/images/games/re0.jfif'],
     description: 'A prequel set just before the original game. S.T.A.R.S. Bravo Team medic Rebecca Chambers teams up with escaped convict Billy Coen to survive a horrific viral outbreak aboard the Ecliptic Express and Umbrella\'s Arklay training facility. They uncover the truth behind the Progenitor Virus and the resurrection of James Marcus — the man betrayed by his own creation.',
     characters: [
       { class: 'PROTAGONISTS', ids: ['rebecca_chambers', 'billy_coen'] },
@@ -32,7 +32,7 @@ export const games = [
     year: '1996 / 2002',
     platform: ['PS1', 'GameCube', 'PC', 'PS4', 'Xbox One', 'Switch'],
     type: 'MAINLINE',
-    covers: ['/images/games/re1_original.jpg', '/images/games/re1.jpg'],
+    covers: ['/images/games/re1_original.jpg', '/images/games/re1.webp'],
     description: 'S.T.A.R.S. Alpha Team takes shelter in an abandoned Spencer Mansion after a mysterious attack, only to discover Umbrella\'s darkest secrets — bioweapons, a rogue AI, and a traitor in their midst. The game that defined survival horror.',
     characters: [
       { class: 'PROTAGONISTS', ids: ['jill_valentine', 'chris_redfield', 'barry_burton', 'rebecca_chambers'] },
