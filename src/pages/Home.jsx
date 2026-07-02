@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../styles/Home.css';
 import umbrellaLogo from '../assets/images/brand/umbrella-logo.png';
 import residentEvilLogo from '../assets/images/brand/resident-evil-logo.png';
@@ -27,19 +27,24 @@ const SPRAY_ITEM = {
     position: { col: 5, row: 2 },
 };
 
+/* `desc` is only used by the mobile menu — it plays the same role as the
+   "Resume the game from the beginning of the Stage you left off in." caption
+   under the CONTINUE entry in the reference menu: a one-line blurb for
+   whichever entry currently holds the highlight bar. */
 const BASE_ITEMS = [
-    { id: 1, type: "link", label: "CHARACTERS", to: "/characters", size: "1x1", position: { col: 1, row: 1 } },
-    { id: 2, type: "link", label: "GAMES", to: "/games", size: "2x1", position: { col: 2, row: 1 } },
-    { id: 3, type: "link", label: "MOVIES", to: "/movies", size: "1x1", position: { col: 1, row: 2 } },
-    { id: 4, type: "link", label: "DOWNLOADS", to: "/downloads", size: "2x2", position: { col: 3, row: 2 } },
-    { id: 5, type: "link", label: "3D MODELS", to: "/models3d", size: "1x1", position: { col: 5, row: 1 } },
-    { id: 6, type: "link", label: "ABOUT", to: "/about", size: "1x1", position: { col: 6, row: 1 } },
-    { id: 7, type: "link", label: "CONTACT", to: "/contact", size: "1x1", position: { col: 6, row: 2 } },
+    { id: 1, type: "link", label: "CHARACTERS", to: "/characters", size: "1x1", position: { col: 1, row: 1 }, desc: "Dossiês completos de sobreviventes, operativos e espécimes B.O.W." },
+    { id: 2, type: "link", label: "GAMES", to: "/games", size: "2x1", position: { col: 2, row: 1 }, desc: "Toda a linha do tempo da franquia, jogo a jogo, com lore e curiosidades." },
+    { id: 3, type: "link", label: "MOVIES", to: "/movies", size: "1x1", position: { col: 1, row: 2 }, desc: "Produções live-action e animadas do universo Resident Evil." },
+    { id: 4, type: "link", label: "DOWNLOADS", to: "/downloads", size: "2x2", position: { col: 3, row: 2 }, desc: "Wallpapers, ícones e arquivos para colecionadores do arquivo." },
+    { id: 5, type: "link", label: "3D MODELS", to: "/models3d", size: "1x1", position: { col: 5, row: 1 }, desc: "Modelos 3D feitos pela comunidade, prontos para inspecionar." },
+    { id: 6, type: "link", label: "ABOUT", to: "/about", size: "1x1", position: { col: 6, row: 1 }, desc: "A origem e a missão deste arquivo classificado." },
+    { id: 7, type: "link", label: "CONTACT", to: "/contact", size: "1x1", position: { col: 6, row: 2 }, desc: "Envie uma transmissão direta para a equipe do arquivo." },
 ];
 
 const GRID_COLS = 6;
 const GRID_ROWS = 4;
 const HEALTH_SEGMENTS = 12;
+const MOBILE_SELECT_DELAY = 650; // ms — must match the CSS animation duration
 
 export default function Home() {
 
@@ -65,6 +70,10 @@ export default function Home() {
     const [items, setItems] = useState([...BASE_ITEMS, SPRAY_ITEM]);
     const [dragId, setDragId] = useState(null);
     const isDraggingRef = useRef(false);
+
+    /* ── Mobile menu (RE5-style list, no hover, tap to select) ── */
+    const navigate = useNavigate();
+    const [mobileSelectedId, setMobileSelectedId] = useState(null);
 
     /* Sync spray item with hasSpray state */
     useEffect(() => {
@@ -198,6 +207,20 @@ export default function Home() {
     const healthColor = health === 'green' ? '#00ff44' : '#ffcc00';
     const healthStatus = health === 'green' ? 'FINE' : 'CAUTION';
 
+    /* ── Mobile menu select ──────────────────────────────────── */
+    const handleMobileSelect = (item) => {
+        if (mobileSelectedId || !item.to) return;
+        setMobileSelectedId(item.id);
+        setTimeout(() => {
+            navigate(item.to);
+        }, MOBILE_SELECT_DELAY);
+    };
+
+    /* Whichever entry currently owns the highlight bar — the tapped one while
+       the select animation plays, otherwise the default (first) entry. */
+    const mobileActiveItem =
+        BASE_ITEMS.find(i => i.id === mobileSelectedId) || BASE_ITEMS[0];
+
     /* ── Render ──────────────────────────────────────────────── */
     return (
         <div className="home-container">
@@ -283,7 +306,7 @@ export default function Home() {
                 </p>
             </section>
 
-            {/* ── Game area ── */}
+            {/* ── Game area (desktop / large tablet) ── */}
             <div className="game-area">
 
                 {/* ── Character panel ── */}
@@ -410,6 +433,56 @@ export default function Home() {
                 </main>
 
             </div>
+
+            {/* ── Mobile menu (tablet / phone) — RE5 title-screen style ── */}
+            <nav className="mobile-menu" aria-label="Main menu">
+                <div className="mobile-menu-wrap">
+
+                    {/* rocky, breathing orb — the menu list is stacked dead
+                        center on top of it, exactly like CONTINUE / CHAPTER
+                        SELECT / ... in the reference menu */}
+                    <div className="mobile-menu-orb">
+                        <span className="orb-ring" aria-hidden="true" />
+                        <span className="orb-moon" aria-hidden="true" />
+                        <span className="orb-core" aria-hidden="true" />
+
+                        <ul className="mobile-menu-list">
+                            {BASE_ITEMS.map((item, idx) => {
+                                const isSelected = mobileSelectedId === item.id;
+                                const isDimmed = !!mobileSelectedId && !isSelected;
+                                const isDefault = idx === 0 && !mobileSelectedId;
+                                return (
+                                    <li
+                                        key={item.id}
+                                        className={`mobile-menu-row
+                                            ${isSelected ? 'is-selected' : ''}
+                                            ${isDimmed ? 'is-dimmed' : ''}
+                                            ${isDefault ? 'is-default' : ''}`}
+                                    >
+                                        <button
+                                            type="button"
+                                            className="mobile-menu-btn"
+                                            onClick={() => handleMobileSelect(item)}
+                                            disabled={!!mobileSelectedId}
+                                        >
+                                            <span className="mobile-menu-label">{item.label}</span>
+                                        </button>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+
+                    {/* caption for whichever entry is currently highlighted —
+                        mirrors "Resume the game from the beginning of the
+                        Stage you left off in." under CONTINUE */}
+                    <p className="mobile-menu-desc">{mobileActiveItem.desc}</p>
+
+                    <p className="mobile-menu-hint">Toque para selecionar</p>
+
+                </div>
+            </nav>
+
         </div>
     );
 }

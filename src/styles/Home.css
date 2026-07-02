@@ -19,24 +19,39 @@
     content: '';
     position: fixed;
     inset: 0;
-    background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 2px,
-        rgba(0, 0, 0, 0.06) 2px,
-        rgba(0, 0, 0, 0.06) 4px
-    );
+    background: repeating-linear-gradient(to bottom,
+            transparent 0px,
+            transparent 2px,
+            rgba(0, 0, 0, 0.06) 2px,
+            rgba(0, 0, 0, 0.06) 4px);
     pointer-events: none;
     z-index: 9998;
 }
 
 /* ── Screen flicker — attention-grabber #3 ──────────────────── */
 @keyframes screenFlicker {
-    0%, 92%, 100% { opacity: 1; }
-    93%  { opacity: 0.88; }
-    94%  { opacity: 1; }
-    95%  { opacity: 0.92; }
-    96%  { opacity: 1; }
+
+    0%,
+    92%,
+    100% {
+        opacity: 1;
+    }
+
+    93% {
+        opacity: 0.88;
+    }
+
+    94% {
+        opacity: 1;
+    }
+
+    95% {
+        opacity: 0.92;
+    }
+
+    96% {
+        opacity: 1;
+    }
 }
 
 /* ── Warning overlay ────────────────────────────────────────── */
@@ -71,13 +86,11 @@
     position: absolute;
     inset: 0;
     border-radius: 3px;
-    background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 3px,
-        rgba(0, 0, 0, 0.07) 3px,
-        rgba(0, 0, 0, 0.07) 4px
-    );
+    background: repeating-linear-gradient(to bottom,
+            transparent 0px,
+            transparent 3px,
+            rgba(0, 0, 0, 0.07) 3px,
+            rgba(0, 0, 0, 0.07) 4px);
     pointer-events: none;
 }
 
@@ -112,8 +125,15 @@
 }
 
 @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(-7px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
 }
 
 .warning-headline {
@@ -199,19 +219,42 @@
 }
 
 @keyframes glowPulse {
-    from { filter: drop-shadow(0 0 6px #990000); }
-    to   { filter: drop-shadow(0 0 22px #ff0000) drop-shadow(0 0 40px #660000); }
+    from {
+        filter: drop-shadow(0 0 6px #990000);
+    }
+
+    to {
+        filter: drop-shadow(0 0 22px #ff0000) drop-shadow(0 0 40px #660000);
+    }
 }
 
 @keyframes glitchLogo {
-    0%, 88%, 100% {
+
+    0%,
+    88%,
+    100% {
         transform: translateX(0) skewX(0deg);
         filter: drop-shadow(0 0 18px #cc0000);
     }
-    89% { transform: translateX(-4px) skewX(-1deg); filter: drop-shadow(-4px 0 #00ffff) drop-shadow(4px 0 #ff0000); }
-    90% { transform: translateX(4px) skewX(1deg);  filter: drop-shadow(4px 0 #ff0000)  drop-shadow(-4px 0 #00ffff); }
-    91% { transform: translateX(-2px); }
-    92% { transform: translateX(0) skewX(0deg); filter: drop-shadow(0 0 18px #cc0000); }
+
+    89% {
+        transform: translateX(-4px) skewX(-1deg);
+        filter: drop-shadow(-4px 0 #00ffff) drop-shadow(4px 0 #ff0000);
+    }
+
+    90% {
+        transform: translateX(4px) skewX(1deg);
+        filter: drop-shadow(4px 0 #ff0000) drop-shadow(-4px 0 #00ffff);
+    }
+
+    91% {
+        transform: translateX(-2px);
+    }
+
+    92% {
+        transform: translateX(0) skewX(0deg);
+        filter: drop-shadow(0 0 18px #cc0000);
+    }
 }
 
 /* ── Intro section ───────────────────────────────────────────── */
@@ -271,8 +314,10 @@
 /* Portrait frame */
 .char-frame {
     position: relative;
-    width: 150px;   /* mesma largura da health-panel */
-    height: 338px;  /* altura proporcional */
+    width: 150px;
+    /* mesma largura da health-panel */
+    height: 338px;
+    /* altura proporcional */
     background: linear-gradient(170deg, #0c0c0c 0%, #180000 100%);
     border: 1px solid #2a2a2a;
     border-radius: 3px;
@@ -294,10 +339,30 @@
     border-color: #8b0000;
     border-style: solid;
 }
-.cf-corner.tl { top: 5px;    left: 5px;    border-width: 2px 0 0 2px; }
-.cf-corner.tr { top: 5px;    right: 5px;   border-width: 2px 2px 0 0; }
-.cf-corner.bl { bottom: 5px; left: 5px;    border-width: 0 0 2px 2px; }
-.cf-corner.br { bottom: 5px; right: 5px;   border-width: 0 2px 2px 0; }
+
+.cf-corner.tl {
+    top: 5px;
+    left: 5px;
+    border-width: 2px 0 0 2px;
+}
+
+.cf-corner.tr {
+    top: 5px;
+    right: 5px;
+    border-width: 2px 2px 0 0;
+}
+
+.cf-corner.bl {
+    bottom: 5px;
+    left: 5px;
+    border-width: 0 0 2px 2px;
+}
+
+.cf-corner.br {
+    bottom: 5px;
+    right: 5px;
+    border-width: 0 2px 2px 0;
+}
 
 .char-img {
     width: 100%;
@@ -361,7 +426,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
     color: #aaa;
     font-family: 'Courier New', monospace;
     font-size: 9px;
@@ -391,13 +456,11 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 2px,
-        rgba(0, 0, 0, 0.07) 2px,
-        rgba(0, 0, 0, 0.07) 3px
-    );
+    background: repeating-linear-gradient(to bottom,
+            transparent 0px,
+            transparent 2px,
+            rgba(0, 0, 0, 0.07) 2px,
+            rgba(0, 0, 0, 0.07) 3px);
     pointer-events: none;
 }
 
@@ -433,8 +496,13 @@
 }
 
 @keyframes statusBlink {
-    from { opacity: 0.65; }
-    to   { opacity: 1; }
+    from {
+        opacity: 0.65;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .health-bar-track {
@@ -461,8 +529,13 @@
     letter-spacing: 0.08em;
 }
 
-.caution-note { color: #aa8800; }
-.fine-note    { color: #006622; }
+.caution-note {
+    color: #aa8800;
+}
+
+.fine-note {
+    color: #006622;
+}
 
 /* ── Spray modal ─────────────────────────────────────────────── */
 .spray-overlay {
@@ -484,13 +557,20 @@
     padding: 2rem 2.5rem;
     text-align: center;
     min-width: 270px;
-    box-shadow: 0 0 50px rgba(200, 0, 0, 0.2), inset 0 0 30px rgba(0,0,0,0.5);
+    box-shadow: 0 0 50px rgba(200, 0, 0, 0.2), inset 0 0 30px rgba(0, 0, 0, 0.5);
     animation: modalIn 0.2s ease-out;
 }
 
 @keyframes modalIn {
-    from { transform: scale(0.92); opacity: 0; }
-    to   { transform: scale(1);    opacity: 1; }
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .spray-modal-img {
@@ -569,10 +649,10 @@
     flex: 1;
     padding: 18px;
     position: relative;
-    background: linear-gradient(160deg, rgba(10,10,10,0.95), rgba(18,0,0,0.5));
+    background: linear-gradient(160deg, rgba(10, 10, 10, 0.95), rgba(18, 0, 0, 0.5));
     border: 1px solid #1c0000;
     border-radius: 3px;
-    box-shadow: inset 0 0 40px rgba(0,0,0,0.4);
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);
 }
 
 .grid-slot {
@@ -593,12 +673,27 @@
     transition: color 0.25s, opacity 0.25s;
 }
 
-.slot-occupied .slot-x { opacity: 0; }
+.slot-occupied .slot-x {
+    opacity: 0;
+}
 
-.invalid-drop              { background: rgba(100, 0, 0, 0.75); border-color: #cc0000; }
-.invalid-drop .slot-x      { color: #cc0000; }
-.valid-drop                { background: rgba(0, 70, 0, 0.75);  border-color: #00cc00; }
-.valid-drop .slot-x        { color: #00cc00; }
+.invalid-drop {
+    background: rgba(100, 0, 0, 0.75);
+    border-color: #cc0000;
+}
+
+.invalid-drop .slot-x {
+    color: #cc0000;
+}
+
+.valid-drop {
+    background: rgba(0, 70, 0, 0.75);
+    border-color: #00cc00;
+}
+
+.valid-drop .slot-x {
+    color: #00cc00;
+}
 
 /* ── Grid items ──────────────────────────────────────────────── */
 .grid-item {
@@ -621,7 +716,9 @@
     letter-spacing: 0.05em;
 }
 
-.grid-item:active { cursor: grabbing; }
+.grid-item:active {
+    cursor: grabbing;
+}
 
 .grid-item:hover {
     background: #5a0000;
@@ -660,7 +757,9 @@
     cursor: pointer;
 }
 
-.item-action .item-label { color: #00aa00; }
+.item-action .item-label {
+    color: #00aa00;
+}
 
 .item-action:hover {
     background: #001a00;
@@ -669,18 +768,323 @@
     transform: translateY(-2px);
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE MENU  —  RE5 title-screen style
+   A vertical list nested inside a rocky, breathing orb. The top
+   entry idles with a red highlight bar exactly like "CONTINUE" in
+   the reference art; tapping a lower entry hands it that same bar
+   in a quick flash before navigating.
+   ═══════════════════════════════════════════════════════════════ */
+.mobile-menu {
+    display: none;
+    /* switched to block under the breakpoint below */
+    width: 100%;
+    margin: 0.5rem auto 1.5rem;
+}
+
+.mobile-menu-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+/* ── Central orb — rocky, cell-like, breathing/pulsing like a virus ── */
+.mobile-menu-orb {
+    position: relative;
+    width: clamp(250px, 74vw, 340px);
+    height: clamp(250px, 74vw, 340px);
+    flex-shrink: 0;
+}
+
+/* thin ring of tick marks — echoes the scope/dial ring in the reference art */
+.orb-ring {
+    position: absolute;
+    inset: -16px;
+    border-radius: 50%;
+    background: repeating-conic-gradient(from 0deg,
+            rgba(170, 45, 28, 0.55) 0deg 0.5deg,
+            transparent 0.5deg 5.625deg);
+    -webkit-mask-image: radial-gradient(farthest-side, transparent calc(100% - 12px), #000 calc(100% - 11px));
+    mask-image: radial-gradient(farthest-side, transparent calc(100% - 12px), #000 calc(100% - 11px));
+    filter: drop-shadow(0 0 6px rgba(120, 20, 10, 0.2));
+    animation: orbRingSpin 46s linear infinite;
+}
+
+.orb-ring::after {
+    content: '';
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    border: 1px solid rgba(100, 25, 18, 0.3);
+}
+
+/* small orbiting satellite cell, top-left of the ring — matches the little
+   moon-like shape overlapping the ring in the reference art */
+.orb-moon {
+    position: absolute;
+    top: -4%;
+    left: 0%;
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 34% 30%, #241610 0%, #0c0705 60%, #030202 100%);
+    border: 1px solid rgba(90, 20, 15, 0.4);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.85), 0 0 10px rgba(120, 20, 10, 0.15);
+    z-index: 1;
+}
+
+.orb-moon::after {
+    content: '';
+    position: absolute;
+    inset: 30%;
+    border-radius: 50%;
+    border: 1px solid rgba(120, 30, 20, 0.35);
+}
+
+/* the rocky, organic core the menu text sits on top of */
+.orb-core {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 24% 22%, rgba(255, 255, 255, 0.05) 0 2%, transparent 3%),
+        radial-gradient(circle at 66% 38%, rgba(255, 255, 255, 0.04) 0 2%, transparent 3%),
+        radial-gradient(circle at 42% 70%, rgba(255, 255, 255, 0.035) 0 2.4%, transparent 3.4%),
+        radial-gradient(circle at 60% 62%, rgba(200, 50, 15, 0.14), transparent 55%),
+        radial-gradient(circle at 34% 28%, #2c1b13 0%, #150b09 45%, #050303 100%);
+    box-shadow:
+        0 0 30px rgba(180, 25, 10, 0.22),
+        inset 0 0 40px rgba(0, 0, 0, 0.85),
+        inset 0 0 16px rgba(255, 70, 0, 0.1);
+    animation: orbPulse 4s ease-in-out infinite;
+}
+
+@keyframes orbPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.035);
+    }
+}
+
+@keyframes orbRingSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Menu list, stacked dead center on top of the orb ── */
+.mobile-menu-list {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    list-style: none;
+    margin: 0;
+    padding: 0 9%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: clamp(1px, 1vw, 4px);
+}
+
+.mobile-menu-row {
+    position: relative;
+}
+
+/* the highlight bar behind the focused entry — the red banner behind
+   "CONTINUE" in the reference art */
+.mobile-menu-row::before {
+    content: '';
+    position: absolute;
+    inset: 1px 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, rgba(160, 0, 0, 0.5) 18%, rgba(160, 0, 0, 0.5) 82%, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-menu-row.is-default::before,
+.mobile-menu-row.is-selected::before {
+    opacity: 1;
+}
+
+.mobile-menu-row.is-dimmed {
+    opacity: 0.28;
+    transition: opacity 0.35s ease;
+}
+
+.mobile-menu-btn {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: clamp(4px, 1.6vw, 7px) 0.4rem;
+    cursor: pointer;
+}
+
+.mobile-menu-btn:disabled {
+    cursor: default;
+}
+
+.mobile-menu-label {
+    position: relative;
+    z-index: 1;
+    font-family: 'Resident Evil', sans-serif;
+    font-size: clamp(0.68rem, 3.3vw, 0.9rem);
+    letter-spacing: 0.12em;
+    text-align: center;
+    color: #4a4a4a;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* progressive fade down the list — echoes the greyed-out lower entries
+   ("?????") in the reference menu */
+.mobile-menu-row:nth-child(1) .mobile-menu-label {
+    color: #cfcfcf;
+}
+
+.mobile-menu-row:nth-child(2) .mobile-menu-label {
+    color: #a8a8a8;
+}
+
+.mobile-menu-row:nth-child(3) .mobile-menu-label {
+    color: #868686;
+}
+
+.mobile-menu-row:nth-child(4) .mobile-menu-label {
+    color: #6a6a6a;
+}
+
+.mobile-menu-row:nth-child(5) .mobile-menu-label {
+    color: #545454;
+}
+
+.mobile-menu-row:nth-child(6) .mobile-menu-label {
+    color: #424242;
+}
+
+.mobile-menu-row:nth-child(7) .mobile-menu-label {
+    color: #333333;
+}
+
+.mobile-menu-row.is-default .mobile-menu-label,
+.mobile-menu-row.is-selected .mobile-menu-label {
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 60, 30, 0.6);
+}
+
+.mobile-menu-row.is-selected .mobile-menu-label {
+    animation: mobileLabelFlash 0.65s ease-out;
+}
+
+.mobile-menu-row.is-selected::before {
+    animation: mobileBarFlash 0.65s ease-out;
+}
+
+@keyframes mobileLabelFlash {
+    0% {
+        text-shadow: 0 0 10px rgba(255, 60, 30, 0.6);
+    }
+
+    40% {
+        text-shadow: 0 0 22px rgba(255, 140, 20, 0.95);
+        transform: scale(1.05);
+    }
+
+    100% {
+        text-shadow: 0 0 10px rgba(255, 60, 30, 0.6);
+        transform: scale(1);
+    }
+}
+
+@keyframes mobileBarFlash {
+    0% {
+        background: linear-gradient(90deg, transparent, rgba(160, 0, 0, 0.5) 18%, rgba(160, 0, 0, 0.5) 82%, transparent);
+    }
+
+    50% {
+        background: linear-gradient(90deg, transparent, rgba(255, 120, 20, 0.75) 18%, rgba(255, 120, 20, 0.75) 82%, transparent);
+        box-shadow: 0 0 18px rgba(255, 110, 0, 0.5);
+    }
+
+    100% {
+        background: linear-gradient(90deg, transparent, rgba(160, 0, 0, 0.5) 18%, rgba(160, 0, 0, 0.5) 82%, transparent);
+    }
+}
+
+/* ── Description + hint, under the orb ── */
+.mobile-menu-desc {
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: #888;
+    text-align: center;
+    max-width: 320px;
+    min-height: 2.6em;
+    padding: 0 1rem;
+}
+
+.mobile-menu-hint {
+    font-family: 'Courier New', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #3a3a3a;
+}
+
+/* ── Breakpoint: swap the desktop layout for the mobile menu ── */
+@media (max-width: 820px) {
+    .intro-section {
+        display: none;
+    }
+
+    /* the synopsis now lives under the orb */
+    .game-area {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+}
+
 /* ── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 920px) {
     .game-area {
         flex-direction: column;
         align-items: center;
     }
+
     .character-panel {
         flex-direction: row;
         align-items: flex-start;
     }
-    .char-frame    { width: 120px; min-height: 168px; }
-    .health-panel  { width: 150px; }
+
+    .char-frame {
+        width: 120px;
+        min-height: 168px;
+    }
+
+    .health-panel {
+        width: 150px;
+    }
 }
 
 @media (max-width: 640px) {
@@ -688,6 +1092,13 @@
         grid-template-rows: repeat(4, 72px);
         padding: 10px;
     }
-    .character-panel { flex-direction: column; align-items: center; }
-    .resident-logo   { width: clamp(160px, 55vw, 280px); }
+
+    .character-panel {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .resident-logo {
+        width: clamp(160px, 55vw, 280px);
+    }
 }
