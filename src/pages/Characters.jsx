@@ -30,6 +30,7 @@ export default function Characters() {
     const defaultChar = characters.find(c => c.id === "leon_kennedy") || characters[0];
     const [selectedCharacter, setSelectedCharacter] = useState(defaultChar);
     const [imgError, setImgError] = useState(false);
+    const [isTransformed, setIsTransformed] = useState(false);
 
     /* ── Audio ──────────────────────────────────────────────── */
     const bgAudioRef = useRef(null);
@@ -37,9 +38,10 @@ export default function Characters() {
     const [muted, setMuted] = useState(false);
     const [audioBlocked, setAudioBlocked] = useState(false);
 
-    // Reset image error state when character changes
+    // Reset image error state and mutation state when character changes
     useEffect(() => {
         setImgError(false);
+        setIsTransformed(false);
     }, [selectedCharacter]);
 
     // Handle entering and starting the music
@@ -248,7 +250,7 @@ export default function Characters() {
                 <div className="char-dossier-card">
                     {/* Left Column: Portrait */}
                     <div className="char-dossier-left">
-                        <div className="char-frame-large">
+                        <div className={`char-frame-large ${isTransformed ? 'transformed-mutation' : ''}`}>
                             <span className="char-frame-corner tl" />
                             <span className="char-frame-corner tr" />
                             <span className="char-frame-corner bl" />
@@ -258,7 +260,7 @@ export default function Characters() {
                                 <img
                                     src={getCharImage(selectedCharacter)}
                                     alt={selectedCharacter.name}
-                                    className="char-img-large"
+                                    className={`char-img-large ${isTransformed ? 'char-img-mutated' : ''}`}
                                     onError={() => setImgError(true)}
                                 />
                             ) : (
@@ -276,7 +278,23 @@ export default function Characters() {
 
                     {/* Right Column: Dossier details */}
                     <div className="char-dossier-right">
-                        <h2 className="char-dossier-name">{selectedCharacter.name}</h2>
+                        <div className="char-name-header">
+                            <h2 className="char-dossier-name">
+                                {isTransformed ? selectedCharacter.transformation.name : selectedCharacter.name}
+                            </h2>
+                            {selectedCharacter.transformation && (
+                                <button
+                                    id="btn-mutate-specimen"
+                                    className={`char-mutate-btn ${isTransformed ? 'active' : ''}`}
+                                    onClick={() => {
+                                        playTypewriterSound();
+                                        setIsTransformed(!isTransformed);
+                                    }}
+                                >
+                                    {isTransformed ? "🧬 REVERT SPECIMEN" : "🧬 MUTATE SPECIMEN"}
+                                </button>
+                            )}
+                        </div>
                         
                         <div className="char-metadata-grid">
                             <div className="char-meta-item">
@@ -285,8 +303,8 @@ export default function Characters() {
                             </div>
                             <div className="char-meta-item">
                                 <span className="char-meta-label">Status</span>
-                                <span className={`char-status-badge ${selectedCharacter.status.toLowerCase()}`}>
-                                    {selectedCharacter.status}
+                                <span className={`char-status-badge ${isTransformed ? 'mutated' : selectedCharacter.status.toLowerCase()}`}>
+                                    {isTransformed ? 'MUTATED B.O.W.' : selectedCharacter.status}
                                 </span>
                             </div>
                             <div className="char-meta-item">
@@ -296,8 +314,12 @@ export default function Characters() {
                         </div>
 
                         <div className="char-bio-container">
-                            <h3 className="char-bio-title">BIOLOGICAL & HISTORICAL DOSSIER</h3>
-                            <p className="char-bio-content">{selectedCharacter.bio}</p>
+                            <h3 className="char-bio-title">
+                                {isTransformed ? "MUTATED BIOLOGY & VIRAL RECONSTRUCTION" : "BIOLOGICAL & HISTORICAL DOSSIER"}
+                            </h3>
+                            <p className="char-bio-content">
+                                {isTransformed ? selectedCharacter.transformation.description : selectedCharacter.bio}
+                            </p>
                         </div>
 
                         {selectedCharacter.games && selectedCharacter.games.length > 0 && (

@@ -770,38 +770,40 @@
 
 /* ═══════════════════════════════════════════════════════════════
    MOBILE MENU  —  RE5 title-screen style
-   A vertical list nested inside a rocky, breathing orb. The top
-   entry idles with a red highlight bar exactly like "CONTINUE" in
-   the reference art; tapping a lower entry hands it that same bar
-   in a quick flash before navigating.
+   Orb on the left with presentation text, Vein + Options on the right
    ═══════════════════════════════════════════════════════════════ */
 .mobile-menu {
     display: none;
-    /* switched to block under the breakpoint below */
     width: 100%;
-    margin: 0.5rem auto 1.5rem;
+    margin: 2rem 0;
+    min-height: 70vh;
+    overflow: hidden;
 }
 
-.mobile-menu-wrap {
+.re5-mobile-layout {
     position: relative;
     width: 100%;
-    max-width: 420px;
+    max-width: 800px;
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 0.9rem;
+    justify-content: space-between;
+    min-height: 400px;
 }
 
-/* ── Central orb — rocky, cell-like, breathing/pulsing like a virus ── */
-.mobile-menu-orb {
-    position: relative;
-    width: clamp(250px, 74vw, 340px);
-    height: clamp(250px, 74vw, 340px);
+/* ── Left Side: Giant Orb ── */
+.re5-giant-orb {
+    position: absolute;
+    left: -15vw; /* Push partially off-screen on mobile */
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(280px, 60vw, 400px);
+    height: clamp(280px, 60vw, 400px);
     flex-shrink: 0;
+    z-index: 1;
 }
 
-/* thin ring of tick marks — echoes the scope/dial ring in the reference art */
 .orb-ring {
     position: absolute;
     inset: -16px;
@@ -823,8 +825,6 @@
     border: 1px solid rgba(100, 25, 18, 0.3);
 }
 
-/* small orbiting satellite cell, top-left of the ring — matches the little
-   moon-like shape overlapping the ring in the reference art */
 .orb-moon {
     position: absolute;
     top: -4%;
@@ -846,7 +846,6 @@
     border: 1px solid rgba(120, 30, 20, 0.35);
 }
 
-/* the rocky, organic core the menu text sits on top of */
 .orb-core {
     position: absolute;
     inset: 0;
@@ -865,188 +864,215 @@
 }
 
 @keyframes orbPulse {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.035);
-    }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.035); }
 }
 
 @keyframes orbRingSpin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
-/* ── Menu list, stacked dead center on top of the orb ── */
-.mobile-menu-list {
+/* Presentation text inside the orb */
+.re5-orb-text-container {
     position: absolute;
     inset: 0;
-    z-index: 2;
-    list-style: none;
-    margin: 0;
-    padding: 0 9%;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
     justify-content: center;
-    gap: clamp(1px, 1vw, 4px);
+    align-items: center;
+    text-align: center;
+    padding: 10% 15% 10% 25%; /* Padding left larger because orb is shifted left */
+    z-index: 2;
 }
 
-.mobile-menu-row {
+.re5-orb-title {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    color: #ccbb99;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px #000, 0 0 10px rgba(0,0,0,0.8);
+}
+
+.re5-orb-presentation {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(0.5rem, 2vw, 0.75rem);
+    color: #887766;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    text-shadow: 1px 1px 1px #000;
+}
+
+.re5-orb-desc-divider {
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200, 100, 50, 0.4), transparent);
+    margin-bottom: 1rem;
+}
+
+.mobile-menu-desc {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(0.6rem, 2.5vw, 0.8rem);
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 100, 50, 0.8), 1px 1px 2px #000;
+    line-height: 1.4;
+}
+
+/* ── Right Side: Options Container ── */
+.re5-options-container {
+    position: relative;
+    width: 50%;
+    margin-left: auto;
+    padding: 2rem 5% 2rem 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+}
+
+.re5-vein-svg-wrapper {
+    position: absolute;
+    left: -25px; /* Aligns SVG x=10 with node left=-15 */
+    top: 5%;
+    bottom: 5%;
+    width: 100px;
+    z-index: 1;
+}
+
+.re5-vein-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 3px #000) drop-shadow(2px 2px 2px rgba(0,0,0,0.8));
+}
+
+.re5-menu-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.2rem, 5vh, 2.2rem);
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.re5-menu-item {
+    position: relative;
+    width: 100%;
+}
+
+/* Curve the menu items to follow the SVG vein */
+.re5-menu-item:nth-child(1) { transform: translateX(0px); }
+.re5-menu-item:nth-child(2) { transform: translateX(30px); }
+.re5-menu-item:nth-child(3) { transform: translateX(50px); }
+.re5-menu-item:nth-child(4) { transform: translateX(55px); }
+.re5-menu-item:nth-child(5) { transform: translateX(50px); }
+.re5-menu-item:nth-child(6) { transform: translateX(30px); }
+.re5-menu-item:nth-child(7) { transform: translateX(0px); }
+
+.re5-menu-btn {
+    all: unset;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
     position: relative;
 }
 
-/* the highlight bar behind the focused entry — the red banner behind
-   "CONTINUE" in the reference art */
-.mobile-menu-row::before {
-    content: '';
-    position: absolute;
-    inset: 1px 0;
-    border-radius: 2px;
-    background: linear-gradient(90deg, transparent, rgba(160, 0, 0, 0.5) 18%, rgba(160, 0, 0, 0.5) 82%, transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.mobile-menu-row.is-default::before,
-.mobile-menu-row.is-selected::before {
-    opacity: 1;
-}
-
-.mobile-menu-row.is-dimmed {
-    opacity: 0.28;
-    transition: opacity 0.35s ease;
-}
-
-.mobile-menu-btn {
-    all: unset;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: clamp(4px, 1.6vw, 7px) 0.4rem;
-    cursor: pointer;
-}
-
-.mobile-menu-btn:disabled {
+.re5-menu-btn:disabled {
     cursor: default;
 }
 
-.mobile-menu-label {
-    position: relative;
+/* ── Nodes ── */
+.re5-node-container {
+    position: absolute;
+    left: -15px; /* aligns with vein wrapper */
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+}
+
+.re5-node {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #5c4b3a, #2a2015 60%, #000 100%);
+    box-shadow: inset 0 0 4px #000, 0 2px 5px rgba(0,0,0,0.8);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.5);
+}
+
+.re5-menu-item.is-selected .re5-node {
+    background: radial-gradient(circle at 35% 35%, #ffccaa, #ff4400 40%, #aa1100 80%, #330000 100%);
+    box-shadow: 0 0 20px #ff3300, inset 0 0 8px #fff;
+    border: 1px solid #ffaa00;
+    animation: re5OrbPulseNode 0.1s infinite alternate;
+}
+
+@keyframes re5OrbPulseNode {
+    from { transform: scale(1.1); filter: brightness(1.2); }
+    to { transform: scale(1.2); filter: brightness(1.5); }
+}
+
+.re5-flare {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 100, 0, 0.8) 0%, transparent 60%);
+    animation: re5FlareAnim 0.8s ease-out forwards;
+    pointer-events: none;
+    z-index: 4;
+}
+
+@keyframes re5FlareAnim {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
+.re5-streak {
+    position: absolute;
+    left: 0;
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255,80,0,1) 0%, rgba(200,30,0,0.6) 30%, transparent 100%);
+    box-shadow: 0 0 15px 4px rgba(255,50,0,0.4);
     z-index: 1;
-    font-family: 'Resident Evil', sans-serif;
-    font-size: clamp(0.68rem, 3.3vw, 0.9rem);
-    letter-spacing: 0.12em;
-    text-align: center;
-    color: #4a4a4a;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+    animation: re5StreakAnim 0.5s ease-out forwards;
+    pointer-events: none;
 }
 
-/* progressive fade down the list — echoes the greyed-out lower entries
-   ("?????") in the reference menu */
-.mobile-menu-row:nth-child(1) .mobile-menu-label {
-    color: #cfcfcf;
+@keyframes re5StreakAnim {
+    0% { width: 0; opacity: 1; }
+    100% { width: 180px; opacity: 0; }
 }
 
-.mobile-menu-row:nth-child(2) .mobile-menu-label {
-    color: #a8a8a8;
+/* ── Text Labels ── */
+.re5-label {
+    margin-left: 25px; /* right of node */
+    font-family: 'Times New Roman', Times, serif;
+    font-size: clamp(0.75rem, 3vw, 1.15rem);
+    letter-spacing: 0.15em;
+    color: #7a6e60;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 3px #000, 0 0 5px rgba(0,0,0,0.5);
+    transition: color 0.3s, text-shadow 0.3s;
+    z-index: 2;
+    white-space: nowrap;
 }
 
-.mobile-menu-row:nth-child(3) .mobile-menu-label {
-    color: #868686;
-}
-
-.mobile-menu-row:nth-child(4) .mobile-menu-label {
-    color: #6a6a6a;
-}
-
-.mobile-menu-row:nth-child(5) .mobile-menu-label {
-    color: #545454;
-}
-
-.mobile-menu-row:nth-child(6) .mobile-menu-label {
-    color: #424242;
-}
-
-.mobile-menu-row:nth-child(7) .mobile-menu-label {
-    color: #333333;
-}
-
-.mobile-menu-row.is-default .mobile-menu-label,
-.mobile-menu-row.is-selected .mobile-menu-label {
+.re5-menu-item.is-selected .re5-label {
     color: #fff;
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 60, 30, 0.6);
+    text-shadow: 0 0 12px #ff4400, 0 0 20px #ff2200, 2px 2px 4px #000;
 }
 
-.mobile-menu-row.is-selected .mobile-menu-label {
-    animation: mobileLabelFlash 0.65s ease-out;
-}
-
-.mobile-menu-row.is-selected::before {
-    animation: mobileBarFlash 0.65s ease-out;
-}
-
-@keyframes mobileLabelFlash {
-    0% {
-        text-shadow: 0 0 10px rgba(255, 60, 30, 0.6);
-    }
-
-    40% {
-        text-shadow: 0 0 22px rgba(255, 140, 20, 0.95);
-        transform: scale(1.05);
-    }
-
-    100% {
-        text-shadow: 0 0 10px rgba(255, 60, 30, 0.6);
-        transform: scale(1);
-    }
-}
-
-@keyframes mobileBarFlash {
-    0% {
-        background: linear-gradient(90deg, transparent, rgba(160, 0, 0, 0.5) 18%, rgba(160, 0, 0, 0.5) 82%, transparent);
-    }
-
-    50% {
-        background: linear-gradient(90deg, transparent, rgba(255, 120, 20, 0.75) 18%, rgba(255, 120, 20, 0.75) 82%, transparent);
-        box-shadow: 0 0 18px rgba(255, 110, 0, 0.5);
-    }
-
-    100% {
-        background: linear-gradient(90deg, transparent, rgba(160, 0, 0, 0.5) 18%, rgba(160, 0, 0, 0.5) 82%, transparent);
-    }
-}
-
-/* ── Description + hint, under the orb ── */
-.mobile-menu-desc {
-    font-family: 'Courier New', monospace;
-    font-size: 0.78rem;
-    line-height: 1.6;
-    color: #888;
-    text-align: center;
-    max-width: 320px;
-    min-height: 2.6em;
-    padding: 0 1rem;
-}
-
-.mobile-menu-hint {
-    font-family: 'Courier New', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: #3a3a3a;
+.re5-menu-item.is-dimmed {
+    opacity: 0.3;
 }
 
 /* ── Breakpoint: swap the desktop layout for the mobile menu ── */

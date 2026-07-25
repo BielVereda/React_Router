@@ -13,7 +13,7 @@ export const games = [
     year: '2002',
     platform: ['GameCube', 'Wii', 'PC', 'PS3', 'PS4', 'Xbox One', 'Switch'],
     type: 'MAINLINE',
-    covers: ['/images/games/re0.jfif'],
+    covers: ['/images/games/re0.jpg'],
     description: 'A prequel set just before the original game. S.T.A.R.S. Bravo Team medic Rebecca Chambers teams up with escaped convict Billy Coen to survive a horrific viral outbreak aboard the Ecliptic Express and Umbrella\'s Arklay training facility. They uncover the truth behind the Progenitor Virus and the resurrection of James Marcus — the man betrayed by his own creation.',
     characters: [
       { class: 'PROTAGONISTS', ids: ['rebecca_chambers', 'billy_coen'] },
@@ -32,7 +32,7 @@ export const games = [
     year: '1996 / 2002',
     platform: ['PS1', 'GameCube', 'PC', 'PS4', 'Xbox One', 'Switch'],
     type: 'MAINLINE',
-    covers: ['/images/games/re1_original.jpg', '/images/games/re1.webp'],
+    covers: ['/images/games/re1_original.webp', '/images/games/re1.webp'],
     description: 'S.T.A.R.S. Alpha Team takes shelter in an abandoned Spencer Mansion after a mysterious attack, only to discover Umbrella\'s darkest secrets — bioweapons, a rogue AI, and a traitor in their midst. The game that defined survival horror.',
     characters: [
       { class: 'PROTAGONISTS', ids: ['jill_valentine', 'chris_redfield', 'barry_burton', 'rebecca_chambers'] },
@@ -52,7 +52,7 @@ export const games = [
     year: '1998 / 2019',
     platform: ['PS1', 'N64', 'PC', 'PS4', 'Xbox One', 'Switch'],
     type: 'MAINLINE',
-    covers: ['/images/games/re2_original.jpg', '/images/games/re2.jpg'],
+    covers: ['/images/games/re2_original.png', '/images/games/re2.jpg'],
     description: 'Raccoon City is overrun. Rookie cop Leon S. Kennedy and Claire Redfield fight to survive while being hunted by the unstoppable Mr. X Tyrant, uncovering Umbrella\'s G-Virus experiments beneath the city.',
     characters: [
       { class: 'PROTAGONISTS', ids: ['leon_kennedy', 'claire_redfield'] },
@@ -72,7 +72,7 @@ export const games = [
     year: '1999 / 2020',
     platform: ['PS1', 'PC', 'PS4', 'Xbox One'],
     type: 'MAINLINE',
-    covers: ['/images/games/re3_original.jpg', '/images/games/re3.jpg'],
+    covers: ['/images/games/re3_original.avif', '/images/games/re3.jpg'],
     description: 'Jill Valentine fights to escape Raccoon City while being relentlessly pursued by the Nemesis-T Type — a near-unkillable B.O.W. engineered to eliminate S.T.A.R.S. survivors. Together with UBCS mercenary Carlos Oliveira, she races against a nuclear clock.',
     characters: [
       { class: 'PROTAGONISTS', ids: ['jill_valentine', 'carlos_oliveira'] },
@@ -92,7 +92,7 @@ export const games = [
     year: '2000',
     platform: ['Dreamcast', 'PS2', 'GameCube', 'PS3', 'Xbox 360', 'PC'],
     type: 'MAINLINE',
-    covers: ['/images/games/recvx.jpg'],
+    covers: ['/images/games/recvx.jfif'],
     description: 'Claire Redfield is captured and sent to Rockfort Island, where an attack releases its bio-weapons. She must face the Ashford twins and a revived Albert Wesker while Chris races to save her in Antarctica.',
     characters: [
       { class: 'PROTAGONISTS', ids: ['claire_redfield', 'chris_redfield'] },
@@ -112,7 +112,7 @@ export const games = [
     year: '2005 / 2023',
     platform: ['GameCube', 'PS2', 'Wii', 'PC', 'PS4', 'PS5', 'Xbox Series X', 'Switch'],
     type: 'MAINLINE',
-    covers: ['/images/games/re4_original.jpg', '/images/games/re4.jpg'],
+    covers: ['/images/games/re4_original.png', '/images/games/re4.avif'],
     description: 'Leon S. Kennedy travels to rural Spain to rescue the President\'s daughter, only to discover a sinister cult controlling villagers through an ancient parasite called Las Plagas. The game that reinvented survival horror.',
     characters: [
       { class: 'PROTAGONISTS', ids: ['leon_kennedy', 'ashley_graham'] },
@@ -172,7 +172,7 @@ export const games = [
     year: '2017',
     platform: ['PS4', 'Xbox One', 'PC', 'PS5', 'Xbox Series X', 'Switch'],
     type: 'MAINLINE',
-    covers: ['/images/games/re7.jpg'],
+    covers: ['/images/games/re7.jfif'],
     description: 'First-person horror. Ethan Winters searches for his missing wife in a derelict Louisiana plantation, becoming the prisoner of the mutated Baker family — driven mad by the E-Series mold bioweapon Eveline.',
     characters: [
       { class: 'PROTAGONISTS', ids: ['ethan_winters'] },
@@ -241,7 +241,7 @@ export const games = [
     year: '2012',
     platform: ['3DS', 'PC', 'PS3', 'Xbox 360', 'Wii U', 'PS4', 'Xbox One', 'Switch'],
     type: 'SPIN-OFF',
-    covers: ['/images/games/rerev.jpg'],
+    covers: ['/images/games/rerev.avif'],
     description: 'Set between RE4 and RE5. Jill Valentine and Parker Luciani investigate an abandoned cruise liner in search of Chris Redfield, discovering a new Ooze bioweapon and the terrorist organization Il Veltro.',
     characters: [
       { class: 'PROTAGONISTS', ids: ['jill_valentine', 'chris_redfield', 'parker_luciani'] },
@@ -257,7 +257,7 @@ export const games = [
     year: '2015',
     platform: ['PC', 'PS3', 'PS4', 'Xbox 360', 'Xbox One', 'Switch', 'PS Vita'],
     type: 'SPIN-OFF',
-    covers: ['/images/games/rerev2.jpg'],
+    covers: ['/images/games/rerev2.avif'],
     description: 'Claire Redfield and Moira Burton are abducted to a mysterious island where Alex Wesker runs experiments. Barry Burton travels to rescue his daughter, aided by a mysterious girl named Natalia Korda.',
     characters: [
       { class: 'PROTAGONISTS', ids: ['claire_redfield', 'barry_burton'] },

@@ -1,0 +1,1268 @@
+/* ════════════════════════════════════════════════════════════
+   GAME SYSTEM CSS
+   All game overlays are desktop-only (≥ 821px).
+   ════════════════════════════════════════════════════════════ */
+
+/* ── Shared: hide everything on mobile ────────────────────── */
+@media (max-width: 820px) {
+    .event-overlay,
+    .title-screen,
+    .you-died-screen {
+        display: none !important;
+    }
+}
+
+/* ════════════════════════════════════════════════════════════
+   TITLE SCREEN  —  NEW GAME / CONTINUE
+   ════════════════════════════════════════════════════════════ */
+.title-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: tsEnter 0.6s ease-out;
+}
+
+@keyframes tsEnter {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.title-screen-inner {
+    position: relative;
+    width: 100%;
+    max-width: 680px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.title-umbrella-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.04;
+    color: #cc0000;
+    pointer-events: none;
+}
+
+.title-umbrella-bg svg {
+    width: 80%;
+    height: 80%;
+}
+
+.title-screen-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.title-screen-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: #555;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+.title-screen-title {
+    font-family: 'Resident Evil', 'Times New Roman', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: #cc1100;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 30px rgba(200, 0, 0, 0.5);
+    margin: 0;
+}
+
+.title-screen-subtitle {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.6;
+    margin-top: 0.5rem;
+}
+
+.title-screen-rules {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+}
+
+.title-rule {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #888;
+    line-height: 1.4;
+}
+
+.title-rule-icon {
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    padding-top: 0.05rem;
+}
+
+.title-screen-actions {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+}
+
+.title-btn {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 1rem 2rem;
+    border: 1px solid;
+    border-radius: 2px;
+    min-width: 160px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.title-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.title-btn:hover:not(:disabled)::before { opacity: 0.08; }
+
+.title-btn--new {
+    border-color: #cc1100;
+    color: #cc1100;
+}
+
+.title-btn--new .title-btn-label {
+    color: #cc1100;
+    font-family: 'Resident Evil', 'Times New Roman', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.12em;
+}
+
+.title-btn--continue {
+    border-color: #666;
+    color: #666;
+}
+
+.title-btn--continue:not(:disabled) {
+    border-color: #888;
+    color: #aaa;
+}
+
+.title-btn--continue:not(:disabled) .title-btn-label {
+    color: #ccc;
+}
+
+.title-btn--continue:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.title-btn-label {
+    font-family: 'Resident Evil', 'Times New Roman', serif;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.title-btn-sub {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
+}
+
+/* ════════════════════════════════════════════════════════════
+   EVENT OVERLAY  —  shared base
+   ════════════════════════════════════════════════════════════ */
+.event-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 8000;
+    background: rgba(0, 0, 0, 0.88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: overlayIn 0.3s ease-out;
+    backdrop-filter: blur(4px);
+}
+
+@keyframes overlayIn {
+    from { opacity: 0; backdrop-filter: blur(0); }
+    to { opacity: 1; backdrop-filter: blur(4px); }
+}
+
+.event-card {
+    position: relative;
+    background: linear-gradient(160deg, #0f0a09 0%, #120e0d 60%, #0a0706 100%);
+    border: 1px solid rgba(180, 30, 15, 0.35);
+    border-radius: 3px;
+    padding: 2rem 2.5rem;
+    max-width: 480px;
+    width: 90%;
+    text-align: center;
+    box-shadow:
+        0 0 60px rgba(180, 20, 0, 0.15),
+        inset 0 0 40px rgba(0, 0, 0, 0.5);
+    animation: cardIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cardIn {
+    from { transform: scale(0.9) translateY(20px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.event-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 3px;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.03) 2px,
+        rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+}
+
+.event-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+}
+
+.event-caution-icon {
+    font-size: 1.4rem;
+    color: #ffcc00;
+    text-shadow: 0 0 10px rgba(255,200,0,0.5);
+    animation: iconPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.event-header h2 {
+    font-family: 'Resident Evil', 'Times New Roman', serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.2em;
+    color: #cc2200;
+    margin: 0;
+    text-shadow: 0 0 20px rgba(200,30,0,0.4);
+}
+
+.event-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.event-btn {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.65rem 1.5rem;
+    border: 1px solid;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-btn--take {
+    border-color: #cc2200;
+    color: #cc2200;
+}
+.event-btn--take:hover {
+    background: rgba(180,30,0,0.15);
+    box-shadow: 0 0 12px rgba(180,30,0,0.3);
+}
+
+.event-btn--leave {
+    border-color: #444;
+    color: #777;
+}
+.event-btn--leave:hover {
+    border-color: #666;
+    color: #aaa;
+    background: rgba(255,255,255,0.04);
+}
+
+.event-btn--engage {
+    border-color: #dd3300;
+    color: #ff4400;
+    font-weight: bold;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    padding: 0.75rem 2rem;
+    text-shadow: 0 0 10px rgba(255,50,0,0.4);
+    box-shadow: 0 0 20px rgba(200,30,0,0.2);
+}
+.event-btn--engage:hover {
+    background: rgba(200,30,0,0.15);
+    box-shadow: 0 0 30px rgba(200,30,0,0.4);
+}
+
+.event-btn--flee {
+    border-color: #444;
+    color: #888;
+    font-size: 0.7rem;
+    margin-top: 0.5rem;
+    width: 100%;
+}
+.event-btn--flee:hover {
+    border-color: #cc6600;
+    color: #cc6600;
+}
+
+.event-inventory-count {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    color: #444;
+    margin-top: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+/* ════════════════════════════════════════════════════════════
+   ITEM FOUND
+   ════════════════════════════════════════════════════════════ */
+.event-item-display {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.event-item-glow {
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Glow color now driven by ITEM CATEGORY, not rarity:
+   green = healing items, red = weapons, gold/pulsing = grenades. */
+.glow-heal .event-item-glow {
+    background: radial-gradient(circle, rgba(60,220,90,0.18) 0%, transparent 70%);
+}
+.glow-weapon .event-item-glow {
+    background: radial-gradient(circle, rgba(230,40,30,0.18) 0%, transparent 70%);
+}
+.glow-grenade .event-item-glow {
+    background: radial-gradient(circle, rgba(255,210,40,0.22) 0%, transparent 70%);
+    animation: rarePulse 2s ease-in-out infinite;
+}
+
+@keyframes rarePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.event-item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px rgba(255,255,255,0.1));
+}
+
+.event-item-rarity-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+    color: #555;
+    padding: 1px 4px;
+    border: 1px solid #333;
+    border-radius: 2px;
+}
+
+.rarity-rare .event-item-rarity-badge {
+    color: #aa55dd;
+    border-color: #662299;
+}
+
+.event-item-name {
+    font-family: 'Resident Evil', 'Times New Roman', serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.15em;
+    color: #ddd;
+    margin: 0 0 0.4rem;
+}
+
+.event-item-desc {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    color: #666;
+    line-height: 1.5;
+    margin: 0 0 0.5rem;
+}
+
+.event-item-stat {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #cc4400;
+    letter-spacing: 0.1em;
+}
+
+.event-item-stat span {
+    background: rgba(180,40,0,0.2);
+    border: 1px solid rgba(180,40,0,0.3);
+    padding: 1px 6px;
+    border-radius: 2px;
+    margin-right: 0.4rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+}
+
+/* Discard list */
+.event-card--discard {
+    max-width: 520px;
+}
+
+.discard-list {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.discard-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 2px;
+}
+
+.discard-item-img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.discard-item-info {
+    flex: 1;
+    text-align: left;
+}
+
+.discard-item-name {
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #ccc;
+    letter-spacing: 0.08em;
+}
+
+.discard-item-desc {
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    color: #555;
+    margin-top: 0.1rem;
+}
+
+.discard-item-btn {
+    all: unset;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #993300;
+    border: 1px solid #551100;
+    padding: 3px 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    transition: all 0.15s;
+}
+
+.discard-item-btn:hover {
+    color: #ff4400;
+    border-color: #993300;
+    background: rgba(150,30,0,0.15);
+}
+
+/* ════════════════════════════════════════════════════════════
+   BOSS ENCOUNTER
+   ════════════════════════════════════════════════════════════ */
+.event-overlay--boss {
+    background: rgba(0, 0, 0, 0.94);
+}
+
+.event-card--boss-warning,
+.event-card--boss-battle {
+    max-width: 560px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.boss-warning-header {
+    padding: 1.5rem 2rem 1rem;
+    background: rgba(180, 20, 0, 0.1);
+    border-bottom: 1px solid rgba(180, 20, 0, 0.2);
+}
+
+.boss-caution-blink {
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    color: #ffcc00;
+    animation: blinkAnim 0.7s step-end infinite;
+    margin-bottom: 0.25rem;
+}
+
+@keyframes blinkAnim {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.boss-warning-sub {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: #666;
+    margin: 0;
+}
+
+.boss-warning-img-wrap {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+}
+
+.boss-warning-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: grayscale(0.4) contrast(1.1);
+}
+
+.boss-warning-vignette,
+.boss-battle-vignette {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 40%,
+        rgba(10, 6, 5, 0.95) 100%
+    );
+}
+
+.boss-warning-info {
+    padding: 1rem 2rem;
+}
+
+.boss-name {
+    font-family: 'Resident Evil', 'Times New Roman', serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.15em;
+    color: #dd2200;
+    margin: 0 0 0.1rem;
+    text-shadow: 0 0 20px rgba(200,30,0,0.4);
+}
+
+.boss-title {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: #555;
+    margin: 0 0 0.75rem;
+    text-transform: uppercase;
+}
+
+.boss-desc {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    color: #666;
+    line-height: 1.55;
+    margin: 0;
+}
+
+.event-card--boss-warning .event-actions {
+    padding: 0 2rem 1.5rem;
+}
+
+.boss-battle-header {
+    padding: 1rem 2rem 0.75rem;
+    background: rgba(180, 20, 0, 0.08);
+    border-bottom: 1px solid rgba(180, 20, 0, 0.2);
+}
+
+.boss-hp-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.boss-hp-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #cc2200;
+    flex-shrink: 0;
+}
+
+.boss-hp-track {
+    flex: 1;
+    height: 8px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 1px;
+    overflow: hidden;
+    border: 1px solid rgba(180,30,0,0.3);
+}
+
+.boss-hp-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #660000, #cc2200, #ff4400);
+    border-radius: 1px;
+    transition: width 0.4s ease-out;
+    box-shadow: 0 0 6px rgba(255,50,0,0.5);
+}
+
+.boss-hp-num {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    color: #555;
+    flex-shrink: 0;
+    min-width: 60px;
+    text-align: right;
+}
+
+.boss-battle-img-wrap {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+}
+
+.boss-battle-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: grayscale(0.3) contrast(1.15);
+}
+
+.boss-player-hp-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    background: rgba(0,0,0,0.2);
+    border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.boss-player-hp-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: #666;
+    flex-shrink: 0;
+}
+
+.boss-player-hp-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.boss-player-hp-fill {
+    height: 100%;
+    border-radius: 1px;
+    transition: width 0.4s ease-out;
+}
+
+.boss-player-hp-fill.health-green { background: #00cc44; box-shadow: 0 0 4px #00cc44; }
+.boss-player-hp-fill.health-yellow { background: #ffcc00; box-shadow: 0 0 4px #ffcc00; }
+.boss-player-hp-fill.health-red { background: #cc0000; box-shadow: 0 0 6px #cc0000; animation: hpRedPulse 0.5s ease-in-out infinite; }
+
+@keyframes hpRedPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.boss-player-hp-num {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    color: #444;
+    flex-shrink: 0;
+    min-width: 50px;
+    text-align: right;
+}
+
+.boss-weapon-grid {
+    padding: 0.75rem 1.5rem 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.boss-weapon-label {
+    width: 100%;
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: #555;
+    margin-bottom: 0.25rem;
+    text-align: left;
+}
+
+.boss-weapon-btn {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(180,30,0,0.3);
+    border-radius: 3px;
+    background: rgba(180,30,0,0.06);
+    min-width: 80px;
+    transition: all 0.15s;
+}
+
+.boss-weapon-btn:hover {
+    border-color: rgba(255,60,0,0.6);
+    background: rgba(180,30,0,0.15);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(180,30,0,0.2);
+}
+
+.boss-weapon-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.boss-weapon-name {
+    font-family: 'Courier New', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+    color: #888;
+    text-align: center;
+}
+
+.boss-weapon-dmg {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    color: #cc3300;
+    letter-spacing: 0.05em;
+}
+
+.boss-herb-strip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.boss-herb-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: #445533;
+}
+
+.boss-herb-btn {
+    all: unset;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(50,120,50,0.3);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+}
+
+.boss-herb-btn:hover {
+    border-color: rgba(80,180,80,0.6);
+    background: rgba(50,120,50,0.15);
+}
+
+.boss-herb-btn img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.event-card--boss-won {
+    max-width: 440px;
+}
+
+.boss-won-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.boss-won-icon {
+    font-size: 2rem;
+    color: #ffcc00;
+    text-shadow: 0 0 20px rgba(255,200,0,0.6);
+}
+
+.boss-won-header h2 {
+    font-family: 'Resident Evil', 'Times New Roman', serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.2em;
+    color: #ddd;
+    margin: 0;
+}
+
+.boss-won-msg {
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: #777;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+/* ════════════════════════════════════════════════════════════
+   PUZZLE EVENT
+   ════════════════════════════════════════════════════════════ */
+.event-card--puzzle {
+    max-width: 480px;
+}
+
+.puzzle-title {
+    font-family: 'Resident Evil', 'Times New Roman', serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: #ffcc00;
+    margin: 0;
+}
+
+.puzzle-desc {
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: #888;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+}
+
+.puzzle-input-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+}
+
+.puzzle-input {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,200,0,0.3);
+    border-radius: 2px;
+    padding: 0.6rem 1rem;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    color: #ffcc00;
+    text-align: center;
+    text-transform: uppercase;
+    outline: none;
+    width: 200px;
+    transition: border-color 0.2s;
+}
+
+.puzzle-input:focus {
+    border-color: rgba(255,200,0,0.7);
+    background: rgba(255,200,0,0.04);
+}
+
+.puzzle-input--wrong {
+    border-color: rgba(255, 60, 0, 0.6);
+    animation: inputShake 0.3s ease-out;
+}
+
+@keyframes inputShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.puzzle-wrong-text {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    color: #cc3300;
+    letter-spacing: 0.08em;
+}
+
+.puzzle-hint-strip {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 2px;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+.puzzle-hint-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: #ffcc00;
+    flex-shrink: 0;
+    opacity: 0.6;
+}
+
+.puzzle-hint-text {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+.puzzle-attempts-text {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    color: #444;
+    margin-top: 0.5rem;
+    letter-spacing: 0.08em;
+}
+
+.puzzle-result {
+    padding: 1.25rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+}
+
+.puzzle-result--success {
+    background: rgba(0, 120, 0, 0.1);
+    border: 1px solid rgba(0, 150, 0, 0.3);
+}
+
+.puzzle-result--fail {
+    background: rgba(150, 0, 0, 0.1);
+    border: 1px solid rgba(180, 0, 0, 0.3);
+}
+
+.puzzle-result--choice {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+}
+
+.puzzle-result-icon {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.puzzle-result--success .puzzle-result-icon { color: #00cc44; }
+.puzzle-result--fail .puzzle-result-icon { color: #cc0000; }
+
+.puzzle-reward-text {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    color: #aaa;
+    margin-top: 0.4rem;
+}
+
+.puzzle-reward-text strong { color: #ffcc00; }
+
+.puzzle-penalty-text {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: #cc3300;
+    margin-top: 0.25rem;
+}
+
+.puzzle-choice-result {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #888;
+    font-style: italic;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.puzzle-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.puzzle-choice-btn {
+    all: unset;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #888;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px;
+    padding: 0.7rem 1rem;
+    text-align: left;
+    transition: all 0.15s;
+    line-height: 1.4;
+}
+
+.puzzle-choice-btn:hover {
+    border-color: rgba(255,200,0,0.4);
+    color: #ffcc00;
+    background: rgba(255,200,0,0.04);
+}
+
+/* ════════════════════════════════════════════════════════════
+   YOU DIED SCREEN
+   ════════════════════════════════════════════════════════════ */
+.you-died-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9500;
+    background: radial-gradient(ellipse at center, #2a0000 0%, #0a0000 60%, #000 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: diedIn 0.8s ease-out;
+}
+
+.you-died-screen--fading {
+    animation: diedOut 0.5s ease-in forwards;
+    pointer-events: none;
+}
+
+@keyframes diedIn {
+    from { opacity: 0; background-color: #000; }
+    to { opacity: 1; }
+}
+
+@keyframes diedOut {
+    to { opacity: 0; }
+}
+
+.you-died-inner {
+    text-align: center;
+}
+
+.you-died-text {
+    font-family: 'Resident Evil', 'Times New Roman', serif;
+    font-size: clamp(4rem, 12vw, 9rem);
+    color: #cc0000;
+    margin: 0;
+    letter-spacing: 0.06em;
+    text-shadow:
+        0 0 40px rgba(255,0,0,0.6),
+        0 0 80px rgba(200,0,0,0.3),
+        2px 2px 0 #440000;
+    animation: glitchText 3s ease-in-out;
+}
+
+@keyframes glitchText {
+    0% { transform: translateX(0); opacity: 0; }
+    5% { opacity: 1; transform: translateX(-4px); }
+    10% { transform: translateX(4px); }
+    15% { transform: translateX(0); }
+    40% { transform: translateX(0); }
+    42% { transform: translateX(-3px) skewX(-2deg); }
+    44% { transform: translateX(3px) skewX(2deg); }
+    46% { transform: translateX(0); }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+.you-died-sub {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    color: #550000;
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+}
+
+/* ════════════════════════════════════════════════════════════
+   ITEM DETAIL MODAL — MIX list + DISCARD action
+   (shared by herbs and weapons, opened from the inventory grid)
+   ════════════════════════════════════════════════════════════ */
+.herb-mix-section {
+    margin: 1rem 0;
+    text-align: left;
+}
+
+.herb-mix-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: #cc2200;
+    margin: 0 0 0.5rem;
+    text-align: center;
+}
+
+.herb-mix-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    max-height: 160px;
+    overflow-y: auto;
+}
+
+.herb-mix-option-btn {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    width: 76px;
+    padding: 0.5rem 0.4rem;
+    border: 1px solid rgba(100, 200, 100, 0.25);
+    border-radius: 3px;
+    background: rgba(60, 140, 60, 0.06);
+    transition: all 0.15s;
+}
+
+.herb-mix-option-btn:hover {
+    border-color: rgba(120, 220, 120, 0.6);
+    background: rgba(60, 140, 60, 0.15);
+    transform: translateY(-1px);
+}
+
+.herb-mix-option-btn img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.herb-mix-option-btn span {
+    font-family: 'Courier New', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.04em;
+    color: #aaddaa;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.spray-btn-discard {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.25rem;
+    border: 1px solid #551100;
+    border-radius: 2px;
+    color: #993300;
+    transition: all 0.15s;
+}
+
+.spray-btn-discard:hover {
+    color: #ff4400;
+    border-color: #993300;
+    background: rgba(150, 30, 0, 0.15);
+}
+
+/* Grayed-out USE button when at full health */
+.spray-btn-use:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+.spray-btn-use:disabled:hover {
+    background: none;
+    box-shadow: none;
+}
+
+/* ════════════════════════════════════════════════════════════
+   DRAG & DROP HOVER FEEDBACK
+   ════════════════════════════════════════════════════════════ */
+.grid-slot.mix-target {
+    background: rgba(60, 180, 60, 0.18) !important;
+    border: 1px dashed rgba(100, 220, 100, 0.7) !important;
+    box-shadow: 0 0 10px rgba(80, 200, 80, 0.35);
+}
+
+/* ════════════════════════════════════════════════════════════
+   KNIFE FIXED SLOT (on Home)
+   No special background/border anymore — looks like any regular
+   inventory block, per request. Only the "KNIFE" label remains.
+   ════════════════════════════════════════════════════════════ */
+.inventory-knife-slot {
+    grid-column: span 1;
+    grid-row: span 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.inventory-knife-slot::after {
+    content: 'KNIFE';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.45rem;
+    letter-spacing: 0.08em;
+    color: #665500;
+}
