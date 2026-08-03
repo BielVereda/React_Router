@@ -242,7 +242,7 @@ export const PUZZLES = [
         type: 'code',
         answer: '1998',
         hint: 'Think about the year of the T-Virus outbreak.',
-        reward: 'magnum',
+        reward: 'magnum_ammo',
         penaltyDamage: 25,
     },
     {
@@ -252,7 +252,7 @@ export const PUZZLES = [
         type: 'code',
         answer: 'T-VIRUS',
         hint: 'The simplest of all Umbrella strains. Two words separated by a hyphen.',
-        reward: 'handgun',
+        reward: 'handgun_ammo',
         penaltyDamage: 15,
     },
     {
@@ -262,7 +262,7 @@ export const PUZZLES = [
         type: 'code',
         answer: 'MARCUS',
         hint: 'He was one of three co-founders of the Umbrella Corporation.',
-        reward: 'shotgun',
+        reward: 'shotgun_ammo',
         penaltyDamage: 20,
     },
     {
@@ -272,7 +272,7 @@ export const PUZZLES = [
         type: 'code',
         answer: 'WESKER',
         hint: 'He later became Umbrella\'s most dangerous asset.',
-        reward: 'flamethrower',
+        reward: 'incendiary_grenade',
         penaltyDamage: 20,
     },
     {

@@ -12,10 +12,10 @@ export default function BossEncounterEvent() {
 
     const bossHpPct = Math.max(0, (state.bossHp / state.bossMaxHp) * 100);
 
-    // Knife is always available; ammo items are consumed on use
+    // Knife is always available; weapon items are consumed on use
     const weapons = [
         KNIFE_ITEM,
-        ...state.inventory.filter(i => i.type === 'ammo'),
+        ...state.inventory.filter(i => i.type === 'weapon'),
     ];
 
     // Herbs and consumables available for healing during battle
