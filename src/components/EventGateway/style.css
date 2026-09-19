@@ -1,0 +1,5 @@
+/* ── EventGateway Styles ────────────────────────────────────── */
+.event-gateway-root {
+    position: relative;
+    z-index: 8500;
+}
