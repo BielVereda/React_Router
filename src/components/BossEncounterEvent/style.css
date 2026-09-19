@@ -1,0 +1,269 @@
+/* ── BossEncounterEvent Styles ──────────────────────────────── */
+.event-overlay--boss {
+    background: rgba(10, 0, 0, 0.92);
+}
+
+.event-card--boss-warning,
+.event-card--boss-battle,
+.event-card--boss-won {
+    max-width: 540px;
+    border-color: #880000;
+    box-shadow: 0 0 50px rgba(180, 0, 0, 0.4);
+}
+
+.boss-warning-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.boss-caution-blink {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ff2200;
+    letter-spacing: 0.2em;
+    animation: blink 0.8s infinite alternate;
+}
+
+@keyframes blink {
+    from { opacity: 1; }
+    to { opacity: 0.2; }
+}
+
+.boss-warning-sub {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #888;
+    letter-spacing: 0.15em;
+    margin: 0;
+}
+
+.boss-warning-img-wrap,
+.boss-battle-img-wrap {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background: #000;
+    border: 1px solid #440000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.boss-warning-img,
+.boss-battle-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.boss-warning-vignette,
+.boss-battle-vignette {
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 35px #000;
+    pointer-events: none;
+}
+
+.boss-name {
+    font-family: 'Resident Evil', serif;
+    font-size: 1.9rem;
+    color: #ff2200;
+    margin: 0;
+    letter-spacing: 0.08em;
+}
+
+.boss-title {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: #aaa;
+    margin: 0.2rem 0 0.5rem;
+}
+
+.boss-desc {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: #777;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.event-btn--engage {
+    background: #cc1100;
+    color: #fff;
+    border: 1px solid #ff2200;
+    box-shadow: 0 0 15px rgba(200, 0, 0, 0.4);
+}
+
+.event-btn--engage:hover {
+    background: #e61500;
+    box-shadow: 0 0 25px rgba(230, 21, 0, 0.7);
+    transform: translateY(-2px);
+}
+
+/* Battle HUD */
+.boss-battle-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.boss-hp-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.boss-hp-label,
+.boss-player-hp-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #ff4444;
+}
+
+.boss-hp-track,
+.boss-player-hp-track {
+    flex: 1;
+    height: 12px;
+    background: #220000;
+    border: 1px solid #660000;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.boss-hp-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff2200, #cc0000);
+    transition: width 0.3s ease;
+}
+
+.boss-player-hp-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(0,0,0,0.5);
+    padding: 0.4rem 0.8rem;
+    border-radius: 3px;
+    border: 1px solid #222;
+}
+
+.boss-player-hp-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.boss-player-hp-fill.health-green { background: #00cc44; }
+.boss-player-hp-fill.health-yellow { background: #ffaa00; }
+.boss-player-hp-fill.health-red { background: #cc1100; }
+
+.boss-hp-num,
+.boss-player-hp-num {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #aaa;
+}
+
+/* Weapon grid */
+.boss-weapon-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+.boss-weapon-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: #888;
+    letter-spacing: 0.1em;
+    margin: 0;
+}
+
+.boss-weapon-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid #333;
+    padding: 0.6rem 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.boss-weapon-btn:hover {
+    background: rgba(200,0,0,0.15);
+    border-color: #aa0000;
+}
+
+.boss-weapon-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.boss-weapon-name {
+    flex: 1;
+    font-family: 'Resident Evil', serif;
+    font-size: 1.05rem;
+    color: #ddd;
+}
+
+.boss-weapon-dmg {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: #ffaa00;
+    font-weight: bold;
+}
+
+.boss-herb-strip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.boss-herb-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: #00cc44;
+}
+
+.boss-herb-btn {
+    background: rgba(0, 204, 68, 0.1);
+    border: 1px solid #00aa33;
+    padding: 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.boss-herb-btn img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.event-btn--flee {
+    background: rgba(255,255,255,0.06);
+    color: #ccc;
+    border: 1px solid #444;
+}
+
+.event-btn--flee:hover {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+}
+
+.boss-won-icon {
+    font-size: 2rem;
+    color: #00ff88;
+}
+
+.boss-won-msg {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: #aaa;
+    line-height: 1.5;
+}
