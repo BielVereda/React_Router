@@ -1,0 +1,259 @@
+/* ── 3D Model Viewer Styles ─────────────────────────────────── */
+.model-viewer-box {
+    width: 100%;
+    background: #06070a;
+    border: 1px solid #1a2a22;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 255, 136, 0.05);
+}
+
+.model-viewer-hud-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    background: rgba(10, 20, 15, 0.9);
+    border-bottom: 1px solid #143322;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+}
+
+.hud-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #00ff88;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+}
+
+.hud-dot {
+    width: 6px;
+    height: 6px;
+    background: #00ff88;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00ff88;
+    animation: hud-blink 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes hud-blink {
+    0% { opacity: 0.3; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
+
+.hud-id {
+    color: #557766;
+    letter-spacing: 0.08em;
+}
+
+/* Toolbar */
+.model-viewer-toolbar {
+    display: flex;
+    gap: 4px;
+    padding: 6px 8px;
+    background: rgba(5, 10, 8, 0.95);
+    border-bottom: 1px solid #112218;
+    flex-wrap: wrap;
+}
+
+.hud-btn {
+    background: #0a1410;
+    border: 1px solid #1a3325;
+    color: #88aa99;
+    font-family: 'Resident Evil', sans-serif, monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 4px 8px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.hud-btn:hover {
+    background: #11281e;
+    color: #00ff88;
+    border-color: #00ff88;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+}
+
+.hud-btn.active {
+    background: #003318;
+    color: #00ff88;
+    border-color: #00ff88;
+    box-shadow: inset 0 0 8px rgba(0, 255, 136, 0.3);
+}
+
+/* 3D Stage */
+.model-viewer-stage {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    background: radial-gradient(circle at center, #0c1814 0%, #030605 85%);
+    overflow: hidden;
+    cursor: grab;
+}
+
+.model-viewer-stage:active {
+    cursor: grabbing;
+}
+
+.model-viewer-canvas-wrap {
+    width: 100%;
+    height: 100%;
+}
+
+.model-viewer-canvas-wrap canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+    outline: none;
+}
+
+/* CRT / HUD scanlines & reticle */
+.model-viewer-scanlines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15) 0px,
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    z-index: 2;
+}
+
+.model-viewer-reticle {
+    position: absolute;
+    inset: 12px;
+    border: 1px dashed rgba(0, 255, 136, 0.15);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.model-viewer-reticle::before,
+.model-viewer-reticle::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-color: #00ff88;
+    border-style: solid;
+}
+
+.model-viewer-reticle::before {
+    top: -1px;
+    left: -1px;
+    border-width: 2px 0 0 2px;
+}
+
+.model-viewer-reticle::after {
+    bottom: -1px;
+    right: -1px;
+    border-width: 0 2px 2px 0;
+}
+
+/* Status message / Loading */
+.model-viewer-status-msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #00ff88;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    background: rgba(0, 15, 8, 0.85);
+    padding: 8px 14px;
+    border: 1px solid #00ff88;
+    border-radius: 3px;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.spinner-hud {
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(0, 255, 136, 0.2);
+    border-top-color: #00ff88;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Notice for pending OBJ file */
+.model-viewer-notice {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    background: rgba(10, 18, 12, 0.85);
+    border: 1px solid #1a3325;
+    padding: 6px 10px;
+    border-radius: 3px;
+    color: #88bb99;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    z-index: 3;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.model-viewer-notice strong {
+    color: #00ff88;
+    word-break: break-all;
+}
+
+.model-viewer-notice small {
+    color: #557766;
+    font-size: 9px;
+}
+
+.notice-icon {
+    color: #ffaa00;
+    margin-right: 4px;
+}
+
+/* Photo view */
+.model-viewer-photo-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+}
+
+.model-viewer-photo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Footer hint */
+.model-viewer-footer-hint {
+    padding: 4px 8px;
+    background: rgba(5, 10, 8, 0.95);
+    border-top: 1px solid #112218;
+    color: #446655;
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    text-align: center;
+    letter-spacing: 0.08em;
+}
