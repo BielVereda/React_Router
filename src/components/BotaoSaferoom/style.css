@@ -1,0 +1,40 @@
+/* ── BotaoSaferoom Styles ───────────────────────────────────── */
+.saferoom-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(10, 20, 15, 0.85);
+    border: 1px solid #143322;
+    color: #88bb99;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 6px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-transform: uppercase;
+}
+
+.saferoom-toggle-btn:hover {
+    background: rgba(15, 35, 25, 0.95);
+    border-color: #00ff88;
+    color: #00ff88;
+    box-shadow: 0 0 12px rgba(0, 255, 136, 0.25);
+}
+
+.saferoom-toggle-btn.is-muted {
+    background: rgba(25, 15, 15, 0.85);
+    border-color: #442222;
+    color: #aa8888;
+}
+
+.saferoom-toggle-btn.is-muted:hover {
+    border-color: #ff4444;
+    color: #ff6666;
+    box-shadow: 0 0 12px rgba(255, 68, 68, 0.25);
+}
+
+.saferoom-btn-icon {
+    font-size: 12px;
+}
