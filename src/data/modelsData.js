@@ -1,50 +1,90 @@
 export const models3d = [
     {
-        id: 'tyrant_t103',
-        name: 'Tyrant T-103 (Mr. X)',
-        description: 'A fully rigged 3D model of the mass-produced T-103 Tyrant model, commonly known as Mr. X. Features the signature trench coat power limiter and highly detailed facial texturing.',
-        images: [
-            '/images/models/tyrant_t103_1.jpg',
-            '/images/models/tyrant_t103_2.jpg'
-        ], // Array com várias imagens. A página irá alternar entre elas.
-        url: 'https://sketchfab.com/3d-models/resident-evil-2-remake-mr-x-3d-model-example',
-        author: 'Umbrella R&D / Fan Creator',
-        polyCount: '45.2k'
+        id: 'nemesis',
+        name: 'Nemesis T-Type',
+        description: 'The Nemesis T-Type bioweapon, one of Umbrella\'s most feared creations. Features the iconic restraining gear and tentacle-based weaponry system.',
+        images: [],
+        objPath: '/3dModels/Nemesis/Nemesis.obj',
+        url: '',
+        author: 'Umbrella R&D',
+        polyCount: 'Unknown',
+        initialRotation: { x: -Math.PI / 2, y: 0, z: 0 } // -90 degree on X to face up
     },
     {
-        id: 'samurai_edge',
-        name: 'Samurai Edge (Albert.W.Model)',
-        description: 'High-poly replica of Albert Wesker\'s custom Beretta 92F, the Samurai Edge. Includes laser module, extended magazine, and custom S.T.A.R.S. grips.',
-        images: [
-            '/images/models/samurai_edge_1.jpg',
-            '/images/models/samurai_edge_2.jpg',
-            '/images/models/samurai_edge_3.jpg'
-        ],
-        url: 'https://sketchfab.com/3d-models/samurai-edge-example',
-        author: 'Kendo Gun Shop / Fan Creator',
-        polyCount: '12.8k'
+        id: 'zombie_re4',
+        name: 'Resident Evil 4 Zombie',
+        description: 'A Ganado-style infected villager from the Resident Evil 4 timeline. Features detailed clothing and facial modeling characteristic of the game\'s aesthetic.',
+        images: [],
+        objPath: '/3dModels/ZombieRE4/Resident_Evil_Zombie_4.obj',
+        url: '',
+        author: 'Umbrella R&D',
+        polyCount: 'Unknown',
+        initialRotation: { x: -Math.PI / 2, y: 0, z: 0 } // -90 degree on X to face up
     },
     {
-        id: 'g_virus_vial',
-        name: 'G-Virus Sample Vial',
-        description: 'Detailed 3D prop of the G-Virus sample vial as seen in Resident Evil 2. Features glass refraction materials and the internal glowing double-helix structure.',
-        images: [
-            '/images/models/g_virus_1.jpg',
-            '/images/models/g_virus_2.jpg'
-        ],
-        url: 'https://sketchfab.com/3d-models/g-virus-example',
-        author: 'NEST Labs / Fan Creator',
-        polyCount: '5.1k'
+        id: 'stars_badge',
+        name: 'S.T.A.R.S. RPD Badge',
+        description: 'Official S.T.A.R.S. (Special Tactics and Rescue Service) badge from the Raccoon City Police Department. Features the iconic winged star emblem.',
+        images: [],
+        objPath: '/3dModels/DistintivoSTARS/STARS_RPD.obj',
+        url: '',
+        author: 'RPD Archives',
+        polyCount: 'Unknown',
+        initialRotation: { x: 0, y: 0, z: 0 } // No rotation
     },
     {
-        id: 'safe_room_typewriter',
-        name: 'Safe Room Typewriter',
-        description: 'Classic ribbon typewriter used for saving progress. Intricate mechanical details on the keys, carriage, and the iconic ink ribbon cartridge.',
-        images: [
-            '/images/models/typewriter_1.jpg'
-        ], // Se tiver só 1, ele fica estático
-        url: 'https://sketchfab.com/3d-models/re-typewriter-example',
-        author: 'Arklay Antiques / Fan Creator',
-        polyCount: '28.5k'
+        id: 're_movie_logo',
+        name: 'Resident Evil Movie Logo',
+        description: 'The iconic Resident Evil movie logo, featuring the stylized biological hazard symbol and the franchise title typography.',
+        images: [],
+        objPath: '/3dModels/LogoMovieRE/resident_evil_movie_logo.obj',
+        url: '',
+        author: 'Umbrella Corporation',
+        polyCount: 'Unknown',
+        initialRotation: { x: 0, y: 0, z: 0 }
+    },
+    {
+        id: 'armor_key',
+        name: 'Armor Key (RE2)',
+        description: 'One of the four gemstone keys from the Raccoon City Police Station in Resident Evil 2. Required to access the eastern wing of the station.',
+        images: [],
+        objPath: '/3dModels/ChavesRE2/ArmorKey.obj',
+        url: '',
+        author: 'RPD Keymaster',
+        polyCount: 'Unknown',
+        initialRotation: { x: 0, y: 0, z: 0 }
+    },
+    {
+        id: 'helm_key',
+        name: 'Helm Key (RE2)',
+        description: 'The Helmet Key from Resident Evil 2, featuring the distinctive helmet design. Part of the gemstone key set needed to navigate the RPD station.',
+        images: [],
+        objPath: '/3dModels/ChavesRE2/HelmKey.obj',
+        url: '',
+        author: 'RPD Keymaster',
+        polyCount: 'Unknown',
+        initialRotation: { x: 0, y: 0, z: 0 }
+    },
+    {
+        id: 'shield_key',
+        name: 'Shield Key (RE2)',
+        description: 'The Shield Key from Resident Evil 2, featuring the protective shield emblem. Essential for accessing the safety deposit room in the RPD station.',
+        images: [],
+        objPath: '/3dModels/ChavesRE2/ShieldKey.obj',
+        url: '',
+        author: 'RPD Keymaster',
+        polyCount: 'Unknown',
+        initialRotation: { x: 0, y: 0, z: 0 }
+    },
+    {
+        id: 'sword_key',
+        name: 'Sword Key (RE2)',
+        description: 'The Sword Key from Resident Evil 2, featuring the crossed sword design. Part of the gemstone key collection required for station navigation.',
+        images: [],
+        objPath: '/3dModels/ChavesRE2/SwordKey.obj',
+        url: '',
+        author: 'RPD Keymaster',
+        polyCount: 'Unknown',
+        initialRotation: { x: 0, y: 0, z: 0 }
     }
 ];
