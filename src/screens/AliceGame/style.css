@@ -1,0 +1,497 @@
+/* ─── Alice Game Page (Secret Umbrella Project Theme) ─── */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+    --alice-red: #ff0040;
+    --alice-red-dim: #660018;
+    --alice-purple: #8b00ff;
+    --alice-bg: #0a0010;
+    --alice-panel: rgba(20, 0, 40, 0.95);
+    --alice-border: #ff0040;
+    --alice-text: #ffe0f0;
+}
+
+.alice-game-page {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--alice-bg);
+    color: var(--alice-text);
+    font-family: 'Rajdhani', 'Share Tech Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 20px 60px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* Background effects */
+.alice-game-bg {
+    position: fixed;
+    inset: 0;
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(139, 0, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(255, 0, 64, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(255, 0, 64, 0.08) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+    animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.alice-game-scanlines {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1) 0px,
+        rgba(0, 0, 0, 0.1) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Header */
+.alice-game-header {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 20px;
+    background: var(--alice-panel);
+    border: 2px solid var(--alice-border);
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 30px rgba(255, 0, 64, 0.3);
+}
+
+.alice-game-header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.alice-game-logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px var(--alice-red));
+}
+
+.alice-game-title-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.alice-game-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--alice-red);
+    text-shadow: 0 0 25px var(--alice-red);
+    margin: 0;
+    letter-spacing: 3px;
+}
+
+.alice-game-subtitle {
+    font-size: 1rem;
+    color: var(--alice-text);
+    opacity: 0.8;
+    margin: 5px 0 0 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.alice-game-back-btn {
+    padding: 12px 24px;
+    background: transparent;
+    border: 2px solid var(--alice-red);
+    color: var(--alice-red);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.alice-game-back-btn:hover {
+    background: var(--alice-red);
+    color: var(--alice-bg);
+    box-shadow: 0 0 20px var(--alice-red);
+}
+
+/* Content */
+.alice-game-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Game Info */
+.alice-game-info {
+    background: var(--alice-panel);
+    border: 1px solid var(--alice-border);
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(255, 0, 64, 0.2);
+}
+
+.alice-game-warning {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(255, 0, 64, 0.1);
+    border: 1px solid var(--alice-red);
+    border-radius: 4px;
+    margin-bottom: 25px;
+    color: var(--alice-red);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.warning-icon {
+    font-size: 1.5rem;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.alice-game-story-title {
+    font-size: 2.2rem;
+    color: var(--alice-red);
+    margin: 0 0 20px 0;
+    text-shadow: 0 0 15px var(--alice-red);
+    text-align: center;
+}
+
+.alice-game-story {
+    font-size: 1.1rem;
+    color: var(--alice-text);
+    line-height: 1.8;
+    margin: 0 0 30px 0;
+    text-align: center;
+    opacity: 0.9;
+}
+
+.alice-game-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(139, 0, 255, 0.1);
+    border: 1px solid var(--alice-purple);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    background: rgba(139, 0, 255, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(139, 0, 255, 0.3);
+}
+
+.feature-icon {
+    font-size: 2rem;
+}
+
+.feature-text h3 {
+    font-size: 1.1rem;
+    color: var(--alice-purple);
+    margin: 0 0 5px 0;
+}
+
+.feature-text p {
+    font-size: 0.9rem;
+    color: var(--alice-text);
+    opacity: 0.8;
+    margin: 0;
+}
+
+/* Play Options */
+.alice-game-options {
+    background: var(--alice-panel);
+    border: 1px solid var(--alice-border);
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(255, 0, 64, 0.2);
+}
+
+.options-title {
+    font-size: 1.8rem;
+    color: var(--alice-red);
+    margin: 0 0 30px 0;
+    text-shadow: 0 0 15px var(--alice-red);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.option-card {
+    background: rgba(255, 0, 64, 0.05);
+    border: 2px solid var(--alice-border);
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.option-card:hover {
+    background: rgba(255, 0, 64, 0.1);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(255, 0, 64, 0.3);
+}
+
+.option-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.option-title {
+    font-size: 1.5rem;
+    color: var(--alice-red);
+    margin: 0 0 15px 0;
+    text-shadow: 0 0 10px var(--alice-red);
+}
+
+.option-description {
+    font-size: 1rem;
+    color: var(--alice-text);
+    opacity: 0.9;
+    margin: 0 0 20px 0;
+    line-height: 1.6;
+}
+
+.option-specs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.spec-item {
+    padding: 5px 12px;
+    background: rgba(139, 0, 255, 0.2);
+    border: 1px solid var(--alice-purple);
+    color: var(--alice-text);
+    font-size: 0.85rem;
+    border-radius: 4px;
+}
+
+.option-btn {
+    width: 100%;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.option-btn.primary {
+    background: var(--alice-red);
+    color: var(--alice-bg);
+}
+
+.option-btn.primary:hover {
+    background: #ff2060;
+    box-shadow: 0 0 25px var(--alice-red);
+    transform: scale(1.05);
+}
+
+.option-btn.secondary {
+    background: var(--alice-purple);
+    color: var(--alice-bg);
+}
+
+.option-btn.secondary:hover {
+    background: #a020ff;
+    box-shadow: 0 0 25px var(--alice-purple);
+    transform: scale(1.05);
+}
+
+/* Game Viewport */
+.alice-game-viewport {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1400px;
+    flex: 1;
+}
+
+.game-container {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+    background: var(--alice-panel);
+    border: 2px solid var(--alice-border);
+    border-radius: 8px;
+    position: relative;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    box-shadow: 0 0 35px rgba(255, 0, 64, 0.3);
+}
+
+#phaser-game-container {
+    width: 800px;
+    height: 600px;
+    max-width: 100%;
+    aspect-ratio: 4 / 3;
+    position: relative;
+    margin: 0 auto;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 0, 64, 0.6);
+    box-shadow: 0 0 20px rgba(255, 0, 64, 0.35);
+}
+
+#phaser-game-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    margin: 0 !important;
+    border-radius: 6px;
+}
+
+.game-hud {
+    position: absolute;
+    top: 14px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 12px;
+    z-index: 1000;
+    pointer-events: none;
+    flex-wrap: wrap;
+}
+
+.hud-item {
+    background: rgba(10, 0, 16, 0.88);
+    border: 1px solid var(--alice-red);
+    border-radius: 4px;
+    padding: 6px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 0 12px rgba(255, 0, 64, 0.25);
+    backdrop-filter: blur(4px);
+}
+
+.hud-label {
+    color: var(--alice-red);
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.hud-value {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+/* Footer */
+.alice-game-footer {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1400px;
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid var(--alice-border);
+}
+
+.alice-game-footer p {
+    color: var(--alice-text);
+    opacity: 0.7;
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+.footer-warning {
+    color: var(--alice-red);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Fade animation */
+.fade-in {
+    animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .alice-game-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .alice-game-title {
+        font-size: 2rem;
+    }
+
+    .alice-game-features {
+        grid-template-columns: 1fr;
+    }
+
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+}
