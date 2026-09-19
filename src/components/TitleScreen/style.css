@@ -1,0 +1,174 @@
+/* ── TitleScreen Styles ─────────────────────────────────────── */
+@media (max-width: 820px) {
+    .title-screen {
+        display: none !important;
+    }
+}
+
+.title-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: tsEnter 0.6s ease-out;
+}
+
+@keyframes tsEnter {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.title-screen-inner {
+    position: relative;
+    width: 100%;
+    max-width: 680px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.title-umbrella-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.04;
+    color: #cc0000;
+    pointer-events: none;
+}
+
+.title-umbrella-bg svg {
+    width: 80%;
+    height: 80%;
+}
+
+.title-screen-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.title-screen-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: #555;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+.title-screen-title {
+    font-family: 'Resident Evil', 'Times New Roman', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: #cc1100;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 30px rgba(200, 0, 0, 0.5);
+    margin: 0;
+}
+
+.title-screen-subtitle {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.6;
+    margin-top: 0.5rem;
+}
+
+.title-screen-rules {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 4px;
+    padding: 1.2rem 1.5rem;
+    text-align: left;
+}
+
+.title-rule {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: #888;
+    line-height: 1.4;
+}
+
+.title-rule-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+    width: 1.2rem;
+    text-align: center;
+}
+
+.title-screen-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.title-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 1.2rem 2.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.25s ease;
+    min-width: 180px;
+}
+
+.title-btn-label {
+    font-family: 'Resident Evil', 'Times New Roman', serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+}
+
+.title-btn-sub {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+}
+
+.title-btn--new {
+    background: #cc1100;
+    color: #fff;
+    border: 1px solid #ff2200;
+    box-shadow: 0 0 20px rgba(200, 17, 0, 0.4);
+}
+
+.title-btn--new:hover {
+    background: #e61500;
+    box-shadow: 0 0 35px rgba(230, 21, 0, 0.7);
+    transform: translateY(-2px);
+}
+
+.title-btn--continue {
+    background: rgba(255,255,255,0.05);
+    color: #ccc;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.title-btn--continue:hover:not(:disabled) {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border-color: rgba(255,255,255,0.35);
+    transform: translateY(-2px);
+}
+
+.title-btn--continue:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
