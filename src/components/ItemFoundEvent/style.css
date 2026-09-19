@@ -1,0 +1,233 @@
+/* ── ItemFoundEvent Styles ─────────────────────────────────── */
+.event-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 8500;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    animation: fadeIn 0.3s ease;
+}
+
+@media (max-width: 820px) {
+    .event-overlay {
+        display: none !important;
+    }
+}
+
+.event-card {
+    background: #0d0d0d;
+    border: 1px solid #333;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 480px;
+    padding: 2rem;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    text-align: center;
+}
+
+.event-header h2 {
+    font-family: 'Resident Evil', serif;
+    font-size: 1.8rem;
+    color: #cc1100;
+    margin: 0.3rem 0;
+    letter-spacing: 0.05em;
+}
+
+.event-caution-icon {
+    color: #ffaa00;
+    font-size: 1.4rem;
+}
+
+.event-item-display {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    margin: 0 auto;
+    background: radial-gradient(circle, #1a1a1a 0%, #080808 100%);
+    border: 1px solid #333;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.event-item-img {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 0 8px rgba(0,0,0,0.8));
+}
+
+.event-item-rarity-badge {
+    position: absolute;
+    bottom: 4px;
+    right: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    color: #777;
+    letter-spacing: 0.1em;
+}
+
+/* Category Glows */
+.glow-heal {
+    border-color: #00cc44;
+    box-shadow: 0 0 25px rgba(0, 204, 68, 0.25);
+}
+.glow-weapon {
+    border-color: #cc1100;
+    box-shadow: 0 0 25px rgba(204, 17, 0, 0.25);
+}
+.glow-grenade {
+    border-color: #ffaa00;
+    box-shadow: 0 0 25px rgba(255, 170, 0, 0.25);
+}
+
+.event-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.event-item-name {
+    font-family: 'Resident Evil', serif;
+    font-size: 1.3rem;
+    color: #eee;
+    margin: 0;
+}
+
+.event-item-desc {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: #888;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.event-item-stat {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: #ffaa00;
+    font-weight: bold;
+}
+
+.event-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.event-btn {
+    padding: 0.8rem 1.6rem;
+    border-radius: 4px;
+    font-family: 'Resident Evil', serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.event-btn--take {
+    background: #cc1100;
+    color: #fff;
+    border: 1px solid #ff2200;
+}
+
+.event-btn--take:hover {
+    background: #e61500;
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(230, 21, 0, 0.5);
+}
+
+.event-btn--leave {
+    background: rgba(255,255,255,0.06);
+    color: #aaa;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.event-btn--leave:hover {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+}
+
+.event-inventory-count {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #555;
+    margin: 0;
+}
+
+/* Discard list */
+.discard-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.discard-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid #222;
+    padding: 0.6rem 0.8rem;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.discard-item-img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.discard-item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.discard-item-name {
+    font-family: 'Resident Evil', serif;
+    font-size: 0.95rem;
+    color: #ddd;
+}
+
+.discard-item-desc {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: #777;
+}
+
+.discard-item-btn {
+    background: #440000;
+    color: #ff6666;
+    border: 1px solid #880000;
+    padding: 0.4rem 0.8rem;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.discard-item-btn:hover {
+    background: #880000;
+    color: #fff;
+}
