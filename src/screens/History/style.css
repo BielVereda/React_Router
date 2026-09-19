@@ -1,0 +1,422 @@
+/* ─── History Page (Umbrella Archive Database Theme) ─── */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+    --archive-green: #00ff88;
+    --archive-green-dim: #004422;
+    --archive-red: #ff3333;
+    --archive-bg: #050810;
+    --archive-panel: rgba(5, 16, 32, 0.9);
+    --archive-border: #006644;
+    --archive-text: #cceeff;
+}
+
+.history-page {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--archive-bg);
+    color: var(--archive-text);
+    font-family: 'Rajdhani', 'Share Tech Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 20px 60px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* Background effects */
+.history-page::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.history-page::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Header */
+.history-header {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 20px;
+    background: var(--archive-panel);
+    border: 1px solid var(--archive-border);
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+}
+
+.history-header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.history-umbrella-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px var(--archive-green));
+}
+
+.history-title-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.history-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--archive-green);
+    text-shadow: 0 0 20px var(--archive-green);
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.history-subtitle {
+    font-size: 1rem;
+    color: var(--archive-text);
+    opacity: 0.8;
+    margin: 5px 0 0 0;
+    letter-spacing: 1px;
+}
+
+.history-back-btn {
+    padding: 12px 24px;
+    background: transparent;
+    border: 2px solid var(--archive-green);
+    color: var(--archive-green);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.history-back-btn:hover {
+    background: var(--archive-green);
+    color: var(--archive-bg);
+    box-shadow: 0 0 15px var(--archive-green);
+}
+
+/* Tab Navigation */
+.history-tabs {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.history-tab {
+    flex: 1;
+    padding: 15px 20px;
+    background: var(--archive-panel);
+    border: 2px solid var(--archive-border);
+    color: var(--archive-text);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.history-tab:hover {
+    background: rgba(0, 255, 136, 0.1);
+    border-color: var(--archive-green);
+}
+
+.history-tab.active {
+    background: var(--archive-green);
+    color: var(--archive-bg);
+    border-color: var(--archive-green);
+    box-shadow: 0 0 15px var(--archive-green);
+}
+
+/* Content */
+.history-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1400px;
+}
+
+/* Timeline Section */
+.timeline-section {
+    background: var(--archive-panel);
+    border: 1px solid var(--archive-border);
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+.timeline-header {
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--archive-border);
+    padding-bottom: 20px;
+}
+
+.timeline-header h2 {
+    font-size: 2rem;
+    color: var(--archive-green);
+    margin: 0 0 10px 0;
+    text-shadow: 0 0 10px var(--archive-green);
+}
+
+.timeline-header p {
+    color: var(--archive-text);
+    opacity: 0.8;
+    margin: 0;
+}
+
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(0, 255, 136, 0.05);
+    border-left: 4px solid var(--archive-border);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover {
+    background: rgba(0, 255, 136, 0.1);
+    border-left-color: var(--archive-green);
+    transform: translateX(5px);
+}
+
+.timeline-item.major {
+    border-left-color: var(--archive-red);
+    background: rgba(255, 51, 51, 0.1);
+}
+
+.timeline-item.major:hover {
+    background: rgba(255, 51, 51, 0.15);
+    border-left-color: var(--archive-red);
+}
+
+.timeline-year {
+    min-width: 100px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--archive-green);
+    text-shadow: 0 0 10px var(--archive-green);
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.timeline-content {
+    flex: 1;
+}
+
+.timeline-title {
+    font-size: 1.3rem;
+    color: var(--archive-text);
+    margin: 0 0 10px 0;
+    font-weight: 600;
+}
+
+.timeline-description {
+    color: var(--archive-text);
+    opacity: 0.9;
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+}
+
+.timeline-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--archive-green);
+    color: var(--archive-bg);
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.timeline-item.major .timeline-badge {
+    background: var(--archive-red);
+}
+
+/* Movies Section */
+.movies-section {
+    background: var(--archive-panel);
+    border: 1px solid var(--archive-border);
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+.movies-header {
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--archive-border);
+    padding-bottom: 20px;
+}
+
+.movies-header h2 {
+    font-size: 2rem;
+    color: var(--archive-red);
+    margin: 0 0 10px 0;
+    text-shadow: 0 0 10px var(--archive-red);
+}
+
+.movies-warning {
+    color: var(--archive-red);
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.movies-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.movie-card {
+    background: rgba(255, 51, 51, 0.05);
+    border: 1px solid var(--archive-red);
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.movie-card:hover {
+    background: rgba(255, 51, 51, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 51, 51, 0.2);
+}
+
+.movie-year {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--archive-red);
+    margin-bottom: 10px;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.movie-title {
+    font-size: 1.2rem;
+    color: var(--archive-text);
+    margin: 0 0 10px 0;
+    font-weight: 600;
+}
+
+.movie-description {
+    color: var(--archive-text);
+    opacity: 0.9;
+    margin: 0 0 15px 0;
+    line-height: 1.5;
+}
+
+.movie-characters {
+    margin-bottom: 15px;
+}
+
+.movie-characters-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--archive-text);
+    opacity: 0.7;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.movie-character-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(255, 51, 51, 0.2);
+    border: 1px solid var(--archive-red);
+    color: var(--archive-text);
+    font-size: 0.85rem;
+    margin: 0 5px 5px 0;
+    border-radius: 4px;
+}
+
+.movie-canon-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--archive-red);
+    color: var(--archive-bg);
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Fade animation */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .history-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .history-title {
+        font-size: 1.8rem;
+    }
+
+    .history-tabs {
+        flex-direction: column;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+    }
+
+    .movies-container {
+        grid-template-columns: 1fr;
+    }
+}
