@@ -1,0 +1,563 @@
+/* ─── About Page: Umbrella Corporate + Red Queen ─── */
+
+.about-container {
+    background-color: #f4f6f8;
+    color: #222;
+    min-height: 100vh;
+    font-family: 'Arial', Helvetica, sans-serif;
+    transition: background-color 0.6s ease, color 0.6s ease;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ── Corporate header ── */
+.about-header {
+    background: linear-gradient(135deg, #003a8c, #0055c4);
+    color: white;
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 60, 140, 0.4);
+    transition: background 0.6s ease, box-shadow 0.6s ease;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ── Page body layout ── */
+.about-body {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 30px 80px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.about-header-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.about-logo {
+    width: 70px;
+    filter: brightness(0) invert(1);
+    transition: filter 0.6s ease;
+}
+
+.about-titles {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-title {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    margin: 0;
+    letter-spacing: 2px;
+    transition: color 0.4s;
+}
+
+.about-tagline {
+    font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+    margin: 5px 0 0;
+    opacity: 0.8;
+    transition: color 0.4s;
+}
+
+.about-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* Suspicious "Restricted Access" button */
+.restricted-btn {
+    background: rgba(255, 200, 0, 0.15);
+    color: #ffd700;
+    border: 1px solid #ffd700;
+    padding: 9px 18px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    animation: subtlePulse 3s infinite;
+}
+
+.restricted-btn:hover {
+    background: rgba(255, 200, 0, 0.35);
+    box-shadow: 0 0 15px rgba(255, 200, 0, 0.5);
+    transform: scale(1.05);
+}
+
+/* Antivirus button */
+.antivirus-btn {
+    background: rgba(0, 200, 80, 0.2);
+    color: #00ff66;
+    border: 1px solid #00cc55;
+    padding: 9px 18px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    animation: antivirusPulse 1s infinite alternate;
+}
+
+.antivirus-btn:hover {
+    background: rgba(0, 200, 80, 0.4);
+    box-shadow: 0 0 20px rgba(0, 255, 100, 0.6);
+    transform: scale(1.05);
+}
+
+/* Back buttons */
+.about-back-btn {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    padding: 9px 18px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.2s;
+}
+
+.about-back-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+/* ── Main content ── */
+.about-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    min-width: 0;
+}
+
+.about-section {
+    background: #ffffff;
+    border-left: 5px solid #0055c4;
+    padding: 30px;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.about-section h2 {
+    font-family: 'Courier New', monospace;
+    color: #003a8c;
+    margin: 0 0 18px;
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    letter-spacing: 1px;
+    transition: color 0.5s ease;
+}
+
+.about-section p {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: #444;
+    margin: 0;
+    transition: color 0.5s ease;
+}
+
+.about-section-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.about-section-content.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    align-items: start;
+}
+
+/* Classified box */
+.about-classified-box {
+    background: #f7f9fc;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    transition: background 0.5s, border-color 0.5s;
+}
+
+.corporate-quote {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #003a8c;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.classified-stamp {
+    font-family: 'Courier New', monospace;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #cc0000;
+    border: 3px solid #cc0000;
+    display: inline-block;
+    padding: 2px 10px;
+    margin-bottom: 12px;
+    letter-spacing: 5px;
+    transform: rotate(-2deg);
+}
+
+/* Tech stack grid */
+.about-tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 6px;
+}
+
+.about-tech-card {
+    background: #f0f4ff;
+    border: 1px solid #ccd6f6;
+    border-radius: 4px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.5s, border-color 0.5s;
+}
+
+.about-tech-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    width: 32px;
+    text-align: center;
+    color: #003a8c;
+    transition: color 0.5s;
+}
+
+.about-tech-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.about-tech-name {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #003a8c;
+    transition: color 0.5s;
+}
+
+.about-tech-desc {
+    font-size: 0.75rem;
+    color: #666;
+    transition: color 0.5s;
+}
+
+/* Red Queen overrides for tech cards */
+.about-container.red-queen-mode .about-tech-card {
+    background: #1a0000;
+    border-color: #330000;
+}
+.about-container.red-queen-mode .about-tech-icon,
+.about-container.red-queen-mode .about-tech-name { color: #ff4444; }
+.about-container.red-queen-mode .about-tech-desc { color: #661111; }
+
+/* Footer bar */
+.about-footer-bar {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+    font-size: 0.8rem;
+    color: #888;
+    transition: color 0.5s, border-color 0.5s;
+}
+
+.secret-project-link {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255, 0, 64, 0.1);
+    border: 2px solid #ff0040;
+    border-radius: 8px;
+    text-align: center;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 10px rgba(255, 0, 64, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(255, 0, 64, 0.6); }
+}
+
+.secret-label {
+    color: #ff0040;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.secret-link {
+    display: inline-block;
+    padding: 15px 30px;
+    background: #ff0040;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.secret-link:hover {
+    background: #ff2060;
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 0, 64, 0.5);
+}
+
+/* ── Red Queen Portrait Sidebar ── */
+.rq-sidebar {
+    flex-shrink: 0;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: sticky;
+    top: 110px;
+}
+
+.rq-portrait-frame {
+    border: 2px solid #cc0000;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.5), inset 0 0 10px rgba(0,0,0,0.8);
+    background: #0a0000;
+    display: flex;
+    flex-direction: column;
+}
+
+.rq-portrait {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    filter: saturate(0.8) contrast(1.1);
+    transition: opacity 0.6s ease;
+    animation: portraitFadeIn 0.6s ease forwards;
+}
+
+.rq-portrait-bad {
+    filter: saturate(1.4) contrast(1.3) hue-rotate(-10deg);
+    animation: portraitFadeIn 0.3s ease forwards, badShake 0.4s ease;
+}
+
+@keyframes portraitFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes badShake {
+    0%   { transform: translateX(0); }
+    20%  { transform: translateX(-4px); }
+    40%  { transform: translateX(4px); }
+    60%  { transform: translateX(-3px); }
+    80%  { transform: translateX(3px); }
+    100% { transform: translateX(0); }
+}
+
+.rq-portrait-label {
+    background: #1a0000;
+    color: #cc0000;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 6px;
+    border-top: 1px solid #440000;
+    animation: textFlicker 2s infinite;
+}
+
+.rq-status-lines {
+    background: #0e0000;
+    border: 1px solid #330000;
+    border-radius: 2px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.rq-status-lines p {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: #664444;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.rq-hi  { color: #ff4444; font-weight: bold; }
+
+/* ── RED QUEEN MODE ── */
+.about-container.red-queen-mode {
+    background-color: #050000;
+    color: #ff3333;
+}
+
+.about-container.red-queen-mode .about-header {
+    background: linear-gradient(135deg, #1a0000, #3d0000);
+    box-shadow: 0 4px 30px rgba(200, 0, 0, 0.7);
+}
+
+.about-container.red-queen-mode .about-logo {
+    filter: drop-shadow(0 0 12px #ff0000) brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(-30deg);
+    animation: logoJitter 0.15s infinite;
+}
+
+.about-container.red-queen-mode .about-title {
+    color: #ff2222;
+    font-family: 'Resident Evil', sans-serif;
+    text-shadow: 0 0 20px #ff0000, 2px 2px 0 #000;
+    animation: textFlicker 0.8s infinite;
+}
+
+.about-container.red-queen-mode .about-tagline {
+    color: #aa0000;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+.about-container.red-queen-mode .about-back-btn {
+    background: rgba(180, 0, 0, 0.3);
+    border-color: #ff0000;
+    color: #ff4444;
+}
+
+.about-container.red-queen-mode .about-section {
+    background: #0e0000;
+    border-left-color: #cc0000;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.15), inset 0 0 15px rgba(200, 0, 0, 0.1);
+}
+
+.about-container.red-queen-mode .about-section h2 {
+    color: #ff2222;
+    font-family: 'Resident Evil', sans-serif;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px #ff0000;
+}
+
+.about-container.red-queen-mode .about-section p {
+    color: #cc4444;
+    font-family: 'Courier New', monospace;
+    line-height: 2;
+}
+
+.about-container.red-queen-mode .about-classified-box {
+    background: #1a0000;
+    border-color: #cc0000;
+}
+
+.about-container.red-queen-mode .about-footer-bar {
+    color: #880000;
+    border-color: #440000;
+    font-family: 'Courier New', monospace;
+    animation: textFlicker 2s infinite;
+}
+
+/* Red Queen overlays */
+.rq-scanlines-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(200, 0, 0, 0.04) 2px,
+        rgba(200, 0, 0, 0.04) 4px
+    );
+}
+
+.rq-vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9997;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(150, 0, 0, 0.5) 100%);
+    animation: vignetteBreath 3s infinite alternate;
+}
+
+/* ── Keyframes ── */
+@keyframes subtlePulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.2); }
+    50%       { box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+}
+
+@keyframes antivirusPulse {
+    from { box-shadow: 0 0 5px rgba(0, 255, 80, 0.3); }
+    to   { box-shadow: 0 0 20px rgba(0, 255, 80, 0.7); }
+}
+
+@keyframes logoJitter {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(-1px, 1px); }
+    50%  { transform: translate(2px, -1px); }
+    75%  { transform: translate(-1px, -2px); }
+    100% { transform: translate(1px, 1px); }
+}
+
+@keyframes textFlicker {
+    0%, 100% { opacity: 1; }
+    45%      { opacity: 1; }
+    50%      { opacity: 0.7; }
+    55%      { opacity: 1; }
+    80%      { opacity: 1; }
+    82%      { opacity: 0.5; }
+    84%      { opacity: 1; }
+}
+
+@keyframes vignetteBreath {
+    from { opacity: 0.6; }
+    to   { opacity: 1; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .rq-sidebar {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        text-align: center;
+    }
+    .about-header-content {
+        flex-direction: column;
+    }
+    .about-body {
+        padding: 20px 15px 40px;
+    }
+    .about-section-content.two-col {
+        grid-template-columns: 1fr;
+    }
+}
