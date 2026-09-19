@@ -1,40 +1,40 @@
-import './styles/App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from './pages/Home'
-import About from './pages/About'
-import Characters from './pages/Characters'
-import Movies from './pages/Movies'
-import Games from './pages/Games'
-import Models from './pages/Models'
-import NotFound from './pages/NotFound'
-import Contact from './pages/Contact'
-import Downloads from './pages/Downloads'
-import './styles/global.css'
-import { useEffect } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './screens/Home';
+import About from './screens/About';
+import Characters from './screens/Characters';
+import Movies from './screens/Movies';
+import Games from './screens/Games';
+import Models from './screens/Models';
+import NotFound from './screens/NotFound';
+import Contact from './screens/Contact';
+import Downloads from './screens/Downloads';
+import AliceGame from './screens/AliceGame';
+import History from './screens/History';
+import { useEffect } from 'react';
 
 // Game System
-import { GameProvider, useGame } from './context/GameContext'
-import TitleScreen from './components/game/TitleScreen'
-import EventGateway from './components/game/EventGateway'
-import YouDiedScreen from './components/game/YouDiedScreen'
-import { usePageEvent } from './hooks/usePageEvent'
+import { GameProvider, useGame } from './context/GameContext';
+import TitleScreen from './components/TitleScreen';
+import EventGateway from './components/EventGateway';
+import YouDiedScreen from './components/YouDiedScreen';
+import { usePageEvent } from './hooks/usePageEvent';
 
 /** Inner shell — needs router context for usePageEvent */
 function AppShell() {
-  const { state, hasSave } = useGame()
+  const { state, hasSave } = useGame();
 
   // Watch route changes and fire game events (desktop only, non-home)
-  usePageEvent()
+  usePageEvent();
 
   // Preload audio
   useEffect(() => {
-    const ogg = new Audio('/audio/Not_Found.ogg')
-    const mp3 = new Audio('/audio/Not_Found.mp3')
-    ogg.preload = 'auto'
-    mp3.preload = 'auto'
-    ogg.load()
-    mp3.load()
-  }, [])
+    const ogg = new Audio('/audio/Not_Found.ogg');
+    const mp3 = new Audio('/audio/Not_Found.mp3');
+    ogg.preload = 'auto';
+    mp3.preload = 'auto';
+    ogg.load();
+    mp3.load();
+  }, []);
 
   return (
     <>
@@ -54,12 +54,14 @@ function AppShell() {
         <Route path='/movies' element={<Movies />} />
         <Route path='/games' element={<Games />} />
         <Route path='/models3d' element={<Models />} />
+        <Route path='/history' element={<History />} />
+        <Route path='/project-alice' element={<AliceGame />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/downloads' element={<Downloads />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>
-  )
+  );
 }
 
 function App() {
@@ -69,7 +71,7 @@ function App() {
         <AppShell />
       </BrowserRouter>
     </GameProvider>
-  )
+  );
 }
 
-export default App
+export default App;
