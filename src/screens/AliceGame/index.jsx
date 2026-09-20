@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import Phaser from 'phaser';
 import './style.css';
 import umbrellaLogo from '../../assets/images/brand/umbrella-logo.png';
@@ -87,21 +86,6 @@ export default function AliceGame() {
                         <h1 className="alice-game-title">PROJECT: ALICE</h1>
                         <p className="alice-game-subtitle">CLASSIFIED — UMBRELLA TERMINAL</p>
                     </div>
-                </div>
-                <div className="alice-game-header-right">
-                    {gameStarted && (
-                        <button 
-                            className="alice-game-back-btn" 
-                            onClick={() => {
-                                setGameStarted(false);
-                                setShowHud(false);
-                            }}
-                            style={{ cursor: 'pointer', background: 'rgba(255, 0, 64, 0.15)' }}
-                        >
-                            ◀ MENU INICIAL
-                        </button>
-                    )}
-                    <Link to="/" className="alice-game-back-btn">◀ ABORT MISSION</Link>
                 </div>
             </header>
 
