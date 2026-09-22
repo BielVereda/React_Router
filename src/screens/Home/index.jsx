@@ -53,6 +53,37 @@ const GRID_ROWS = 4;
 const HEALTH_SEGMENTS = 12;
 const MOBILE_SELECT_DELAY = 650; // ms — must match the CSS animation duration
 
+// ── Local Storage for Home Inventory Layout ──────────────────
+const HOME_LAYOUT_KEY = 're_archive_home_layout';
+
+function loadHomeLayout() {
+    try {
+        const raw = localStorage.getItem(HOME_LAYOUT_KEY);
+        if (!raw) return null;
+        return JSON.parse(raw);
+    } catch {
+        return null;
+    }
+}
+
+function saveHomeLayout(items) {
+    try {
+        // Save positions for ALL items (links, knife, spray, collected items)
+        const layout = items.map(item => ({
+            id: item.id,
+            position: item.position,
+            type: item.type
+        }));
+        localStorage.setItem(HOME_LAYOUT_KEY, JSON.stringify(layout));
+    } catch { /* ignore */ }
+}
+
+function clearHomeLayout() {
+    try {
+        localStorage.removeItem(HOME_LAYOUT_KEY);
+    } catch { /* ignore */ }
+}
+
 export default function Home() {
 
     /* ── Warning screen ─────────────────────────────────────── */
@@ -104,18 +135,76 @@ export default function Home() {
         return { col: 1, row: 4 }; // fallback
     };
 
-    // Synchronize local items positions with global state (inventory, pages, spray, knife)
+    // Load saved layout ONCE on mount
+    useEffect(() => {
+        const savedLayout = loadHomeLayout();
+
+        setItems(() => {
+            const newItemsList = [];
+
+            // 1. BASE_ITEMS - use saved position or default disorganized
+            BASE_ITEMS.forEach(base => {
+                const saved = savedLayout ? savedLayout.find(s => s.id === base.id) : null;
+                newItemsList.push({ ...base, position: saved ? saved.position : base.position });
+            });
+
+            // 2. Combat Knife - use saved position or default
+            const knifeItem = {
+                id: 'knife',
+                type: 'weapon',
+                label: KNIFE_ITEM.label,
+                icon: KNIFE_ITEM.image,
+                description: KNIFE_ITEM.description,
+                damage: KNIFE_ITEM.damage,
+                fixed: true,
+                size: '1x1',
+                position: { col: 1, row: 4 }
+            };
+            const savedKnife = savedLayout ? savedLayout.find(s => s.id === 'knife') : null;
+            newItemsList.push({ ...knifeItem, position: savedKnife ? savedKnife.position : knifeItem.position });
+
+            // 3. F.AID SPRAY - use saved position or default
+            if (hasSpray) {
+                const sprayItem = {
+                    id: 'spray',
+                    type: 'action',
+                    action: 'spray',
+                    label: 'F.AID SPRAY',
+                    icon: sprayImg,
+                    size: '1x1',
+                    position: { col: 6, row: 4 }
+                };
+                const savedSpray = savedLayout ? savedLayout.find(s => s.id === 'spray') : null;
+                newItemsList.push({ ...sprayItem, position: savedSpray ? savedSpray.position : sprayItem.position });
+            }
+
+            // 4. Collected Items - use saved position or find free slot
+            state.inventory.forEach(invItem => {
+                const saved = savedLayout ? savedLayout.find(s => s.id === invItem.id) : null;
+                if (saved) {
+                    newItemsList.push({ ...invItem, position: saved.position, size: '1x1', icon: invItem.image });
+                } else {
+                    const freePos = findFreeSlot(newItemsList);
+                    newItemsList.push({ ...invItem, position: freePos, size: '1x1', icon: invItem.image });
+                }
+            });
+
+            return newItemsList;
+        });
+    }, []); // Empty deps - runs only on mount
+
+    // Update items when inventory changes, PRESERVING positions
     useEffect(() => {
         setItems(prev => {
             const newItemsList = [];
 
-            // 1. Keep/add the BASE_ITEMS (the page links)
+            // Keep BASE_ITEMS with current positions
             BASE_ITEMS.forEach(base => {
                 const existing = prev.find(p => p.id === base.id);
                 newItemsList.push(existing ? { ...base, position: existing.position } : base);
             });
 
-            // 2. Combat Knife (fixed slot, starts at 1,4)
+            // Keep knife with current position
             const knifeItem = {
                 id: 'knife',
                 type: 'weapon',
@@ -130,7 +219,7 @@ export default function Home() {
             const existingKnife = prev.find(p => p.id === 'knife');
             newItemsList.push(existingKnife ? { ...knifeItem, position: existingKnife.position } : knifeItem);
 
-            // 3. F.AID SPRAY
+            // Keep/remove spray with current position
             if (hasSpray) {
                 const sprayItem = {
                     id: 'spray',
@@ -145,7 +234,7 @@ export default function Home() {
                 newItemsList.push(existingSpray ? { ...sprayItem, position: existingSpray.position } : sprayItem);
             }
 
-            // 4. Collected Items
+            // Update collected items, PRESERVING their positions
             state.inventory.forEach(invItem => {
                 const existing = prev.find(p => p.id === invItem.id);
                 if (existing) {
@@ -159,6 +248,13 @@ export default function Home() {
             return newItemsList;
         });
     }, [state.inventory, hasSpray]);
+
+    // Save layout whenever item positions change (only if not empty)
+    useEffect(() => {
+        if (items.length > 0) {
+            saveHomeLayout(items);
+        }
+    }, [items]);
 
     useEffect(() => {
         if (!detailItem) return;
