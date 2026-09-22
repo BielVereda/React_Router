@@ -2,11 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import Phaser from 'phaser';
 import './style.css';
 import umbrellaLogo from '../../assets/images/brand/umbrella-logo.png';
-import { BootScene, TitleScene, MainScene, WeskerScene, GameOverScene, VictoryScene } from './PhaserGame';
+import { BootScene, TitleScene, CutsceneScene, MainScene, WeskerScene, GameOverScene, VictoryScene } from './PhaserGame';
 
 export default function AliceGame() {
     const [gameStarted, setGameStarted] = useState(false);
     const [showHud, setShowHud] = useState(false);
+    const [isFullscreen, setIsFullscreen] = useState(false);
     const canvasRef = useRef(null);
     const gameRef = useRef(null);
     
@@ -29,6 +30,35 @@ export default function AliceGame() {
         setGameStarted(true);
     };
 
+    const toggleFullscreen = () => {
+        const container = document.getElementById('phaser-game-container');
+        if (!document.fullscreenElement) {
+            container.requestFullscreen().then(() => {
+                setIsFullscreen(true);
+            }).catch(err => {
+                console.error('Erro ao entrar em tela cheia:', err);
+            });
+        } else {
+            document.exitFullscreen().then(() => {
+                setIsFullscreen(false);
+            }).catch(err => {
+                console.error('Erro ao sair de tela cheia:', err);
+            });
+        }
+    };
+
+    // Prevenir rolagem com ESPAÇO quando o jogo está ativo
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.code === 'Space' && gameStarted) {
+                e.preventDefault();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [gameStarted]);
+
     useEffect(() => {
         if (gameStarted && canvasRef.current && !gameRef.current) {
             // Configurar e iniciar o jogo Phaser com resolução fixa de 800x600
@@ -45,7 +75,7 @@ export default function AliceGame() {
                         debug: false
                     }
                 },
-                scene: [BootScene, TitleScene, MainScene, WeskerScene, GameOverScene, VictoryScene]
+                scene: [BootScene, TitleScene, CutsceneScene, MainScene, WeskerScene, GameOverScene, VictoryScene]
             };
             
             gameRef.current = new Phaser.Game(config);
@@ -186,7 +216,16 @@ export default function AliceGame() {
             ) : (
                 <main className="alice-game-viewport">
                     <div className="game-container">
-                        <div 
+                        {/* Botão de tela cheia */}
+                        <button
+                            className="fullscreen-btn"
+                            onClick={toggleFullscreen}
+                            title={isFullscreen ? 'Sair da tela cheia' : 'Tela cheia'}
+                        >
+                            {isFullscreen ? '⛶' : '⛶'}
+                        </button>
+
+                        <div
                             id="phaser-game-container"
                             ref={canvasRef}
                         >

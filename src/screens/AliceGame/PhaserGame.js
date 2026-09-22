@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 // Resident Evil: Alice Chronicles - Phaser 3 Engine
-// Controle de Alice com WASD e disparo exclusivo com a tecla ESPAÇO
+// Controle de Alice com WASD e disparo com ENTER ou ESPAÇO
 
 // ─── BootScene ────────────────────────────────────────────────────────────────
 class BootScene extends Phaser.Scene {
@@ -159,6 +159,122 @@ class BootScene extends Phaser.Scene {
     }
 }
 
+// ─── CutsceneScene ─────────────────────────────────────────────────────────────
+class CutsceneScene extends Phaser.Scene {
+    constructor() {
+        super('CutsceneScene');
+    }
+
+    init(data) {
+        this.dialogues = data.dialogues || [];
+        this.nextScene = data.nextScene || 'MainScene';
+        this.currentDialogueIndex = 0;
+    }
+
+    create() {
+        // Fundo escuro
+        this.add.rectangle(400, 300, 800, 600, 0x080008);
+
+        // Barras cinematográficas
+        this.add.rectangle(400, 30, 800, 60, 0x000000);
+        this.add.rectangle(400, 570, 800, 60, 0x000000);
+
+        // Container do diálogo
+        this.dialogueBox = this.add.graphics();
+        this.dialogueBox.fillStyle(0x1a1a1a, 0.95);
+        this.dialogueBox.lineStyle(2, 0xff0033, 1);
+        this.dialogueBox.fillRoundedRect(50, 420, 700, 120, 8);
+        this.dialogueBox.strokeRoundedRect(50, 420, 700, 120, 8);
+
+        // Nome do personagem
+        this.speakerName = this.add.text(70, 400, '', {
+            fontSize: '18px',
+            color: '#ff0033',
+            fontStyle: 'bold',
+            stroke: '#000000',
+            strokeThickness: 3
+        });
+
+        // Texto do diálogo
+        this.dialogueText = this.add.text(70, 450, '', {
+            fontSize: '16px',
+            color: '#ffffff',
+            wordWrap: { width: 660 }
+        });
+
+        // Indicador de continuação
+        this.continueIndicator = this.add.text(400, 525, '▼ Clique, ENTER ou ESPAÇO para continuar ▼', {
+            fontSize: '14px',
+            color: '#00ff66',
+            fontStyle: 'bold'
+        }).setOrigin(0.5);
+
+        this.tweens.add({
+            targets: this.continueIndicator,
+            alpha: 0.3,
+            duration: 500,
+            yoyo: true,
+            repeat: -1
+        });
+
+        // Exibir primeiro diálogo
+        this.showCurrentDialogue();
+
+        // Input para avançar
+        this.input.keyboard.on('keydown-SPACE', this.advanceDialogue, this);
+        this.input.keyboard.on('keydown-ENTER', this.advanceDialogue, this);
+        this.input.on('pointerdown', this.advanceDialogue, this);
+    }
+
+    showCurrentDialogue() {
+        if (this.currentDialogueIndex >= this.dialogues.length) {
+            this.endCutscene();
+            return;
+        }
+
+        const dialogue = this.dialogues[this.currentDialogueIndex];
+        this.speakerName.setText(dialogue.speaker || '???');
+
+        // Efeito de digitação
+        this.dialogueText.setText('');
+        let charIndex = 0;
+        const fullText = dialogue.text;
+
+        this.typingTimer = this.time.addEvent({
+            delay: 30,
+            callback: () => {
+                if (charIndex < fullText.length) {
+                    this.dialogueText.setText(fullText.substring(0, charIndex + 1));
+                    charIndex++;
+                } else {
+                    this.typingTimer.remove();
+                }
+            },
+            repeat: fullText.length
+        });
+    }
+
+    advanceDialogue() {
+        // Se ainda está digitando, mostrar texto completo imediatamente
+        if (this.typingTimer && this.typingTimer.getRemaining() > 0) {
+            this.typingTimer.remove();
+            const dialogue = this.dialogues[this.currentDialogueIndex];
+            this.dialogueText.setText(dialogue.text);
+            return;
+        }
+
+        this.currentDialogueIndex++;
+        this.showCurrentDialogue();
+    }
+
+    endCutscene() {
+        this.input.keyboard.off('keydown-SPACE', this.advanceDialogue, this);
+        this.input.keyboard.off('keydown-ENTER', this.advanceDialogue, this);
+        this.input.off('pointerdown', this.advanceDialogue, this);
+        this.scene.start(this.nextScene);
+    }
+}
+
 // ─── TitleScene ───────────────────────────────────────────────────────────────
 class TitleScene extends Phaser.Scene {
     constructor() {
@@ -216,7 +332,7 @@ class TitleScene extends Phaser.Scene {
             letterSpacing: 2
         }).setOrigin(0.5);
 
-        this.add.text(400, 375, 'WASD ou SETAS = Mover Alice   |   ESPAÇO = Atirar', {
+        this.add.text(400, 375, 'WASD ou SETAS = Mover Alice   |   ENTER = Atirar', {
             fontSize: '15px',
             color: '#ffffff',
             stroke: '#000000',
@@ -224,7 +340,7 @@ class TitleScene extends Phaser.Scene {
         }).setOrigin(0.5);
 
         // Prompt de início
-        const startPrompt = this.add.text(400, 450, 'Pressione ESPAÇO para Jogar', {
+        const startPrompt = this.add.text(400, 450, 'Pressione ENTER para Jogar', {
             fontSize: '22px',
             color: '#00ff66',
             fontStyle: 'bold',
@@ -240,13 +356,23 @@ class TitleScene extends Phaser.Scene {
             repeat: -1
         });
 
-        // Início direto do jogo
+        // Início com cutscene de introdução
         const launchGame = () => {
-            this.scene.start('MainScene');
+            const introDialogues = [
+                { speaker: 'ALICE', text: 'Pensei que tinha acabado... que Wesker tinha morrido para sempre.' },
+                { speaker: 'ALICE', text: 'Mas o T-Vírus... ele nunca realmente morre. Ele só espera.' },
+                { speaker: 'RÁDIO', text: 'Alice, recebemos sinais da Umbrella na Antártida. Eles estão reconstruindo tudo.' },
+                { speaker: 'ALICE', text: 'Então é verdade. Wesker sobreviveu.' },
+                { speaker: 'ALICE', text: 'Desta vez, vou acabar com a Umbrella de uma vez por todas.' }
+            ];
+            this.scene.start('CutsceneScene', {
+                dialogues: introDialogues,
+                nextScene: 'MainScene'
+            });
         };
 
-        this.input.keyboard.once('keydown-SPACE', launchGame);
         this.input.keyboard.once('keydown-ENTER', launchGame);
+        this.input.keyboard.once('keydown-SPACE', launchGame);
         this.input.once('pointerdown', launchGame);
     }
 
@@ -344,6 +470,7 @@ class MainScene extends Phaser.Scene {
             d: Phaser.Input.Keyboard.KeyCodes.D
         });
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
         // Colisões com inimigos, tiros e com as paredes
         this.physics.add.collider(this.player, this.walls);
@@ -354,7 +481,7 @@ class MainScene extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.enemies, this.playerHitEnemy, null, this);
         this.physics.add.overlap(this.player, this.powerUps, this.collectPowerUp, null, this);
 
-        this.showMissionBanner('MISSÃO 01: ELIMINE OS INFECTADOS NO LABORATÓRIO\n[ ESPAÇO: Atirar | WASD: Mover ]');
+        this.showMissionBanner('MISSÃO 01: ELIMINE OS INFECTADOS NO LABORATÓRIO\n[ ENTER: Atirar | WASD: Mover ]');
         this.syncHud();
     }
 
@@ -494,8 +621,8 @@ class MainScene extends Phaser.Scene {
         if (this.player.y < boundMinY) { this.player.y = boundMinY; this.player.setVelocityY(0); }
         if (this.player.y > boundMaxY) { this.player.y = boundMaxY; this.player.setVelocityY(0); }
 
-        // TIRO COM ESPAÇO
-        if (this.spaceKey.isDown) {
+        // TIRO COM ENTER OU ESPAÇO
+        if (this.spaceKey.isDown || this.enterKey.isDown) {
             if (this.time.now - this.lastShotTime > 220) {
                 this.shoot();
             }
@@ -617,7 +744,17 @@ class MainScene extends Phaser.Scene {
 
             this.time.delayedCall(2200, () => {
                 alertText.destroy();
-                this.scene.start('WeskerScene');
+                const weskerDialogues = [
+                    { speaker: 'WESKER', text: 'Alice... eu sabia que você viria.' },
+                    { speaker: 'WESKER', text: 'A Umbrella evoluiu. E eu junto com ela.' },
+                    { speaker: 'ALICE', text: 'Você não deveria ter sobrevivido, Wesker.' },
+                    { speaker: 'WESKER', text: 'A morte é apenas uma fase da evolução. E agora... você vai descobrir o que vem depois.' },
+                    { speaker: 'ALICE', text: 'Vamos acabar com isso de uma vez por todas.' }
+                ];
+                this.scene.start('CutsceneScene', {
+                    dialogues: weskerDialogues,
+                    nextScene: 'WeskerScene'
+                });
             });
         } else {
             this.showMissionBanner(`NÍVEL ${this.level} — HUNTERS DETECTADOS NO SETOR!`);
@@ -659,8 +796,8 @@ class WeskerScene extends Phaser.Scene {
         this.wesker = this.physics.add.sprite(640, 300, 'wesker');
         this.wesker.setCollideWorldBounds(true);
         this.wesker.setDepth(10);
-        this.wesker.setData('health', 200);
-        this.wesker.setData('maxHealth', 200);
+        this.wesker.setData('health', 300);
+        this.wesker.setData('maxHealth', 300);
         this.wesker.setData('phase', 1);
 
         this.playerBullets = this.physics.add.group();
@@ -674,6 +811,7 @@ class WeskerScene extends Phaser.Scene {
             d: Phaser.Input.Keyboard.KeyCodes.D
         });
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
         this.weskerBarBg = this.add.graphics().setDepth(200);
         this.weskerBarFill = this.add.graphics().setDepth(201);
@@ -698,7 +836,7 @@ class WeskerScene extends Phaser.Scene {
             loop: true
         });
 
-        const tip = this.add.text(400, 575, '[ WASD: Desviar   |   ESPAÇO: Atirar em Wesker ]', {
+        const tip = this.add.text(400, 575, '[ WASD: Desviar   |   ENTER: Atirar em Wesker ]', {
             fontSize: '13px',
             color: '#ffffff',
             stroke: '#000000',
@@ -763,7 +901,7 @@ class WeskerScene extends Phaser.Scene {
         if (this.player.y < wMinY) { this.player.y = wMinY; this.player.setVelocityY(0); }
         if (this.player.y > wMaxY) { this.player.y = wMaxY; this.player.setVelocityY(0); }
 
-        if (this.spaceKey.isDown) {
+        if (this.spaceKey.isDown || this.enterKey.isDown) {
             if (this.time.now - this.lastShotTime > 220) {
                 this.shoot();
             }
@@ -800,7 +938,7 @@ class WeskerScene extends Phaser.Scene {
         if (!bullet.active || !wesker.active) return;
         bullet.destroy();
 
-        const hp = wesker.getData('health') - 6;
+        const hp = wesker.getData('health') - 10;
         wesker.setData('health', hp);
         wesker.setTint(0xff0044);
         this.time.delayedCall(70, () => { if (wesker.active) wesker.clearTint(); });
@@ -810,8 +948,8 @@ class WeskerScene extends Phaser.Scene {
         if (hp <= 0) {
             const phase = wesker.getData('phase');
             if (phase === 1) {
-                wesker.setData('health', 150);
-                wesker.setData('maxHealth', 150);
+                wesker.setData('health', 200);
+                wesker.setData('maxHealth', 200);
                 wesker.setData('phase', 2);
                 wesker.setScale(1.35);
                 wesker.setTint(0xff2200);
@@ -825,7 +963,16 @@ class WeskerScene extends Phaser.Scene {
             } else {
                 this.weskerAttackTimer.remove();
                 wesker.setActive(false).setVisible(false);
-                this.scene.start('VictoryScene');
+                const victoryDialogues = [
+                    { speaker: 'WESKER', text: 'Impossível... eu... sou... a evolução...' },
+                    { speaker: 'ALICE', text: 'Evolução tem um limite, Wesker. Você o ultrapassou.' },
+                    { speaker: 'ALICE', text: 'A Umbrella caiu. A humanidade está segura.' },
+                    { speaker: 'ALICE', text: 'Mas vou continuar vigilante. Sempre.' }
+                ];
+                this.scene.start('CutsceneScene', {
+                    dialogues: victoryDialogues,
+                    nextScene: 'VictoryScene'
+                });
             }
         }
     }
@@ -918,7 +1065,7 @@ class GameOverScene extends Phaser.Scene {
             strokeThickness: 2
         }).setOrigin(0.5);
 
-        const restartPrompt = this.add.text(400, 390, 'Pressione ESPAÇO para Tentar Novamente', {
+        const restartPrompt = this.add.text(400, 390, 'Pressione ENTER para Tentar Novamente', {
             fontSize: '20px',
             color: '#ffffff',
             stroke: '#000000',
@@ -977,7 +1124,7 @@ class VictoryScene extends Phaser.Scene {
 
         this.createFireworks();
 
-        const menuPrompt = this.add.text(400, 460, 'Pressione ESPAÇO para Voltar ao Menu', {
+        const menuPrompt = this.add.text(400, 460, 'Pressione ENTER para Voltar ao Menu', {
             fontSize: '19px',
             color: '#00ff88',
             stroke: '#000000',
@@ -1030,4 +1177,4 @@ class VictoryScene extends Phaser.Scene {
 }
 
 // Exportar cenas únicas
-export { BootScene, TitleScene, MainScene, WeskerScene, GameOverScene, VictoryScene };
+export { BootScene, TitleScene, CutsceneScene, MainScene, WeskerScene, GameOverScene, VictoryScene };
