@@ -36,6 +36,10 @@ function gameReducer(state, action) {
     switch (action.type) {
 
         case 'NEW_GAME': {
+            // Clear the Home inventory layout when starting a new game
+            try {
+                localStorage.removeItem('re_archive_home_layout');
+            } catch { /* ignore */ }
             return {
                 ...INITIAL_STATE,
                 isGameStarted: true,
